@@ -37,5 +37,5 @@ test('classNames property returns matching matchers as classes', function() {
   subject.match('all', 'all');
   subject.match('none', 'not all');
 
-  equal('mobile-device all', subject.get('classNames'));
+  equal('media-mobile-device media-all', subject.get('classNames'));
 });
