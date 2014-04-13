@@ -1,11 +1,11 @@
 module('test');
 
-test('Ember.Responsive exists', function() {
-  ok(Ember.Responsive);
+test('Ember.Media exists', function() {
+  ok(Ember.Media);
 });
 
 test('matchers can be set at construction', function() {
-  var subject = Ember.Responsive.create({
+  var subject = Ember.Media.create({
     matchers: { all: 'all' }
   });
 
@@ -13,7 +13,7 @@ test('matchers can be set at construction', function() {
 });
 
 test('matchers can be added dynamically', function() {
-  var subject = Ember.Responsive.create();
+  var subject = Ember.Media.create();
   subject.match('all', 'not all');
 
   equal(false, subject.get('all.matches'));
