@@ -1,0 +1,28 @@
+{
+  "name": "ember-responsive",
+  "version": "0.0.0",
+  "description": "Easy responsive layouts with Ember",
+  "main": "index.js",
+  "scripts": {
+    "test": "testem ci"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/freshbooks/ember-responsive.git"
+  },
+  "keywords": [
+    "ember",
+    "responsive",
+    "media"
+  ],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/freshbooks/ember-responsive/issues"
+  },
+  "homepage": "https://github.com/freshbooks/ember-responsive",
+  "devDependencies": {
+    "testem": "^0.6.14",
+    "phantomjs": "^1.9.7-3"
+  }
+}
