@@ -17,7 +17,9 @@
   "author": "FreshBooks <dev@freshbooks.com",
   "contributors": [
     "Jonathan Geiger <geiger@freshbooks.com>",
-    "Alexandre Baizeau <abaizeau@freshbooks.com>"
+    "Alexandre Baizeau <abaizeau@freshbooks.com>",
+    "Justin Bull <jbull@freshbooks.com>",
+    "Ryan Albrecht <ryan@freshbooks.com>"
   ],
   "license": "MIT",
   "bugs": {
