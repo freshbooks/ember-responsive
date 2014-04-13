@@ -21,3 +21,21 @@ test('matchers have a corresponding isser', function() {
 
   equal(false, subject.get('isMobile'));
 });
+
+test('matching property returns matching matchers', function() {
+  var subject = Ember.Responsive.Media.create();
+  subject.match('mobile', 'all');
+  subject.match('all', 'all');
+  subject.match('none', 'not all');
+
+  deepEqual(['mobile', 'all'], subject.get('matching').toArray());
+});
+
+test('classNames property returns matching matchers as classes', function() {
+  var subject = Ember.Responsive.Media.create();
+  subject.match('mobileDevice', 'all');
+  subject.match('all', 'all');
+  subject.match('none', 'not all');
+
+  equal('mobile-device all', subject.get('classNames'));
+});
