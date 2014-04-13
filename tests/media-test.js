@@ -1,8 +1,4 @@
-module('test');
-
-test('Ember.Media exists', function() {
-  ok(Ember.Media);
-});
+module('Ember.Media');
 
 test('matchers can be set at construction', function() {
   var subject = Ember.Media.create({
@@ -17,4 +13,11 @@ test('matchers can be added dynamically', function() {
   subject.match('all', 'not all');
 
   equal(false, subject.get('all.matches'));
+});
+
+test('matchers have a corresponding isser', function() {
+  var subject = Ember.Media.create();
+  subject.match('mobile', 'not all');
+
+  equal(false, subject.get('isMobile'));
 });
