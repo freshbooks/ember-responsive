@@ -1,4 +1,4 @@
-module('Ember.Responsive', {
+module('Ember.Responsive.init', {
   setup: function() {
     this.App = {
       register: sinon.spy(),
@@ -8,11 +8,11 @@ module('Ember.Responsive', {
 });
 
 test('initializer has an appropriate name', function() {
-  equal('responsive', Ember.Responsive().name);
+  equal('responsive', Ember.Responsive.init().name);
 });
 
 test('initializer registers the media instance', function() {
-  var subject = Ember.Responsive();
+  var subject = Ember.Responsive.init();
   subject.initialize(null, this.App);
 
   ok(this.App.inject.calledWith('controller', 'media', 'responsive:media'));
