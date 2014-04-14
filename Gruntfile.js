@@ -2,14 +2,6 @@ module.exports = function(grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
 
-    uglify: {
-      dist: {
-        files: {
-          'dist/<%= pkg.name %>.min.js': ['lib/responsive.js', 'lib/*.js']
-        }
-      }
-    },
-
     concat: {
       dist: {
         src: ['lib/responsive.js', 'lib/*.js'],
@@ -55,7 +47,6 @@ module.exports = function(grunt) {
     }
   });
 
-  grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-testem');
   grunt.loadNpmTasks('grunt-contrib-yuidoc');
@@ -64,7 +55,7 @@ module.exports = function(grunt) {
                      ['concat:test', 'testem:ci:test']);
 
   grunt.registerTask('dist', 'Create a distributable version',
-                     ['doc', 'uglify:dist', 'concat:dist']);
+                     ['doc', 'concat:dist']);
 
   grunt.registerTask('doc', 'Generate API documentation',
                      ['yuidoc:compile']);
