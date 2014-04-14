@@ -44,12 +44,24 @@ module.exports = function(grunt) {
           outdir: 'dist/doc'
         }
       }
-    }
+    },
+
+    bump: {
+      options: {
+        files: ['package.json', 'bower.json'],
+        commitFiles: ['package.json', 'bower.json', 'dist'],
+        pushTo: 'origin',
+      }
+    },
+
+    clean: ['dist']
   });
 
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-testem');
   grunt.loadNpmTasks('grunt-contrib-yuidoc');
+  grunt.loadNpmTasks('grunt-contrib-clean');
+  grunt.loadNpmTasks('grunt-bump');
 
   grunt.registerTask('test', 'Run tests using testem and PhantomJS',
                      ['concat:test', 'testem:ci:test']);
@@ -59,4 +71,10 @@ module.exports = function(grunt) {
 
   grunt.registerTask('doc', 'Generate API documentation',
                      ['yuidoc:compile']);
+
+  grunt.registerTask('release:minor', 'Generates and tags a minor release',
+                     ['test', 'clean', 'dist', 'bump:minor']);
+
+  grunt.registerTask('release:patch', 'Generates and tags a patch release',
+                     ['test', 'clean', 'dist', 'bump:patch']);
 }
