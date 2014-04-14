@@ -15,14 +15,17 @@
   ],
   "license": "MIT",
   "ignore": [
-    "**/.*",
+    "lib",
     "node_modules",
     "bower_components",
-    "test",
-    "tests"
+    "tests",
+    "Gruntfile.js",
+    "**/*.json",
   ],
+  "dependencies": {
+    "ember": "~1.5.0"
+  },
   "devDependencies": {
-    "ember": "~1.5.0",
     "qunit": "~1.14.0",
     "sinonjs": "~1.9.0"
   }
