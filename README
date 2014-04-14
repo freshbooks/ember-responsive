@@ -1,57 +1,59 @@
 
-                     ┌─┐┌┬┐┌┐ ┌─┐┬─┐   ┬─┐┌─┐┌─┐┌─┐┌─┐┌┐┌┌─┐┬┬  ┬┌─┐
-                  ~─ ├┤ │││├┴┐├┤ ├┬┘   ├┬┘├┤ └─┐├─┘│ ││││└─┐│└┐┌┘├┤  ─~
-                     └─┘┴ ┴└─┘└─┘┴└─   ┴└─└─┘└─┘┴  └─┘┘└┘└─┘┴ └┘ └─┘
-
-                              ~───────────────────────────~
 
 
-       The goal of ember-responsive is to give you a simple, Ember-aware way
-       of dealing with media queries. All you need to do is tell it your
-       application's breakpoints and it'll expose the rest for you.
+                    ┌─┐┌┬┐┌┐ ┌─┐┬─┐   ┬─┐┌─┐┌─┐┌─┐┌─┐┌┐┌┌─┐┬┬  ┬┌─┐
+                 ~─ ├┤ │││├┴┐├┤ ├┬┘ ─ ├┬┘├┤ └─┐├─┘│ ││││└─┐│└┐┌┘├┤  ─~
+                    └─┘┴ ┴└─┘└─┘┴└─   ┴└─└─┘└─┘┴  └─┘┘└┘└─┘┴ └┘ └─┘
+
+                             ~───────────────────────────~
 
 
-       Getting Started
-       ~──────────────
-
-       Fortunately, ember-responsive is dead-simple to set up. You can start
-       by adding it to your list of bower dependencies:
-
-          $ bower install --save ember-responsive
-
-       After that, simply register the Ember.Responsive initializer with the
-       media queries that are pertinent to your application.
-
-          // Add the following initializer wherever you create your App class,
-          // giving it a list of named breakpoints that your app responds to.
-          App.initialize(Ember.Responsive.init({
-            mobile:  '(max-width: 768px)',
-            tablet:  '(min-width: 769px) and (max-width: 992px)',
-            desktop: '(min-width: 993px) and (max-width: 1200px)',
-            jumbo:   '(min-width: 1201px)',
-          });
-
-       You can then query those breakpoints in your controllers and components:
-
-          this.get('media.isMobile'); // => true
-
-       Obviously, these properties also propagate to templates:
-
-          {{#if media.isDesktop}}
-            Desktop view!
-          {{/if}}
-
-       You should also bind the list of active media queries to your app's
-       rootElement. This means you won't have to deal with complicated media
-       queries in CSS—instead simply use classes to style the different devices.
-
-          <body {{bind-attr class=media.classNames}}></body>
-          {{! Rendered as '<body class="media-desktop"></body>'}}
+         The goal of ember-responsive is to give you a simple, Ember-aware way
+         of dealing with media queries. All you need to do is tell it your
+         application's breakpoints and it'll expose the rest for you.
 
 
-       License
-       ~──────
+         Getting Started
+         ~──────────────
 
-       This library is lovingly brought to you by the FreshBooks developers.
-       We've released it under the MIT license.
+         Fortunately, ember-responsive is dead-simple to set up. You can start
+         by adding it to your list of bower dependencies:
+
+            $ bower install --save ember-responsive
+
+         After that, simply register the Ember.Responsive initializer with the
+         media queries that are pertinent to your application.
+
+            // Add the following initializer wherever you create your App class,
+            // giving it a list of named breakpoints that your app responds to.
+            App.initialize(Ember.Responsive.init({
+              mobile:  '(max-width: 768px)',
+              tablet:  '(min-width: 769px) and (max-width: 992px)',
+              desktop: '(min-width: 993px) and (max-width: 1200px)',
+              jumbo:   '(min-width: 1201px)',
+            });
+
+         You can then query those breakpoints in your controllers and components:
+
+            this.get('media.isMobile'); // => true
+
+         Obviously, these properties also propagate to templates:
+
+            {{#if media.isDesktop}}
+              Desktop view!
+            {{/if}}
+
+         You should also bind the list of active media queries to your app's
+         rootElement. This means you won't have to deal with complicated media
+         queries in CSS—instead simply use classes to style the different devices.
+
+            <body {{bind-attr class=media.classNames}}></body>
+            {{! Rendered as '<body class="media-desktop"></body>'}}
+
+
+         License
+         ~──────
+
+         This library is lovingly brought to you by the FreshBooks developers.
+         We've released it under the MIT license.
 
