@@ -34,6 +34,8 @@
     "grunt-contrib-uglify": "^0.4.0",
     "grunt-contrib-concat": "^0.4.0",
     "grunt-contrib-testem": "^0.5.15",
-    "grunt-cli": "^0.1.13"
+    "grunt-cli": "^0.1.13",
+    "jsdoc": "^3.3.0-alpha5",
+    "grunt-jsdoc": "^0.5.4"
   }
 }
