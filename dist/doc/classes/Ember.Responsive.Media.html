@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Ember.Responsive.Media - ember-responsive</title>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="shortcut icon" type="image/png" href="../assets/favicon.png">
+    <script src="http://yui.yahooapis.com/combo?3.9.1/build/yui/yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+            
+                <h1><img src="../assets/css/logo.png" title="ember-responsive"></h1>
+            
+        </div>
+        <div class="yui3-u-1-4 version">
+            <em>API Docs for: 0.1.1</em>
+        </div>
+    </div>
+    <div id="bd" class="yui3-g">
+
+        <div class="yui3-u-1-4">
+            <div id="docs-sidebar" class="sidebar apidocs">
+                <div id="api-list">
+    <h2 class="off-left">APIs</h2>
+    <div id="api-tabview" class="tabview">
+        <ul class="tabs">
+            <li><a href="#api-classes">Classes</a></li>
+            <li><a href="#api-modules">Modules</a></li>
+        </ul>
+
+        <div id="api-tabview-filter">
+            <input type="search" id="api-filter" placeholder="Type to filter APIs">
+        </div>
+
+        <div id="api-tabview-panel">
+            <ul id="api-classes" class="apis classes">
+            
+                <li><a href="../classes/Ember.Application.initializer.html">Ember.Application.initializer</a></li>
+            
+                <li><a href="../classes/Ember.Application.responsive.html">Ember.Application.responsive</a></li>
+            
+                <li><a href="../classes/Ember.Responsive.Media.html">Ember.Responsive.Media</a></li>
+            
+            </ul>
+
+            <ul id="api-modules" class="apis modules">
+            
+                <li><a href="../modules/ember-responsive.html">ember-responsive</a></li>
+            
+            </ul>
+        </div>
+    </div>
+</div>
+
+            </div>
+        </div>
+        <div class="yui3-u-3-4">
+                <div id="api-options">
+        Show:
+        <label for="api-show-inherited">
+            <input type="checkbox" id="api-show-inherited" checked>
+            Inherited
+        </label>
+
+        <label for="api-show-protected">
+            <input type="checkbox" id="api-show-protected">
+            Protected
+        </label>
+
+        <label for="api-show-private">
+            <input type="checkbox" id="api-show-private">
+            Private
+        </label>
+        <label for="api-show-deprecated">
+            <input type="checkbox" id="api-show-deprecated">
+            Deprecated
+        </label>
+
+    </div>
+
+
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+                        <h1>Ember.Responsive.Media Class</h1>
+<div class="box meta">
+    
+
+    
+
+    
+        <div class="foundat">
+            Defined in: <a href="../files/lib_media.js.html#l2"><code>lib&#x2F;media.js:2</code></a>
+        </div>
+    
+
+    
+        
+            Module: <a href="../modules/ember-responsive.html">ember-responsive</a>
+        
+    
+
+    
+</div>
+
+
+
+<div class="box intro">
+    <p>Handles detecting and responding to media queries.</p>
+<p>Generally speaking, you won&#39;t ever need to create an instance of this class
+yourself, since <code>Ember.Responsive</code> takes care of creating and configuring it
+for you. However, it is important to document how to interact with this
+class—which can become important during test time in particular. With that
+said, let&#39;s take a look at how to work with it.</p>
+<p><strong>Adding media query matchers</strong></p>
+<p>The first step to using the class is to add media queries that you
+want it to listen to. Each media query has a name that you can
+use to reference it by.</p>
+<pre class="code prettyprint"><code class="lang-javascript">media = Ember.Responsive.Media.create();
+media.match(&#39;mobile&#39;, &#39;(max-width: 768px)&#39;);
+media.match(&#39;desktop&#39;, &#39;(min-width: 769px)&#39;);</code></pre>
+<p><strong>Testing the media query matchers</strong></p>
+<p>Now that you&#39;ve added a few matchers, you can access those media queries as
+if they were properties on your object. The nice thing is that whenever the
+media queries change, this class will automatically update the relevant
+properties (and so will the rest of your application, thanks to the power
+of two-way data-binding).</p>
+<pre class="code prettyprint"><code class="lang-javascript">media = Ember.Responsive.Media.create();
+media.match(&#39;mobile&#39;, &#39;(max-width: 768px)&#39;);
+media.match(&#39;desktop&#39;, &#39;(min-width: 769px)&#39;);
+
+// There are convenient &quot;isser&quot; properties defined...
+if (media.get(&#39;isMobile&#39;)) {
+  console.log(&#39;mobile!&#39;);
+}
+
+// As well as access to the matchMedia API...
+if (media.get(&#39;desktop.matches&#39;)) {
+  console.log(&#39;desktop!&#39;);
+}</code></pre>
+<p><strong>Retrieving a list of matching media queries</strong></p>
+<p>It&#39;s also nice to be able to see which media queries are matching, since
+some applications might have many matches at the same time.</p>
+<pre class="code prettyprint"><code class="lang-javascript">media = Ember.Responsive.Media.create();
+media.match(&#39;desktop&#39;, &#39;all&#39;);
+media.match(&#39;mobile&#39;, &#39;all&#39;);
+
+console.log(media.get(&#39;matches&#39;));
+// =&gt; Ember.Set([&#39;desktop&#39;, &#39;mobile&#39;]);</code></pre>
+<p>This class can also return that list as a string of dasherized class names,
+which is useful for placing on your app&#39;s rootElement. By default, these
+class names are prefixed with <code>media-</code>, so as not to clash with any other
+classes your app might use.</p>
+<pre class="code prettyprint"><code class="lang-javascript">App.ApplicationView = Ember.View.extend({
+  classNameBindings: [&#39;media.classNames&#39;]
+});</code></pre>
+
+</div>
+
+
+
+<div id="classdocs" class="tabview">
+    <ul class="api-class-tabs">
+        <li class="api-class-tab index"><a href="#index">Index</a></li>
+
+        
+            <li class="api-class-tab methods"><a href="#methods">Methods</a></li>
+        
+        
+            <li class="api-class-tab properties"><a href="#properties">Properties</a></li>
+        
+        
+        
+    </ul>
+
+    <div>
+        <div id="index" class="api-class-tabpanel index">
+            <h2 class="off-left">Item Index</h2>
+
+            
+                <div class="index-section methods">
+                    <h3>Methods</h3>
+
+                    <ul class="index-list methods">
+                        
+                            <li class="index-item method">
+                                <a href="#method_match">match</a>
+
+                                
+                                
+                            </li>
+                        
+                    </ul>
+                </div>
+            
+
+            
+                <div class="index-section properties">
+                    <h3>Properties</h3>
+
+                    <ul class="index-list properties">
+                        
+                            <li class="index-item property">
+                                <a href="#property_classNames">classNames</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property private">
+                                <a href="#property_matcher">matcher</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property">
+                                <a href="#property_matches">matches</a>
+
+                                
+                                
+                            </li>
+                        
+                    </ul>
+                </div>
+            
+
+            
+
+            
+        </div>
+
+        
+            <div id="methods" class="api-class-tabpanel">
+                <h2 class="off-left">Methods</h2>
+
+                
+                    <div id="method_match" class="method item">
+    <h3 class="name"><code>match</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>string</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>string</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/lib_media.js.html#l112"><code>lib&#x2F;media.js:112</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Adds a new matcher to the list.</p>
+<p>After this method is called, you will be able to access the result
+of the matcher as a property on this object.</p>
+<p><strong>Adding a new matcher</strong></p>
+<pre class="code prettyprint"><code class="lang-javascript">media = Ember.Responsive.Media.create();
+media.match(&#39;all&#39;, &#39;all&#39;);
+media.get(&#39;all&#39;);
+  // =&gt; instanceof window.matchMedia
+media.get(&#39;all.matches&#39;);
+  // =&gt; true</code></pre>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">string</code>
+                        <span class="type">Object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>name   The name of the matcher</p>
+
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">string</code>
+                        <span class="type">Object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>query  The media query to match against</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+            </div>
+        
+
+        
+            <div id="properties" class="api-class-tabpanel">
+                <h2 class="off-left">Properties</h2>
+
+                
+                    <div id="property_classNames" class="property item">
+    <h3 class="name"><code>classNames</code></h3>
+    <span class="type">String</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/lib_media.js.html#l99"><code>lib&#x2F;media.js:99</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>A string composed of all the matching matchers&#39; names, turned into
+friendly, dasherized class-names that are prefixed with <code>media-</code>.</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_matcher" class="property item private">
+    <h3 class="name"><code>matcher</code></h3>
+    <span class="type">MatchMedia</span>
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/lib_media.js.html#l89"><code>lib&#x2F;media.js:89</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>The matcher to use for testing media queries.</p>
+
+    </div>
+
+    
+        <p><strong>Default:</strong> window.matchMedia</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_matches" class="property item">
+    <h3 class="name"><code>matches</code></h3>
+    <span class="type">Ember.Set</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/lib_media.js.html#l78"><code>lib&#x2F;media.js:78</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>A set of matching matchers.</p>
+
+    </div>
+
+    
+        <p><strong>Default:</strong> Ember.Set</p>
+    
+
+    
+
+    
+</div>
+
+                
+            </div>
+        
+
+        
+
+        
+    </div>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="../assets/js/yui-prettify.js"></script>
+<script src="../assets/../api.js"></script>
+<script src="../assets/js/api-filter.js"></script>
+<script src="../assets/js/api-list.js"></script>
+<script src="../assets/js/api-search.js"></script>
+<script src="../assets/js/apidocs.js"></script>
+</body>
+</html>
