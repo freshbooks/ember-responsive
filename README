@@ -1,10 +1,7 @@
 
-                                    ┌─┐┌┬┐┌┐ ┌─┐┬─┐
-                                ~─  ├┤ │││├┴┐├┤ ├┬┘  ─~
-                                    └─┘┴ ┴└─┘└─┘┴└─
-                              ┬─┐┌─┐┌─┐┌─┐┌─┐┌┐┌┌─┐┬┬  ┬┌─┐
-                              ├┬┘├┤ └─┐├─┘│ ││││└─┐│└┐┌┘├┤
-                              ┴└─└─┘└─┘┴  └─┘┘└┘└─┘┴ └┘ └─┘
+                     ┌─┐┌┬┐┌┐ ┌─┐┬─┐   ┬─┐┌─┐┌─┐┌─┐┌─┐┌┐┌┌─┐┬┬  ┬┌─┐
+                  ~─ ├┤ │││├┴┐├┤ ├┬┘   ├┬┘├┤ └─┐├─┘│ ││││└─┐│└┐┌┘├┤  ─~
+                     └─┘┴ ┴└─┘└─┘┴└─   ┴└─└─┘└─┘┴  └─┘┘└┘└─┘┴ └┘ └─┘
 
                               ~───────────────────────────~
 
@@ -34,22 +31,22 @@
             jumbo:   '(min-width: 1201px)',
           });
 
-      You can then query those breakpoints in your controllers and components:
+       You can then query those breakpoints in your controllers and components:
 
-         this.get('media.isMobile'); // => true
+          this.get('media.isMobile'); // => true
 
-      Obviously, these properties also propagate to templates:
+       Obviously, these properties also propagate to templates:
 
-         {{#if media.isDesktop}}
-           Desktop view!
-         {{/if}}
+          {{#if media.isDesktop}}
+            Desktop view!
+          {{/if}}
 
-      You should also bind the list of active media queries to your app's
-      rootElement. This means you won't have to deal with complicated media
-      queries in CSS—instead simply use classes to style the different devices.
+       You should also bind the list of active media queries to your app's
+       rootElement. This means you won't have to deal with complicated media
+       queries in CSS—instead simply use classes to style the different devices.
 
-         <body {{bind-attr class=media.classNames}}></body>
-         {{! Rendered as '<body class="media-desktop"></body>'}}
+          <body {{bind-attr class=media.classNames}}></body>
+          {{! Rendered as '<body class="media-desktop"></body>'}}
 
 
        License
