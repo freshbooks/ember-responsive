@@ -27,7 +27,7 @@
 
           // Add the following initializer wherever you create your App class,
           // giving it a list of named breakpoints that your app responds to.
-          App.initialize(Ember.Responsive({
+          App.initialize(Ember.Responsive.init({
             mobile:  '(max-width: 768px)',
             tablet:  '(min-width: 769px) and (max-width: 992px)',
             desktop: '(min-width: 993px) and (max-width: 1200px)',
