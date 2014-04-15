@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.2.2</em>
+            <em>API Docs for: 0.2.3</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -201,7 +201,7 @@
       return this.get(&#x27;matches&#x27;).map(function(name) {
         return &#x27;media-&#x27; + name.dasherize();
       }).join(&#x27; &#x27;);
-    }.property(&#x27;matches.@each&#x27;),
+    }.property(&#x27;matches.[]&#x27;),
 
    /**
     * Adds a new matcher to the list.
