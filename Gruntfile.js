@@ -16,7 +16,7 @@ module.exports = function(grunt) {
           'bower_components/sinonjs/sinon.js',
           'lib/responsive.js',
           'lib/*.js',
-          'tests/**.js',
+          'test/**.js',
         ],
         dest: 'dist/<%= pkg.name %>.test.js'
       }
@@ -25,7 +25,7 @@ module.exports = function(grunt) {
     testem: {
       test: {
         options: {
-          test_page: 'tests/index.html',
+          test_page: 'test/index.html',
           framework: 'qunit',
           launch_in_dev: ['PhantomJS', 'Chrome'],
           launch_in_ci: ['PhantomJS', 'Chrome'],
