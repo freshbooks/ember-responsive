@@ -4,7 +4,7 @@
   "description": "Easy responsive layouts with Ember",
   "scripts": {
     "test": "grunt test",
-    "prepublish": "grunt dist"
+    "prepublish": "grunt release:patch"
   },
   "repository": {
     "type": "git",
