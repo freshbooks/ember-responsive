@@ -2,7 +2,7 @@
     "project": {
         "name": "ember-responsive",
         "description": "Easy responsive layouts with Ember",
-        "version": "0.2.3",
+        "version": "0.2.4",
         "url": "https://github.com/freshbooks/ember-responsive"
     },
     "files": {
