@@ -31,3 +31,16 @@ test('classNames property returns matching matchers as classes', function() {
 
   equal('media-mobile-device media-all', subject.get('classNames'));
 });
+
+test('classNames is correctly bound to the matches property', function() {
+  var subject = Ember.Responsive.Media.create();
+
+  subject.match('one', 'all');
+  equal('media-one', subject.get('classNames'));
+
+  subject.match('two', 'all');
+  equal('media-one media-two', subject.get('classNames'));
+
+  subject.match('one', 'none');
+  equal('media-two', subject.get('classNames'));
+});
