@@ -21,19 +21,24 @@
 
             $ bower install --save ember-responsive
 
-         After that, simply register the Ember.Responsive initializer with the
-         media queries that are pertinent to your application.
+         After that, simply register the media queries that are pertinent
+         to your application.
+
+            App = Ember.Application.extend();
 
             // Add the following initializer wherever you create your App class,
             // giving it a list of named breakpoints that your app responds to.
-            App.initialize(Ember.Responsive.init({
-              mobile:  '(max-width: 768px)',
-              tablet:  '(min-width: 769px) and (max-width: 992px)',
-              desktop: '(min-width: 993px) and (max-width: 1200px)',
-              jumbo:   '(min-width: 1201px)',
+            App.responsive({
+              media: {
+                mobile:  '(max-width: 768px)',
+                tablet:  '(min-width: 769px) and (max-width: 992px)',
+                desktop: '(min-width: 993px) and (max-width: 1200px)',
+                jumbo:   '(min-width: 1201px)',
+              }
             });
 
-         You can then query those breakpoints in your controllers and components:
+         You can then query those breakpoints in your controllers, components,
+         routes, and views:
 
             this.get('media.isMobile'); // => true
 
@@ -47,8 +52,9 @@
          rootElement. This means you won't have to deal with complicated media
          queries in CSS—instead simply use classes to style the different devices.
 
-            <body {{bind-attr class=media.classNames}}></body>
-            {{! Rendered as '<body class="media-desktop"></body>'}}
+            App.ApplicationView = Ember.View.extend({
+              classNameBindings: ['media.classNames']
+            });
 
 
          License
