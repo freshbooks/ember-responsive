@@ -3,8 +3,7 @@
   "version": "0.2.5",
   "description": "Easy responsive layouts with Ember",
   "scripts": {
-    "test": "grunt test",
-    "prepublish": "grunt release:patch"
+    "test": "grunt test"
   },
   "repository": {
     "type": "git",

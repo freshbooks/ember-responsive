@@ -22,15 +22,8 @@ module.exports = function(grunt) {
       }
     },
 
-    testem: {
-      test: {
-        options: {
-          test_page: 'test/index.html',
-          framework: 'qunit',
-          launch_in_dev: ['PhantomJS', 'Chrome'],
-          launch_in_ci: ['PhantomJS', 'Chrome'],
-        }
-      }
+    qunit: {
+      all: ['test/*.html'],
     },
 
     yuidoc: {
@@ -59,13 +52,13 @@ module.exports = function(grunt) {
   });
 
   grunt.loadNpmTasks('grunt-contrib-concat');
-  grunt.loadNpmTasks('grunt-contrib-testem');
   grunt.loadNpmTasks('grunt-contrib-yuidoc');
   grunt.loadNpmTasks('grunt-contrib-clean');
+  grunt.loadNpmTasks('grunt-contrib-qunit');
   grunt.loadNpmTasks('grunt-bump');
 
-  grunt.registerTask('test', 'Run tests using testem and PhantomJS',
-                     ['concat:test', 'testem:ci:test']);
+  grunt.registerTask('test', 'Run tests using PhantomJS',
+                     ['concat:test', 'qunit:all']);
 
   grunt.registerTask('dist', 'Create a distributable version',
                      ['doc', 'concat:dist']);
