@@ -317,6 +317,7 @@
 
       var listener = function(matcher) {
         _this.set(name, matcher);
+        _this.set(isser, matcher.matches);
 
         if (matcher.matches) {
           _this.get('matches').add(name);
@@ -327,11 +328,6 @@
 
       matcher.addListener(listener);
       listener(matcher);
-
-      // Define a corresponding "isser" which is prettier to look at and type
-      Ember.defineProperty(this, isser, Ember.computed(function() {
-        return this.get(name).matches;
-      }).property(name));
     }
   });
 })(window.Ember);
