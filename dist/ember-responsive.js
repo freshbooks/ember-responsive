@@ -266,6 +266,8 @@
       return new Ember.Set();
     }.property(),
 
+    listeners: {},
+
    /**
     * The matcher to use for testing media queries.
     *
@@ -316,7 +318,18 @@
           _this = this;
 
       var listener = function(matcher) {
+
+        // Make sure than set(name, matcher) and notifyPropertyChange(name) notifications
+        // are merged so only one notification is sent,
+        // even the first tinm this listener is called
+        _this.beginPropertyChanges();
+
         _this.set(name, matcher);
+        _this.notifyPropertyChange(name);
+
+        _this.endPropertyChanges();
+
+        _this.set(isser, matcher.matches);
 
         if (matcher.matches) {
           _this.get('matches').add(name);
@@ -324,14 +337,9 @@
           _this.get('matches').remove(name);
         }
       };
-
+      this.get('listeners')[name] = listener;
       matcher.addListener(listener);
       listener(matcher);
-
-      // Define a corresponding "isser" which is prettier to look at and type
-      Ember.defineProperty(this, isser, Ember.computed(function() {
-        return this.get(name).matches;
-      }).property(name));
     }
   });
 })(window.Ember);

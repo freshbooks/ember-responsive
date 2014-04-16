@@ -44,3 +44,26 @@ test('classNames is correctly bound to the matches property', function() {
   subject.match('one', 'none');
   equal('media-two', subject.get('classNames'));
 });
+
+test('matcher\'s name property can be bound to', function() {
+  var listener, matcher, name = 'somethingUnique',
+    subject = Ember.Responsive.Media.create(),
+    observer = sinon.spy();
+
+  subject.addObserver(name, this, observer);
+  //First call
+  subject.match(name, 'query');
+
+  listener = subject.get('listeners')[name];
+
+  matcher = subject.get(name);
+  matcher.matches = true;
+  //Second call
+  listener(matcher);
+
+  matcher.matches = false;
+  //Third call
+  listener(matcher);
+
+  ok(observer.callCount == 3);
+});
