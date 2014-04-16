@@ -34,7 +34,7 @@
           </a>
         </div>
         <div class="col-sm-6">
-          <a href="#" role="button" class="btn btn-block btn-success btn-lg">
+          <a href="#" role="button" class="use-tooltip btn btn-block btn-success btn-lg" title="Coming soon, we promise!" data-toggle="tooltip" data-placement="top">
             <span class="glyphicon glyphicon-play-circle"></span>
             See a demo
           </a>
@@ -105,5 +105,8 @@ App.responsive({
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+      $('.use-tooltip').tooltip();
+    </script>
   </body>
 </html>
