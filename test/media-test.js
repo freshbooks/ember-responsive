@@ -50,17 +50,20 @@ test('matcher\'s name property can be bound to', function() {
     subject = Ember.Responsive.Media.create(),
     observer = sinon.spy();
 
-  subject.match(name, 'query');
   subject.addObserver(name, this, observer);
+  //First call
+  subject.match(name, 'query');
 
   listener = subject.get('listeners')[name];
 
   matcher = subject.get(name);
   matcher.matches = true;
+  //Second call
   listener(matcher);
 
   matcher.matches = false;
+  //Third call
   listener(matcher);
 
-  ok(observer.callCount == 2);
+  ok(observer.callCount == 3);
 });
