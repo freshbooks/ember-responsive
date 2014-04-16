@@ -1,0 +1,18 @@
+body {
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
+
+.header {
+  padding-bottom: 20px;
+}
+
+.logo-image {
+  max-width: 100%;
+  height: auto;
+}
+
+.footer {
+  margin-top: 40px;
+  text-align: center;
+}
