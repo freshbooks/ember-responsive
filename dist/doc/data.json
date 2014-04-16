@@ -2,7 +2,7 @@
     "project": {
         "name": "ember-responsive",
         "description": "Easy responsive layouts with Ember",
-        "version": "0.2.6",
+        "version": "0.2.7",
         "url": "https://github.com/freshbooks/ember-responsive"
     },
     "files": {
@@ -170,6 +170,17 @@
         {
             "file": "lib/media.js",
             "line": 89,
+            "description": "A hash of listeners indexed by their matcher's names",
+            "itemtype": "property",
+            "name": "",
+            "type": "Object",
+            "class": "Ember.Responsive.Media",
+            "module": "ember-responsive",
+            "namespace": "Ember.Responsive"
+        },
+        {
+            "file": "lib/media.js",
+            "line": 97,
             "description": "The matcher to use for testing media queries.",
             "itemtype": "property",
             "name": "matcher",
@@ -183,7 +194,7 @@
         },
         {
             "file": "lib/media.js",
-            "line": 99,
+            "line": 107,
             "description": "A string composed of all the matching matchers' names, turned into\nfriendly, dasherized class-names that are prefixed with `media-`.",
             "itemtype": "property",
             "name": "classNames",
@@ -194,7 +205,7 @@
         },
         {
             "file": "lib/media.js",
-            "line": 112,
+            "line": 120,
             "description": "Adds a new matcher to the list.\n\nAfter this method is called, you will be able to access the result\nof the matcher as a property on this object.\n\n**Adding a new matcher**\n\n```javascript\nmedia = Ember.Responsive.Media.create();\nmedia.match('all', 'all');\nmedia.get('all');\n  // => instanceof window.matchMedia\nmedia.get('all.matches');\n  // => true\n```",
             "params": [
                 {

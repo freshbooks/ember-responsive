@@ -1,6 +1,6 @@
 {
   "name": "ember-responsive",
-  "version": "0.2.7",
+  "version": "0.2.8",
   "description": "Easy responsive layouts with Ember",
   "scripts": {
     "test": "grunt test",

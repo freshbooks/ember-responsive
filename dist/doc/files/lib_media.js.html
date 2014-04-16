@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.2.6</em>
+            <em>API Docs for: 0.2.7</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -180,6 +180,14 @@
       return new Ember.Set();
     }.property(),
 
+    /**
+     * A hash of listeners indexed by their matcher&#x27;s names
+     *
+     * @property
+     * @type Object
+     */
+    listeners: {},
+
    /**
     * The matcher to use for testing media queries.
     *
@@ -230,7 +238,18 @@
           _this = this;
 
       var listener = function(matcher) {
+
+        // Make sure than set(name, matcher) and notifyPropertyChange(name) notifications
+        // are merged so only one notification is sent,
+        // even the first time this listener is called
+        _this.beginPropertyChanges();
+
         _this.set(name, matcher);
+        _this.notifyPropertyChange(name);
+
+        _this.set(isser, matcher.matches);
+
+        _this.endPropertyChanges();
 
         if (matcher.matches) {
           _this.get(&#x27;matches&#x27;).add(name);
@@ -238,14 +257,9 @@
           _this.get(&#x27;matches&#x27;).remove(name);
         }
       };
-
+      this.get(&#x27;listeners&#x27;)[name] = listener;
       matcher.addListener(listener);
       listener(matcher);
-
-      // Define a corresponding &quot;isser&quot; which is prettier to look at and type
-      Ember.defineProperty(this, isser, Ember.computed(function() {
-        return this.get(name).matches;
-      }).property(name));
     }
   });
 })(window.Ember);
