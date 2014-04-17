@@ -48,7 +48,14 @@ module.exports = function(grunt) {
       }
     },
 
-    clean: ['dist']
+    clean: ['dist'],
+
+    jshint: {
+      all: ['lib/**/*.js', 'test/**/*.js'],
+      options: {
+        jshintrc: '.jshintrc'
+      }
+    }
   });
 
   grunt.loadNpmTasks('grunt-contrib-concat');
@@ -56,12 +63,13 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-qunit');
   grunt.loadNpmTasks('grunt-bump');
+  grunt.loadNpmTasks('grunt-contrib-jshint');
 
   grunt.registerTask('test', 'Run tests using PhantomJS',
-                     ['concat:test', 'qunit:all']);
+                     ['jshint:all', 'concat:test', 'qunit:all']);
 
   grunt.registerTask('dist', 'Create a distributable version',
-                     ['doc', 'concat:dist']);
+                     ['jshint:all', 'doc', 'concat:dist']);
 
   grunt.registerTask('doc', 'Generate API documentation',
                      ['yuidoc:compile']);
@@ -71,4 +79,4 @@ module.exports = function(grunt) {
 
   grunt.registerTask('release:patch', 'Generates and tags a patch release',
                      ['test', 'clean', 'dist', 'bump:patch']);
-}
+};
