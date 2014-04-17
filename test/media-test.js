@@ -45,18 +45,18 @@ test('classNames is correctly bound to the matches property', function() {
   equal('media-two', subject.get('classNames'));
 });
 
-test('matcher\'s name property can be bound to', function() {
+test('matcher\'s isser property notifies upon change', function() {
   var listener, matcher, name = 'somethingUnique',
     subject = Ember.Responsive.Media.create(),
     observer = sinon.spy();
 
-  subject.addObserver(name, this, observer);
+  subject.addObserver('is'+name.classify(), this, observer);
   //First call
   subject.match(name, 'query');
 
   listener = subject.get('listeners')[name];
 
-  matcher = subject.get(name);
+  matcher = {}; // Dummy MediaQueryList
   matcher.matches = true;
   //Second call
   listener(matcher);
@@ -65,5 +65,8 @@ test('matcher\'s name property can be bound to', function() {
   //Third call
   listener(matcher);
 
-  ok(observer.callCount == 3);
+  ok(
+    observer.callCount == 3,
+    'Expected 3 calls to an observer, '+observer.callCount+' were called instead'
+  );
 });
