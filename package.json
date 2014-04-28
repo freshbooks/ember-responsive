@@ -26,7 +26,7 @@
   "bugs": {
     "url": "https://github.com/freshbooks/ember-responsive/issues"
   },
-  "homepage": "https://github.com/freshbooks/ember-responsive",
+  "homepage": "https://freshbooks.github.io/ember-responsive/",
   "devDependencies": {
     "testem": "^0.6.14",
     "phantomjs": "^1.9.7-3",
