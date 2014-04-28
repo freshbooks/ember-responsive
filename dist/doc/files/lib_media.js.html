@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.2.7</em>
+            <em>API Docs for: 0.2.8</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -206,8 +206,9 @@
     * @type      string
     */
     classNames: function() {
+      var dasherize = Ember.String.dasherize;
       return this.get(&#x27;matches&#x27;).map(function(name) {
-        return &#x27;media-&#x27; + name.dasherize();
+        return &#x27;media-&#x27; + dasherize(name);
       }).join(&#x27; &#x27;);
     }.property(&#x27;matches.[]&#x27;),
 
@@ -233,32 +234,28 @@
     * @method  match
     */
     match: function(name, query) {
-      var matcher = this.get(&#x27;mql&#x27;)(query),
-          isser = &#x27;is&#x27; + name.classify(),
+      var classify = Ember.String.classify,
+          matcher = this.get(&#x27;mql&#x27;)(query),
+          isser = &#x27;is&#x27; + classify(name),
           _this = this;
 
-      var listener = function(matcher) {
-
-        // Make sure than set(name, matcher) and notifyPropertyChange(name) notifications
-        // are merged so only one notification is sent,
-        // even the first time this listener is called
-        _this.beginPropertyChanges();
-
+      function listener(matcher) {
         _this.set(name, matcher);
-        _this.notifyPropertyChange(name);
-
         _this.set(isser, matcher.matches);
-
-        _this.endPropertyChanges();
 
         if (matcher.matches) {
           _this.get(&#x27;matches&#x27;).add(name);
         } else {
           _this.get(&#x27;matches&#x27;).remove(name);
         }
-      };
+      }
       this.get(&#x27;listeners&#x27;)[name] = listener;
-      matcher.addListener(listener);
+
+      if (matcher.addListener) {
+        matcher.addListener(function(matcher){
+          Ember.run(null, listener, matcher);
+        });
+      }
       listener(matcher);
     }
   });

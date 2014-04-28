@@ -292,8 +292,9 @@
     * @type      string
     */
     classNames: function() {
+      var dasherize = Ember.String.dasherize;
       return this.get('matches').map(function(name) {
-        return 'media-' + name.dasherize();
+        return 'media-' + dasherize(name);
       }).join(' ');
     }.property('matches.[]'),
 
@@ -319,32 +320,28 @@
     * @method  match
     */
     match: function(name, query) {
-      var matcher = this.get('mql')(query),
-          isser = 'is' + name.classify(),
+      var classify = Ember.String.classify,
+          matcher = this.get('mql')(query),
+          isser = 'is' + classify(name),
           _this = this;
 
-      var listener = function(matcher) {
-
-        // Make sure than set(name, matcher) and notifyPropertyChange(name) notifications
-        // are merged so only one notification is sent,
-        // even the first time this listener is called
-        _this.beginPropertyChanges();
-
+      function listener(matcher) {
         _this.set(name, matcher);
-        _this.notifyPropertyChange(name);
-
         _this.set(isser, matcher.matches);
-
-        _this.endPropertyChanges();
 
         if (matcher.matches) {
           _this.get('matches').add(name);
         } else {
           _this.get('matches').remove(name);
         }
-      };
+      }
       this.get('listeners')[name] = listener;
-      matcher.addListener(listener);
+
+      if (matcher.addListener) {
+        matcher.addListener(function(matcher){
+          Ember.run(null, listener, matcher);
+        });
+      }
       listener(matcher);
     }
   });

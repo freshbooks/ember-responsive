@@ -2,8 +2,8 @@
     "project": {
         "name": "ember-responsive",
         "description": "Easy responsive layouts with Ember",
-        "version": "0.2.7",
-        "url": "https://github.com/freshbooks/ember-responsive"
+        "version": "0.2.8",
+        "url": "https://freshbooks.github.io/ember-responsive/"
     },
     "files": {
         "lib/initializer.js": {
@@ -205,7 +205,7 @@
         },
         {
             "file": "lib/media.js",
-            "line": 120,
+            "line": 121,
             "description": "Adds a new matcher to the list.\n\nAfter this method is called, you will be able to access the result\nof the matcher as a property on this object.\n\n**Adding a new matcher**\n\n```javascript\nmedia = Ember.Responsive.Media.create();\nmedia.match('all', 'all');\nmedia.get('all');\n  // => instanceof window.matchMedia\nmedia.get('all.matches');\n  // => true\n```",
             "params": [
                 {
