@@ -1,4 +1,30 @@
 {
+  "bitwise": true,
+  "camelcase": true,
+  "curly": true,
+  "eqeqeq": true,
+  "forin": false,
+  "immed": true,
   "indent": 2,
-  "quotmark": "single"
+  "newcap": true,
+  "noarg": true,
+  "noempty": true,
+  "nonew": true,
+  "plusplus": true,
+  "quotmark": "single",
+  "undef": true,
+  "unused": true,
+  "strict": false,
+  "trailing": true,
+  "maxparams": 4,
+  "maxdepth": 3,
+  "maxlen": 120,
+
+  "boss" : false,
+  "debug": false,
+  "eqnull": true,
+  "esnext": true,
+  "evil": false,
+  "laxbreak": false,
+  "sub": false
 }
