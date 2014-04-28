@@ -65,8 +65,9 @@ test('matcher\'s isser property notifies upon change', function() {
   //Third call
   listener(matcher);
 
-  ok(
-    observer.callCount == 3,
+  equal(
+    3,
+    observer.callCount,
     'Expected 3 calls to an observer, '+observer.callCount+' were called instead'
   );
 });
