@@ -13,6 +13,20 @@
          application's breakpoints and it'll expose the rest for you.
 
 
+         Requirements
+         ~───────────
+
+         ember-responsive needs window.matchMedia() to function, which isn't
+         available in all browsers:
+
+         http://caniuse.com/#feat=matchmedia
+
+         There is a polyfill by Paul Irish called matchMedia.js that will add
+         support to older browsers:
+
+         https://github.com/paulirish/matchMedia.js/
+
+
          Getting Started
          ~──────────────
 
