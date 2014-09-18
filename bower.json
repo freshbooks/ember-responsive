@@ -23,7 +23,7 @@
     "**/*.json"
   ],
   "dependencies": {
-    "ember": "~1.5.0"
+    "ember": ">=1.5.0 <1.8.0"
   },
   "devDependencies": {
     "qunit": "~1.14.0",
