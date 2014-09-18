@@ -1,6 +1,6 @@
 {
   "name": "ember-responsive",
-  "version": "0.2.10",
+  "version": "0.2.11",
   "main": "dist/ember-responsive.js",
   "authors": [
     "Jonathan Geiger <geiger@freshbooks.com>",
