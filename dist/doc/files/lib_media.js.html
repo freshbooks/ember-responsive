@@ -235,7 +235,7 @@
     */
     match: function(name, query) {
       var classify = Ember.String.classify,
-          matcher = this.get(&#x27;mql&#x27;)(query),
+          matcher = (this.get(&#x27;mql&#x27;) || window.matchMedia)(query),
           isser = &#x27;is&#x27; + classify(name),
           _this = this;
 
