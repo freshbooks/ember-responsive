@@ -321,7 +321,7 @@
     */
     match: function(name, query) {
       var classify = Ember.String.classify,
-          matcher = this.get('mql')(query),
+          matcher = (this.get('mql') || window.matchMedia)(query),
           isser = 'is' + classify(name),
           _this = this;
 
