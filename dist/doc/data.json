@@ -2,7 +2,7 @@
     "project": {
         "name": "ember-responsive",
         "description": "Easy responsive layouts with Ember",
-        "version": "0.2.11",
+        "version": "0.2.13",
         "url": "https://freshbooks.github.io/ember-responsive/"
     },
     "files": {
@@ -161,8 +161,8 @@
             "description": "A set of matching matchers.",
             "itemtype": "property",
             "name": "matches",
-            "type": "Ember.Set",
-            "default": "Ember.Set",
+            "type": "Ember.NativeArray",
+            "default": "Ember.NativeArray",
             "class": "Ember.Responsive.Media",
             "module": "ember-responsive",
             "namespace": "Ember.Responsive"

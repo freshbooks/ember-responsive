@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.2.11</em>
+            <em>API Docs for: 0.2.13</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -173,11 +173,11 @@
     * A set of matching matchers.
     *
     * @property  matches
-    * @type      Ember.Set
-    * @default   Ember.Set
+    * @type      Ember.NativeArray
+    * @default   Ember.NativeArray
     */
     matches: function() {
-      return new Ember.Set();
+      return Ember.A();
     }.property(),
 
     /**
@@ -244,9 +244,9 @@
         _this.set(isser, matcher.matches);
 
         if (matcher.matches) {
-          _this.get(&#x27;matches&#x27;).add(name);
+          _this.get(&#x27;matches&#x27;).addObject(name);
         } else {
-          _this.get(&#x27;matches&#x27;).remove(name);
+          _this.get(&#x27;matches&#x27;).removeObject(name);
         }
       }
       this.get(&#x27;listeners&#x27;)[name] = listener;

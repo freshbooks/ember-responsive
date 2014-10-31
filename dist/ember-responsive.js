@@ -259,11 +259,11 @@
     * A set of matching matchers.
     *
     * @property  matches
-    * @type      Ember.Set
-    * @default   Ember.Set
+    * @type      Ember.NativeArray
+    * @default   Ember.NativeArray
     */
     matches: function() {
-      return new Ember.Set();
+      return Ember.A();
     }.property(),
 
     /**
@@ -330,9 +330,9 @@
         _this.set(isser, matcher.matches);
 
         if (matcher.matches) {
-          _this.get('matches').add(name);
+          _this.get('matches').addObject(name);
         } else {
-          _this.get('matches').remove(name);
+          _this.get('matches').removeObject(name);
         }
       }
       this.get('listeners')[name] = listener;
