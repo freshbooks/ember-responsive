@@ -1,33 +1,20 @@
 {
-  "name": "ember-responsive",
-  "version": "0.2.14",
-  "main": "dist/ember-responsive.js",
-  "authors": [
-    "Jonathan Geiger <geiger@freshbooks.com>",
-    "Alexandre Baizeau <abaizeau@freshbooks.com>",
-    "Justin Bull <jbull@freshbooks.com>",
-    "Ryan Albrecht <ryan@freshbooks.com>"
-  ],
-  "description": "Easy responsive layouts with Ember",
-  "keywords": [
-    "ember",
-    "responsive",
-    "media-query"
-  ],
-  "license": "MIT",
-  "ignore": [
-    "lib",
-    "node_modules",
-    "bower_components",
-    "test",
-    "Gruntfile.js",
-    "**/*.json"
-  ],
+  "name": "ember-responsive-test",
   "dependencies": {
-    "ember": ">=1.5.0 <1.8.0"
+    "handlebars": "~1.3.0",
+    "jquery": "^1.11.1",
+    "ember": "1.7.0",
+    "ember-data": "1.0.0-beta.10",
+    "ember-resolver": "~0.1.7",
+    "loader.js": "stefanpenner/loader.js#1.0.1",
+    "ember-cli-shims": "stefanpenner/ember-cli-shims#0.0.3",
+    "ember-cli-test-loader": "rwjblue/ember-cli-test-loader#0.0.4",
+    "ember-load-initializers": "stefanpenner/ember-load-initializers#0.0.2",
+    "ember-qunit": "0.1.8",
+    "ember-qunit-notifications": "0.0.4",
+    "qunit": "~1.15.0"
   },
   "devDependencies": {
-    "qunit": "~1.14.0",
-    "sinonjs": "~1.9.0"
+   "sinon": "http://sinonjs.org/releases/sinon-1.12.1.js"
   }
 }
