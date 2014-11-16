@@ -34,7 +34,7 @@ export default {
     var media = Media.create();
     if (breakpoints) {
       for (var name in breakpoints) {
-        if (media.hasOwnProperty(name)) {
+        if (breakpoints.hasOwnProperty(name)) {
           media.match(name, breakpoints[name]);
         }
       }
