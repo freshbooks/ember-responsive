@@ -27,9 +27,6 @@ export default {
     * @param   Ember.Application app
     */
   initialize: function(container, app) {
-    if (app.responsive) {
-      Ember.warn('Your breakpoints should be defined in /app/breakpoints.js');
-    }
     var breakpoints = container.lookupFactory('breakpoints:main');
     var media = Media.create();
     if (breakpoints) {
@@ -38,6 +35,8 @@ export default {
           media.match(name, breakpoints[name]);
         }
       }
+    } else {
+      Ember.warn('Breakpoints not found they should be defined in app/breakpoints.js');
     }
 
     app.register('responsive:media', media, { instantiate: false });

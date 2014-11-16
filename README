@@ -30,26 +30,21 @@
          Getting Started
          ~──────────────
 
-         Fortunately, ember-responsive is dead-simple to set up. You can start
-         by adding it to your list of bower dependencies:
+         This is an ember-cli addon so, so all you need to do is
 
-            $ bower install --save ember-responsive
+            $ npm install --save ember-responsive
 
-         After that, simply register the media queries that are pertinent
-         to your application.
+         After that, simply register the breakpoints that are pertinent to 
+         your application app/breakpoints.js:
 
-            App = Ember.Application.extend();
 
-            // Add the following initializer wherever you create your App class,
-            // giving it a list of named breakpoints that your app responds to.
-            App.responsive({
-              media: {
-                mobile:  '(max-width: 768px)',
-                tablet:  '(min-width: 769px) and (max-width: 992px)',
-                desktop: '(min-width: 993px) and (max-width: 1200px)',
-                jumbo:   '(min-width: 1201px)',
-              }
-            });
+
+            export default {
+              mobile:  '(max-width: 768px)',
+              tablet:  '(min-width: 769px) and (max-width: 992px)',
+              desktop: '(min-width: 993px) and (max-width: 1200px)',
+              jumbo:   '(min-width: 1201px)',
+            }
 
          You can then query those breakpoints in your controllers, components,
          routes, and views:
@@ -77,7 +72,7 @@
          To run the tests, after cloning do:
 
            $ npm install
-           $ grunt test
+           $ npm test
 
 
          License
