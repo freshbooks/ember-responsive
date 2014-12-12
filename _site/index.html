@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width initial-scale=1" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <title>Ember Responsive</title>
+  <meta name="description" content="Easy responsive layouts with Emberbaseurl: "" # the subpath of your site, e.g. /blog/
+">
+
+  <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="/">
+
+  <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
+</head>
+
+
+  <body>
+
+    <div class="container">
+      <div class="header">
+        <img class="logo-image" src="ember-responsive.png" />
+      </div>
+
+      <p class="lead">
+  The goal of ember-responsive is to give you a simple, Ember-aware way of dealing with media queries. All you need to do is tell it your application's breakpoints and it'll expose the rest for you.
+</p>
+
+<p><a href="https://travis-ci.org/freshbooks/ember-responsive"><img src="https://travis-ci.org/freshbooks/ember-responsive.svg?branch=master" alt="Build Status" title="Build Status" /></a></p>
+
+<div class="row well ">
+  <div class="col-sm-6">
+    <a href="https://github.com/freshbooks/ember-responsive" role="button" class="btn btn-block btn-primary btn-lg">
+      <span class="glyphicon glyphicon-heart"></span>
+      Fork us on GitHub!
+    </a>
+  </div>
+  <div class="col-sm-6">
+    <a href="http://emberjs.jsbin.com/fuyuk/3" role="button" class="use-tooltip btn btn-block btn-success btn-lg" data-toggle="tooltip" data-placement="top">
+      <span class="glyphicon glyphicon-play-circle"></span>
+      See a demo
+    </a>
+  </div>
+</div>
+
+<h1 id="requirements">Requirements</h1>
+
+<p>ember-responsive needs <code>window.matchMedia()</code> to function, which isn’t yet
+available in all browsers:</p>
+
+<p><a href="http://caniuse.com/#feat=matchmedia">http://caniuse.com/#feat=matchmedia</a></p>
+
+<p>There is a polyfill by Paul Irish called matchMedia.js that will add support
+to older browsers:</p>
+
+<p><a href="https://github.com/paulirish/matchMedia.js/">https://github.com/paulirish/matchMedia.js/</a></p>
+
+<h1 id="getting-started">Getting Started</h1>
+
+<p>This is an ember-cli addon so, so all you need to do is</p>
+
+<pre><code>$ npm install --save ember-responsive
+</code></pre>
+
+<p>After that, simply register the media queries that are pertinent to your
+application in <code>app/breakpoints.js</code>:</p>
+
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kr">export</span> <span class="k">default</span> <span class="p">{</span>
+  <span class="nx">mobile</span><span class="o">:</span>  <span class="s1">&#39;(max-width: 768px)&#39;</span><span class="p">,</span>
+  <span class="nx">tablet</span><span class="o">:</span>  <span class="s1">&#39;(min-width: 769px) and (max-width: 992px)&#39;</span><span class="p">,</span>
+  <span class="nx">desktop</span><span class="o">:</span> <span class="s1">&#39;(min-width: 993px) and (max-width: 1200px)&#39;</span><span class="p">,</span>
+  <span class="nx">jumbo</span><span class="o">:</span>   <span class="s1">&#39;(min-width: 1201px)&#39;</span><span class="p">,</span>
+<span class="p">}</span></code></pre></div>
+
+<p>You can then query those breakpoints in your controllers, components,
+routes, and views:</p>
+
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;media.isMobile&#39;</span><span class="p">);</span> <span class="c1">// =&gt; true</span></code></pre></div>
+
+<p>Obviously, these properties also propagate to templates:</p>
+
+<div class="highlight"><pre><code class="language-handlebars" data-lang="handlebars"><span class="cp">{{</span><span class="k">#if</span> <span class="nv">media.isDesktop</span><span class="cp">}}</span><span class="x"></span>
+<span class="x">  Desktop view!</span>
+<span class="cp">{{</span><span class="k">/if</span><span class="cp">}}</span><span class="x"></span></code></pre></div>
+
+<p>You should also bind the list of active media queries to your app’s
+<code>rootElement</code>. This means you won’t have to deal with complicated media
+queries in CSS—instead simply use classes to style the different devices.</p>
+
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kr">export</span> <span class="k">default</span> <span class="nx">Ember</span><span class="p">.</span><span class="nx">View</span><span class="p">.</span><span class="nx">extend</span><span class="p">({</span>
+  <span class="nx">classNameBindings</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;media.classNames&#39;</span><span class="p">]</span>
+<span class="p">});</span></code></pre></div>
+
+<h1 id="tests">Tests</h1>
+
+<p>To run the tests, after cloning do:</p>
+
+<div class="highlight"><pre><code class="language-sh" data-lang="sh"><span class="nv">$ </span>npm install
+<span class="nv">$ </span>npm <span class="nb">test</span></code></pre></div>
+
+<h1 id="license">License</h1>
+
+<p>This library is lovingly brought to you by the FreshBooks developers.</p>
+
+<p>We’ve released it under the MIT license.</p>
+
+    </div>
+
+    <div class="footer">
+  <p>Made with love by the developers of <a href="http://www.freshbooks.com">FreshBooks</a>.</p>
+</div>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+      $('.use-tooltip').tooltip();
+    </script>
+  </body>
+
+</html>
