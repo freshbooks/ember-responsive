@@ -16,7 +16,7 @@ layout: default
     </a>
   </div>
   <div class="col-sm-6">
-    <a href="http://emberjs.jsbin.com/fuyuk/3" role="button" class="use-tooltip btn btn-block btn-success btn-lg" data-toggle="tooltip" data-placement="top">
+    <a href="https://www.justinbull.ca/ember-responsive-demo/" role="button" class="use-tooltip btn btn-block btn-success btn-lg" data-toggle="tooltip" data-placement="top">
       <span class="glyphicon glyphicon-play-circle"></span>
       See a demo
     </a>
