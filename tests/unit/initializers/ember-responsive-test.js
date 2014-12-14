@@ -1,4 +1,4 @@
-import initializer from 'ember-responsive/initializers/responsive';
+import initializer from 'dummy/initializers/responsive';
 module('Unit initializer');
 
 test('initialize', function() {
