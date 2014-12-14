@@ -72,68 +72,70 @@
 
       <div class="row">
         <div class="col-sm-12">
-
           <p>
-            Fortunately, ember-responsive is dead-simple to set up. You can start by adding it to your list of bower dependencies:
+            This is an ember-cli addon so, so all you need to do is
           </p>
 
-          <pre>$ bower install --save ember-responsive</pre>
+          <pre>$ npm install --save ember-responsive</pre>
 
           <p>
-            After that, simply register the media queries that are pertinent to your application.
+            After that, simply register the media queries that are pertinent to your application in <code>app/breakpoints.js</code>:
           </p>
 
-          <pre>App = Ember.Application.extend();
-
-// Add the following initializer wherever you create your App class,
-// giving it a list of named breakpoints that your app responds to.
-App.responsive({
-  media: {
-    mobile:  '(max-width: 768px)',
-    tablet:  '(min-width: 769px) and (max-width: 992px)',
-    desktop: '(min-width: 993px) and (max-width: 1200px)',
-    jumbo:   '(min-width: 1201px)',
-  }
-});</pre>
-
+          <pre>
+            export default {
+              mobile:  '(max-width: 768px)',
+              tablet:  '(min-width: 769px) and (max-width: 992px)',
+              desktop: '(min-width: 993px) and (max-width: 1200px)',
+              jumbo:   '(min-width: 1201px)',
+            }
+          </pre>
+          
           <p>
             You can then query those breakpoints in your controllers, components, routes, and views:
           </p>
-
-          <pre>this.get('media.isMobile'); // => true</pre>
-
+  
+          <pre>
+            this.get('media.isMobile'); // => true
+          </pre>
+  
           <p>
             Obviously, these properties also propagate to templates:
           </p>
-
-          <pre>{{#if media.isDesktop}}
-  Desktop view!
-{{/if}}</pre>
-
+  
+          <pre>
+            {{#if media.isDesktop}}
+              Desktop view!
+            {{/if}}
+          </pre>
+  
           <p>
-            You should also bind the list of active media queries to your app's rootElement. This means you won't have to deal with complicated media queries in CSS—instead simply use classes to style the different devices.
+            You should also bind the list of active media queries to your app's
+            rootElement. This means you won't have to deal with complicated media
+            queries in CSS—instead simply use classes to style the different devices.
           </p>
-
-          <pre>App.ApplicationView = Ember.View.extend({
-  classNameBindings: ['media.classNames']
-});</pre>
-
-        </div>
-      </div>
-
-      <h1>Tests</h1>
-
-      <div class="row">
-        <div class="col-sm-12">
+  
+          <pre>
+            export default  Ember.View.extend({
+              classNameBindings: ['media.classNames']
+            });
+          </pre>
+  
+          <h1>Tests</h1>
+  
           <p>To run the tests, after cloning do:</p>
-          <pre>$ npm install</pre>
-          <pre>$ grunt test</pre>
+  
+          <pre>
+          $ npm install
+          $ npm test
+          </pre>
+  
+          <h1>License</h1>
+  
+          <p>This library is lovingly brought to you by the FreshBooks developers.</p>
+          <p>We've released it under the MIT license.</p>
         </div>
       </div>
-
-      <h2>License</h2>
-
-      We've chosen to release this useful little tool under the <a href="https://github.com/freshbooks/ember-responsive/blob/master/LICENSE">MIT license</a>.
 
       <div class="footer">
         <p>Made with love by the developers of <a href="http://www.freshbooks.com">FreshBooks</a>.</p>
