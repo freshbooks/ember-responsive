@@ -1,4 +1,5 @@
 import Media from 'ember-responsive/media';
+import breakpoints from '../breakpoints';
 
 /**
  * An initializer that sets up `ember-responsive`.
@@ -27,7 +28,6 @@ export default {
     * @param   Ember.Application app
     */
   initialize: function(container, app) {
-    var breakpoints = container.lookupFactory('breakpoints:main');
     var media = Media.create();
     if (breakpoints) {
       for (var name in breakpoints) {
