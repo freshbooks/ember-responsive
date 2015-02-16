@@ -1,6 +1,8 @@
 # Changelog
 
-
+### 1.0.1
+  Better Readme
+  Passing build
 ### 1.0.0
 
 - CHANGE: ember-cli addon
