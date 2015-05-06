@@ -83,9 +83,9 @@ export default  Ember.Object.extend({
   * @type      Ember.NativeArray
   * @default   Ember.NativeArray
   */
-  matches: function() {
+  matches: Ember.computed(function() {
     return Ember.A();
-  }.property(),
+  }),
 
   /**
     * A hash of listeners indexed by their matcher's names
@@ -112,12 +112,12 @@ export default  Ember.Object.extend({
   * @property  classNames
   * @type      string
   */
-  classNames: function() {
+  classNames: Ember.computed('matches.[]', function() {
     var dasherize = Ember.String.dasherize;
     return this.get('matches').map(function(name) {
       return 'media-' + dasherize(name);
     }).join(' ');
-  }.property('matches.[]'),
+  }),
 
   /**
   * Adds a new matcher to the list.
