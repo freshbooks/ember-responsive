@@ -1,8 +1,11 @@
 # Changelog
 
+### 1.0.2
+- Stop using function prototype extensions
+
 ### 1.0.1
-  Better Readme
-  Passing build
+- Better Readme
+- Passing build
 ### 1.0.0
 
 - CHANGE: ember-cli addon
