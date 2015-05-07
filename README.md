@@ -27,10 +27,10 @@ your application in `app/breakpoints.js`:
 
 ```
 export default {
-	mobile:  '(max-width: 768px)',
-	tablet:  '(min-width: 769px) and (max-width: 992px)',
-	desktop: '(min-width: 993px) and (max-width: 1200px)',
-	jumbo:   '(min-width: 1201px)',
+  mobile:  '(max-width: 768px)',
+  tablet:  '(min-width: 769px) and (max-width: 992px)',
+  desktop: '(min-width: 993px) and (max-width: 1200px)',
+  jumbo:   '(min-width: 1201px)',
 }
 ```
 
@@ -45,7 +45,7 @@ Obviously, these properties also propagate to templates:
 
 ```
 {{#if media.isDesktop}}
-	Desktop view!
+  Desktop view!
 {{/if}}
 ```
 
@@ -55,7 +55,7 @@ queries in CSS, instead simply use classes to style the different devices.
 
 ```
 App.ApplicationView = Ember.View.extend({
-	classNameBindings: ['media.classNames']
+  classNameBindings: ['media.classNames']
 });
 ```
 
