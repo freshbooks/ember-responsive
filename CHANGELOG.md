@@ -1,5 +1,8 @@
 # Changelog
 
+### 1.1.0
+- Upgrade to ember-cli 0.2.3
+
 ### 1.0.2
 - Stop using function prototype extensions
 
