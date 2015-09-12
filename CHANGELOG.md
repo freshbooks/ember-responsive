@@ -1,5 +1,8 @@
 # Changelog
 
+### 1.1.1
+- Fixes support for Ember 2.1 beta (#37, thanks @jasonmit)
+
 ### 1.1.0
 - Upgrade to ember-cli 0.2.3
 
