@@ -74,7 +74,7 @@ import Ember from 'ember';
 * @class     Media
 * @extends   Ember.Object
 */
-export default  Ember.Object.extend({
+export default Ember.Object.extend({
 
   /**
   * A set of matching matchers.

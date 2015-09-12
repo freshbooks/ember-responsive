@@ -22,16 +22,15 @@ This is an ember-cli addon so, so all you need to do is
 npm install --save ember-responsive
 ```
 
-After that, simply register the breakpoints that are pertinent to 
-your application in `app/breakpoints.js`:
+After that, simply register the breakpoints that are pertinent to your application in `app/breakpoints.js`:
 
 ```
 export default {
   mobile:  '(max-width: 768px)',
   tablet:  '(min-width: 769px) and (max-width: 992px)',
   desktop: '(min-width: 993px) and (max-width: 1200px)',
-  jumbo:   '(min-width: 1201px)',
-}
+  jumbo:   '(min-width: 1201px)'
+};
 ```
 
 You can then query those breakpoints in your controllers, components,
@@ -72,4 +71,3 @@ npm test
 
 This library is lovingly brought to you by the FreshBooks developers.
 We've released it under the MIT license.
-
