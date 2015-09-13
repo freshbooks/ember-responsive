@@ -33,6 +33,9 @@ export default {
 };
 ```
 
+This default config has already been provided for you. If you wish to change the values or add new ones,
+simply create a new `app/breakpoints.js` in your project and export your chosen config.
+
 You can then query those breakpoints in your controllers, components,
 routes, and views:
 
