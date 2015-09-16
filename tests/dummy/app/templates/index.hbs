@@ -1,0 +1,33 @@
+<div class="index">
+  <p>
+      This demonstrates the default media queries:
+  </p>
+  <div class="view {{if media.isMobile 'active'}}">
+    {{#if media.isMobile}}
+        Mobile View!
+    {{else}}
+        Not Mobile View :(
+    {{/if}}
+  </div>
+  <div class="view {{if media.isTablet 'active'}}">
+    {{#if media.isTablet}}
+        Tablet View!
+    {{else}}
+        Not Tablet View :(
+    {{/if}}
+  </div>
+  <div class="view {{if media.isDesktop 'active'}}">
+    {{#if media.isDesktop}}
+        Desktop View!
+    {{else}}
+        Not Desktop View :(
+    {{/if}}
+  </div>
+  <div class="view {{if media.isJumbo 'active'}}">
+    {{#if media.isJumbo}}
+        Jumbo View!
+    {{else}}
+        Not Jumbo View :(
+    {{/if}}
+  </div>
+</div>
