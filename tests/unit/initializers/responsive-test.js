@@ -1,7 +1,6 @@
 /* global sinon */
 import Ember from 'ember';
 import initializer from '../../../initializers/responsive';
-import instanceInitializer from '../../../instance-initializers/responsive';
 import { module, test } from 'qunit';
 
 var container, application, media;
