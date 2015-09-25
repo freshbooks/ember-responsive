@@ -1,5 +1,8 @@
 # Changelog
 
+### 1.2.0
+- Adds `breakpoints.js` to addon. (#40, thanks @elwayman02)
+
 ### 1.1.1
 - Fixes support for Ember 2.1 beta (#37, thanks @jasonmit)
 - Upgrade addon to use Ember 1.13.10
