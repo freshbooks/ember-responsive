@@ -1,5 +1,8 @@
 # Changelog
 
+### 1.2.1
+- update addon via ember-init (@elwayman02)
+
 ### 1.2.0
 - Adds `breakpoints.js` to addon. (#40, thanks @elwayman02)
 
