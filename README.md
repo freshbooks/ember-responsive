@@ -18,9 +18,7 @@ that will add support to older browsers
 
 This is an ember-cli addon so, so all you need to do is
 
-```
-npm install --save ember-responsive
-```
+`ember install ember-responsive`
 
 After that, simply register the breakpoints that are pertinent to your application in `app/breakpoints.js`:
 
