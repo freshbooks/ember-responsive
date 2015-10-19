@@ -1,5 +1,8 @@
 # Changelog
 
+### 1.2.3
+- fix compatibility with older versions of emnber (#47 @alexbaizeau)
+
 ### 1.2.2
 - fix deprecation warnings (#46 @alexbaizeau)
 
