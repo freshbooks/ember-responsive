@@ -1,5 +1,8 @@
 # Changelog
 
+### 1.2.2
+- fix deprecation warnings (#46 @alexbaizeau)
+
 ### 1.2.1
 - update addon via ember-init (@elwayman02)
 
