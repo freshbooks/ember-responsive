@@ -3,7 +3,8 @@
  *
  * Injects the media service in all controllers route components and views
  */
-export function initialize(application) {
+export function initialize() {
+  let application = arguments[1] || arguments[0];
   application.inject('controller', 'media', 'service:media');
   application.inject('component', 'media', 'service:media');
   application.inject('route', 'media', 'service:media');
