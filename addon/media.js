@@ -2,12 +2,6 @@ import Ember from 'ember';
 /**
 * Handles detecting and responding to media queries.
 *
-* Generally speaking, you won't ever need to create an instance of this class
-* yourself, since `Ember.Responsive` takes care of creating and configuring it
-* for you. However, it is important to document how to interact with this
-* class—which can become important during test time in particular. With that
-* said, let's take a look at how to work with it.
-*
 * **Adding media query matchers**
 *
 * The first step to using the class is to add media queries that you
@@ -74,7 +68,7 @@ import Ember from 'ember';
 * @class     Media
 * @extends   Ember.Object
 */
-export default Ember.Object.extend({
+export default Ember.Service.extend({
 
   /**
   * A set of matching matchers.
@@ -104,6 +98,23 @@ export default Ember.Object.extend({
   * @private
   */
   mql: window.matchMedia,
+
+  /**
+   * Initialize the service based on the breakpoints config
+   *
+   * @method init
+   *
+   */
+  init: function() {
+    const breakpoints = this.container.lookupFactory('breakpoints:main');
+    if (breakpoints) {
+      for (var name in breakpoints) {
+        if (breakpoints.hasOwnProperty(name)) {
+          this.match(name, breakpoints[name]);
+        }
+      }
+    }
+  },
 
   /**
   * A string composed of all the matching matchers' names, turned into
