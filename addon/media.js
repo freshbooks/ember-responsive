@@ -1,4 +1,6 @@
 import Ember from 'ember';
+import getOwner from 'ember-getowner-polyfill';
+
 /**
 * Handles detecting and responding to media queries.
 *
@@ -117,7 +119,7 @@ export default Ember.Service.extend({
   },
 
   breakpoints: Ember.computed(function() {
-    return this.container.lookupFactory('breakpoints:main');
+    return getOwner(this)._lookupFactory('breakpoints:main');
   }),
 
   /**
