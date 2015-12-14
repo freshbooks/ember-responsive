@@ -65,6 +65,7 @@ To run the tests, after cloning do:
 
 ```
 npm install
+bower install
 npm test
 ```
 
