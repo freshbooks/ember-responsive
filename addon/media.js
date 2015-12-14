@@ -106,7 +106,7 @@ export default Ember.Service.extend({
    *
    */
   init: function() {
-    const breakpoints = this.container.lookupFactory('breakpoints:main');
+    const breakpoints = Ember.getOwner(this)._lookupFactory('breakpoints:main');
     if (breakpoints) {
       for (var name in breakpoints) {
         if (breakpoints.hasOwnProperty(name)) {
