@@ -106,7 +106,7 @@ export default Ember.Service.extend({
    *
    */
   init: function() {
-    const breakpoints = this.container.lookupFactory('breakpoints:main');
+    const breakpoints = this.get('breakpoints');
     if (breakpoints) {
       for (var name in breakpoints) {
         if (breakpoints.hasOwnProperty(name)) {
@@ -115,6 +115,10 @@ export default Ember.Service.extend({
       }
     }
   },
+
+  breakpoints: Ember.computed(function() {
+    return this.container.lookupFactory('breakpoints:main');
+  }),
 
   /**
   * A string composed of all the matching matchers' names, turned into
