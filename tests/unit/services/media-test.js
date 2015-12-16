@@ -1,22 +1,22 @@
 /* global sinon */
+
 import Ember from 'ember';
 import { moduleFor, test } from 'ember-qunit';
-
-moduleFor('service:media');
 
 const mediaRules = {
   mobile:  '(max-width: 768px)',
   jumbo:   '(min-width: 1201px)'
 };
 
+moduleFor('service:media', 'Unit | Service | media', {
+  // Specify the other units that are required for this test.
+  // needs: ['service:foo']
+});
+
 test('it matches on init', function(assert) {
 
   const subject = this.subject({
-    container: {
-      lookupFactory: () => {
-        return mediaRules;
-      }
-    },
+    breakpoints: mediaRules,
     match: sinon.stub()
   });
 
@@ -25,21 +25,21 @@ test('it matches on init', function(assert) {
 });
 
 test('matchers can be added dynamically', function(assert) {
-  var subject = this.subject({container: {lookupFactory: sinon.stub()}});
+  var subject = this.subject({ breakpoints: mediaRules });
   subject.match('all', 'not all');
 
   assert.equal(false, subject.get('all.matches'));
 });
 
 test('matchers have a corresponding isser', function(assert) {
-  var subject = this.subject({container: {lookupFactory: sinon.stub()}});
+  var subject = this.subject({ breakpoints: mediaRules });
   subject.match('mobile', 'not all');
 
   assert.equal(false, subject.get('isMobile'));
 });
 
 test('matches property returns matching matchers', function(assert) {
-  var subject = this.subject({container: {lookupFactory: sinon.stub()}});
+  var subject = this.subject({ breakpoints: mediaRules });
   subject.match('mobile', 'all');
   subject.match('all', 'all');
   subject.match('none', 'not all');
@@ -48,7 +48,7 @@ test('matches property returns matching matchers', function(assert) {
 });
 
 test('classNames property returns matching matchers as classes', function(assert) {
-  var subject = this.subject({container: {lookupFactory: sinon.stub()}});
+  var subject = this.subject({ breakpoints: mediaRules });
   subject.match('mobileDevice', 'all');
   subject.match('all', 'all');
   subject.match('none', 'not all');
@@ -57,7 +57,7 @@ test('classNames property returns matching matchers as classes', function(assert
 });
 
 test('classNames is correctly bound to the matches property', function(assert) {
-  var subject = this.subject({container: {lookupFactory: sinon.stub()}});
+  var subject = this.subject({ breakpoints: mediaRules });
  
   subject.match('one', 'all');
   assert.equal('media-one', subject.get('classNames'));
@@ -71,7 +71,7 @@ test('classNames is correctly bound to the matches property', function(assert) {
 
 test('matcher\'s isser property notifies upon change', function(assert) {
   var listener, matcher, name = 'somethingUnique',
-    subject = this.subject({container: {lookupFactory: sinon.stub()}}),
+    subject = this.subject({ breakpoints: mediaRules }),
     observer = sinon.spy();
 
   subject.addObserver('is'+Ember.String.classify(name), this, observer);
