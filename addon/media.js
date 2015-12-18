@@ -1,5 +1,6 @@
 import Ember from 'ember';
 import getOwner from 'ember-getowner-polyfill';
+import nullMatchMedia from './null-match-media';
 
 /**
 * Handles detecting and responding to media queries.
@@ -99,7 +100,7 @@ export default Ember.Service.extend({
   * @default   window.matchMedia
   * @private
   */
-  mql: window.matchMedia,
+  mql: detectMatchMedia(),
 
   /**
    * Initialize the service based on the breakpoints config
@@ -185,3 +186,11 @@ export default Ember.Service.extend({
     listener(matcher);
   }
 });
+
+function detectMatchMedia() {
+  if (typeof window === 'object' && window.matchMedia) {
+    return window.matchMedia;
+  }
+
+  return nullMatchMedia;
+}
