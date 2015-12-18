@@ -1,5 +1,10 @@
 # Changelog
 
+### 1.2.4
+- Support fastboot (#56 @tomdale)
+- Remove use of private method `lookupFactory` (#57 @poteto)
+- fix ember 2.3 deprecations (#53 @minichate)
+
 ### 1.2.3
 - fix compatibility with older versions of emnber (#47 @alexbaizeau)
 
