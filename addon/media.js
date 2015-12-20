@@ -110,8 +110,6 @@ export default Ember.Service.extend({
    */
   init: function() {
     const breakpoints = this.get('breakpoints');
-    const owner = getOwner(this);
-    owner.registerOptionsForType('breakpoints', { instantiate: false });
     if (breakpoints) {
       for (var name in breakpoints) {
         if (breakpoints.hasOwnProperty(name)) {
@@ -122,7 +120,7 @@ export default Ember.Service.extend({
   },
 
   breakpoints: Ember.computed(function() {
-    return getOwner(this).lookup('breakpoints:main');
+    return getOwner(this)._lookupFactory('breakpoints:main');
   }),
 
   /**
