@@ -109,9 +109,9 @@ export default Ember.Service.extend({
    *
    */
   init: function() {
-    const breakpoints = this.get('breakpoints');
     const owner = getOwner(this);
     owner.registerOptionsForType('breakpoints', { instantiate: false });
+    const breakpoints = this.get('breakpoints');
     if (breakpoints) {
       for (var name in breakpoints) {
         if (breakpoints.hasOwnProperty(name)) {
