@@ -22,7 +22,7 @@ This is an ember-cli addon so, so all you need to do is
 
 After that, simply register the breakpoints that are pertinent to your application in `app/breakpoints.js`:
 
-```
+```js
 export default {
   mobile:  '(max-width: 768px)',
   tablet:  '(min-width: 769px) and (max-width: 992px)',
@@ -37,13 +37,13 @@ simply create a new `app/breakpoints.js` in your project and export your chosen 
 You can then query those breakpoints in your controllers, components,
 routes, and views:
 
-```
+```js
 this.get('media.isMobile'); // => true
 ```
 
 Obviously, these properties also propagate to templates:
 
-```
+```hbs
 {{#if media.isDesktop}}
   Desktop view!
 {{/if}}
@@ -53,7 +53,7 @@ You should also bind the list of active media queries to your app's
 rootElement. This means you won't have to deal with complicated media
 queries in CSS, instead simply use classes to style the different devices.
 
-```
+```js
 App.ApplicationView = Ember.View.extend({
   classNameBindings: ['media.classNames']
 });
@@ -63,7 +63,7 @@ App.ApplicationView = Ember.View.extend({
 
 To run the tests, after cloning do:
 
-```
+```sh
 npm install
 bower install
 npm test
