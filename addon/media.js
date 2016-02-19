@@ -2,6 +2,8 @@ import Ember from 'ember';
 import getOwner from 'ember-getowner-polyfill';
 import nullMatchMedia from './null-match-media';
 
+const { dasherize, classify } = Ember.String;
+
 /**
 * Handles detecting and responding to media queries.
 *
@@ -108,7 +110,7 @@ export default Ember.Service.extend({
    * @method init
    *
    */
-  init: function() {
+  init() {
     const owner = getOwner(this);
     owner.registerOptionsForType('breakpoints', { instantiate: false });
     const breakpoints = this.get('breakpoints');
@@ -133,9 +135,8 @@ export default Ember.Service.extend({
   * @type      string
   */
   classNames: Ember.computed('matches.[]', function() {
-    var dasherize = Ember.String.dasherize;
     return this.get('matches').map(function(name) {
-      return 'media-' + dasherize(name);
+      return `media-${dasherize(name)}`;
     }).join(' ');
   }),
 
@@ -160,22 +161,20 @@ export default Ember.Service.extend({
   * @param   string  query  The media query to match against
   * @method  match
   */
-  match: function(name, query) {
-    var classify = Ember.String.classify,
-        matcher = (this.get('mql') || window.matchMedia)(query),
-        isser = 'is' + classify(name),
-        _this = this;
+  match(name, query) {
+    var matcher = (this.get('mql') || window.matchMedia)(query),
+        isser = 'is' + classify(name);
 
-    function listener(matcher) {
-      _this.set(name, matcher);
-      _this.set(isser, matcher.matches);
+    var listener = (matcher) => {
+      this.set(name, matcher);
+      this.set(isser, matcher.matches);
 
       if (matcher.matches) {
-        _this.get('matches').addObject(name);
+        this.get('matches').addObject(name);
       } else {
-        _this.get('matches').removeObject(name);
+        this.get('matches').removeObject(name);
       }
-    }
+    };
     this.get('listeners')[name] = listener;
 
     if (matcher.addListener) {
