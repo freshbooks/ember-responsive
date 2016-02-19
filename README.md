@@ -59,6 +59,27 @@ App.ApplicationView = Ember.View.extend({
 });
 ```
 
+## Testing Helpers
+This project provides an acceptance testing helper to assist in testing
+content specific to different breakpoints.
+
+To the `setBreakpoint` helper in an acceptance test:
+
+```javascript
+test('example test', function(assert) {
+  setBreakpoint('mobile');
+  visit('/');
+
+  andThen(function() {
+    // assert something specific to mobile
+  });
+});
+```
+
+The default breakpoint for testing defaults to `desktop`. You can modify this
+by changing `_defaultBreakpoint` in `tests/helpers/responsive.js`.
+
+
 ## Tests
 
 To run the tests, after cloning do:
