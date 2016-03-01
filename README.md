@@ -59,6 +59,54 @@ App.ApplicationView = Ember.View.extend({
 });
 ```
 
+## Testing Helpers
+This project provides several testing helpers to assist in testing
+content specific to different breakpoints.
+
+### Acceptance Tests
+This project provides an acceptance testing helper to assist in testing
+content specific to different breakpoints.
+
+To use the `setBreakpoint` helper in an acceptance test:
+
+```javascript
+test('example test', function(assert) {
+  setBreakpoint('mobile');
+  visit('/');
+
+  andThen(function() {
+    // assert something specific to mobile
+  });
+});
+```
+
+The default breakpoint for testing defaults to `desktop`. You can modify this
+by changing `_defaultBreakpoint` in `tests/helpers/responsive.js`.
+
+### Integration Tests
+Since the entire application isn't spun up for an integration tests, the `setBreakpoint`
+acceptance test helper won't work. In this case, you'll need to use the
+`setBreakpointForIntegrationTest` helper.
+
+To use the `setBreakpointForIntegrationTest` helper in an integration test:
+
+```javascript
+import { moduleForComponent, test } from 'ember-qunit';
+import hbs from 'htmlbars-inline-precompile';
+import { setBreakpointForIntegrationTest } from 'your-app-name/tests/helpers/responsive';
+
+moduleForComponent('foo-bar', 'Integration | Component | foo bar', {
+  integration: true
+});
+
+test('it renders', function(assert) {
+  setBreakpointForIntegrationTest(this, 'mobile');
+  this.render(hbs`{{foo-bar media=media}}`); // IMPORTANT: you must pass the media service
+
+  // assert something specific to mobile
+});
+```
+
 ## Tests
 
 To run the tests, after cloning do:
