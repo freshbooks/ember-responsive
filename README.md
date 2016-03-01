@@ -53,10 +53,12 @@ You should also bind the list of active media queries to your app's
 rootElement. This means you won't have to deal with complicated media
 queries in CSS, instead simply use classes to style the different devices.
 
-```js
-App.ApplicationView = Ember.View.extend({
-  classNameBindings: ['media.classNames']
-});
+In your application.hbs template:
+
+```hbs
+<div class="{{media.classNames}}">
+  {{outlet}}
+</div>
 ```
 
 ## Testing Helpers
