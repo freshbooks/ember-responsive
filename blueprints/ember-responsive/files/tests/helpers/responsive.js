@@ -1,7 +1,7 @@
 import Ember from 'ember';
 import MediaService from 'ember-responsive/media';
 
-const { K } = Ember;
+const { K, getOwner } = Ember;
 const { classify } = Ember.String;
 
 MediaService.reopen({
@@ -46,3 +46,11 @@ export default Ember.Test.registerAsyncHelper('setBreakpoint', function(app, bre
   const mediaService = app.__deprecatedInstance__.lookup('service:media');
   mediaService._forceSetBreakpoint(breakpoint);
 });
+
+export function setBreakpointForIntegrationTest(container, breakpoint) {
+  const mediaService = getOwner(container).lookup('service:media');
+  mediaService._forceSetBreakpoint(breakpoint);
+  container.set('media', mediaService);
+
+  return mediaService;
+}
