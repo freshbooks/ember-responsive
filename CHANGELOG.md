@@ -1,5 +1,10 @@
 # Changelog
 
+### 1.2.6
+
+- New test helpers (#65 @blimmer)
+- ES6 syntax (#63 @blimmer)
+
 ### 1.2.4
 - Support fastboot (#56 @tomdale)
 - Remove use of private method `lookupFactory` (#57 @poteto)
