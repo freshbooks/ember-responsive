@@ -166,6 +166,10 @@ export default Ember.Service.extend({
         isser = 'is' + classify(name);
 
     var listener = (matcher) => {
+      if (this.get('isDestroyed')) {
+        return;
+      }
+
       this.set(name, matcher);
       this.set(isser, matcher.matches);
 
