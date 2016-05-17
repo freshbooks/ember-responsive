@@ -18,7 +18,9 @@ MediaService.reopen({
     const props = {};
     this.get('_breakpointArr').forEach(function(bp) {
       const val = bp === breakpoint;
-      if (val) { found = true; }
+      if (val) {
+        found = true;
+      }
 
       props[`is${classify(bp)}`] = val;
     });
@@ -38,7 +40,7 @@ MediaService.reopen({
     this._super(...arguments);
 
     this._forceSetBreakpoint(this.get('_defaultBreakpoint'));
-  },
+  }
 });
 
 export default Ember.Test.registerAsyncHelper('setBreakpoint', function(app, breakpoint) {
