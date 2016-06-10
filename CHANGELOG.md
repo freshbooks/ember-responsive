@@ -1,5 +1,9 @@
 # Changelog
 
+### 1.2.7
+
+- Fix setting on a destroyed element (#67 @Gaurav0)
+
 ### 1.2.6
 
 - New test helpers (#65 @blimmer)
