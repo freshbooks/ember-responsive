@@ -1,9 +1,21 @@
 /* jshint node: true */
 
 var EOL = require('os').EOL;
+var path = require('path');
 
 module.exports = {
   description: 'Generates ember-responsive test helper',
+
+  fileMapTokens: function() {
+    return {
+      __app__: function (options) {
+        return options.inAddon ? path.join(path.sep, 'tests', 'dummy', 'app') : path.sep;
+      },
+      __root__: function (/* options */) {
+        return path.sep;
+      }
+    }
+  },
 
   afterInstall: function() {
 
