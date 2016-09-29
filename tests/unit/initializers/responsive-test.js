@@ -1,5 +1,5 @@
 /* global sinon */
-import initializer from '../../../initializers/responsive';
+import initializer from 'ember-responsive/initializers/responsive';
 import { module, test } from 'qunit';
 
 var application = [];
