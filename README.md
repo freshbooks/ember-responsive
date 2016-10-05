@@ -65,9 +65,9 @@ In your application.hbs template:
 
 By default, this addon will generate an initializer in `app/initializers/responsive.js` that injects the media service app-wide. If the `media` property conflicts with other addons or you wish to use manual injection (`Ember.service.inject`) you can override this file.
 
-## Updating
+## Updating to 2.x
 
-When updating this addon, make sure to run the generate command. Choose `no` to overriding existing files, unless you want the defaults.
+When updating this addon, make sure to run the generate command. Choose `no` to overriding existing files, unless you want the defaults. This command has to be run when updating to 2.x if your application relies on automatic injection. Because as of version 1.2.9, the addon will generate an initializer to allow users to customize injection.
 
 `ember g ember-responsive`
 
