@@ -1,7 +1,7 @@
 import Ember from 'ember';
-import getOwner from 'ember-getowner-polyfill';
 import nullMatchMedia from './null-match-media';
 
+const { getOwner } = Ember;
 const { dasherize, classify } = Ember.String;
 
 /**
