@@ -1,8 +1,7 @@
 import Ember from 'ember';
 import MediaService from 'ember-responsive/media';
 
-const { K, getOwner } = Ember;
-const { classify } = Ember.String;
+const { getOwner, String: { classify } } = Ember;
 
 MediaService.reopen({
   // Change this if you want a different default breakpoint in tests.
@@ -34,7 +33,7 @@ MediaService.reopen({
     }
   },
 
-  match: K, // do not set up listeners in test
+  match() {}, // do not set up listeners in test
 
   init() {
     this._super(...arguments);
