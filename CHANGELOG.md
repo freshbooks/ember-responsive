@@ -1,5 +1,9 @@
 # Changelog
 
+### [2.0.1]
+- Fix: update ember-getowner-polyfill to remove deprecation ([#86](https://github.com/freshbooks/ember-responsive/pull/86) @kellyselden)
+- Fix: Remove deprecated Ember.K ([#89](https://github.com/freshbooks/ember-responsive/pull/89) @cibernox)
+
 ### [2.0.0]
 - Breaking Change: Initializer is now generated instead of included. Run `ember g ember-responsive` to generate the required file. ([#83](https://github.com/freshbooks/ember-responsive/pull/83))
 
@@ -62,3 +66,4 @@
 [1.2.9]: https://github.2ndsiteinc.com/dev/freshbooks_billing/compare/v1.2.8...v1.2.9
 [1.2.10]: https://github.2ndsiteinc.com/dev/freshbooks_billing/compare/v1.2.9...v1.2.10
 [2.0.0]: https://github.2ndsiteinc.com/dev/freshbooks_billing/compare/v1.2.10...v2.0.0
+[2.0.1]: https://github.2ndsiteinc.com/dev/freshbooks_billing/compare/v2.0.0...v2.0.1
