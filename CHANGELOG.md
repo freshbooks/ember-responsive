@@ -1,5 +1,18 @@
 # Changelog
 
+### [2.0.0]
+- Breaking Change: Initializer is now generated instead of included. Run `ember g ember-responsive` to generate the required file. ([#83](https://github.com/freshbooks/ember-responsive/pull/83))
+
+### [1.2.10]
+- Fixed: Initializer breaking change, re-add initializer before 2.0 ([#82](https://github.com/freshbooks/ember-responsive/pull/82))
+
+### [1.2.9]
+- No changes
+
+### [1.2.8]
+- Changed: Expose automatic injection as a generated file ([#78](https://github.com/freshbooks/ember-responsive/pull/78))
+- Fixed: Ember-try scenarios ([#78](https://github.com/freshbooks/ember-responsive/pull/78))
+
 ### 1.2.7
 
 - Fix setting on a destroyed element (#67 @Gaurav0)
@@ -44,3 +57,8 @@
 
 - CHANGE: ember-cli addon
 - BREAKING CHANGE: Breakpoints are now defined in app/breakpoints.js
+
+[1.2.8]: https://github.2ndsiteinc.com/dev/freshbooks_billing/compare/v1.2.7...v1.2.8
+[1.2.9]: https://github.2ndsiteinc.com/dev/freshbooks_billing/compare/v1.2.8...v1.2.9
+[1.2.10]: https://github.2ndsiteinc.com/dev/freshbooks_billing/compare/v1.2.9...v1.2.10
+[2.0.0]: https://github.2ndsiteinc.com/dev/freshbooks_billing/compare/v1.2.10...v2.0.0
