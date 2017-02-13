@@ -1,5 +1,8 @@
 # Changelog
 
+### [2.0.2]
+- Fix: Add more floating room for ember-getowner-polyfill dependency ([#91](https://github.com/freshbooks/ember-responsive/pull/91) @kturney)
+
 ### [2.0.1]
 - Fix: update ember-getowner-polyfill to remove deprecation ([#86](https://github.com/freshbooks/ember-responsive/pull/86) @kellyselden)
 - Fix: Remove deprecated Ember.K ([#89](https://github.com/freshbooks/ember-responsive/pull/89) @cibernox)
@@ -67,3 +70,4 @@
 [1.2.10]: https://github.2ndsiteinc.com/dev/freshbooks_billing/compare/v1.2.9...v1.2.10
 [2.0.0]: https://github.2ndsiteinc.com/dev/freshbooks_billing/compare/v1.2.10...v2.0.0
 [2.0.1]: https://github.2ndsiteinc.com/dev/freshbooks_billing/compare/v2.0.0...v2.0.1
+[2.0.2]: https://github.2ndsiteinc.com/dev/freshbooks_billing/compare/v2.0.1...v2.0.2
