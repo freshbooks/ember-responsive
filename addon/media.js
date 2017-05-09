@@ -183,7 +183,7 @@ export default Ember.Service.extend({
 
     if (matcher.addListener) {
       matcher.addListener(function(matcher){
-        Ember.run(null, listener, matcher);
+        Ember.run.debounce(null, listener, matcher, 100);
       });
     }
     listener(matcher);
