@@ -1,5 +1,8 @@
 # Changelog
 
+### [2.0.3]
+- Update ember-cli-babel and remove some unneeded packages ([#97](https://github.com/freshbooks/ember-responsive/pull/97) @calvinlough)
+
 ### [2.0.2]
 - Fix: Add more floating room for ember-getowner-polyfill dependency ([#91](https://github.com/freshbooks/ember-responsive/pull/91) @kturney)
 
@@ -35,7 +38,7 @@
 - fix ember 2.3 deprecations (#53 @minichate)
 
 ### 1.2.3
-- fix compatibility with older versions of emnber (#47 @alexbaizeau)
+- fix compatibility with older versions of ember (#47 @alexbaizeau)
 
 ### 1.2.2
 - fix deprecation warnings (#46 @alexbaizeau)
@@ -65,9 +68,10 @@
 - CHANGE: ember-cli addon
 - BREAKING CHANGE: Breakpoints are now defined in app/breakpoints.js
 
-[1.2.8]: https://github.2ndsiteinc.com/dev/freshbooks_billing/compare/v1.2.7...v1.2.8
-[1.2.9]: https://github.2ndsiteinc.com/dev/freshbooks_billing/compare/v1.2.8...v1.2.9
-[1.2.10]: https://github.2ndsiteinc.com/dev/freshbooks_billing/compare/v1.2.9...v1.2.10
-[2.0.0]: https://github.2ndsiteinc.com/dev/freshbooks_billing/compare/v1.2.10...v2.0.0
-[2.0.1]: https://github.2ndsiteinc.com/dev/freshbooks_billing/compare/v2.0.0...v2.0.1
-[2.0.2]: https://github.2ndsiteinc.com/dev/freshbooks_billing/compare/v2.0.1...v2.0.2
+[1.2.8]: https://github.com/freshbooks/ember-responsive/compare/v1.2.7...v1.2.8
+[1.2.9]: https://github.com/freshbooks/ember-responsive/compare/v1.2.8...v1.2.9
+[1.2.10]: https://github.com/freshbooks/ember-responsive/compare/v1.2.9...v1.2.10
+[2.0.0]: https://github.com/freshbooks/ember-responsive/compare/v1.2.10...v2.0.0
+[2.0.1]: https://github.com/freshbooks/ember-responsive/compare/v2.0.0...v2.0.1
+[2.0.2]: https://github.com/freshbooks/ember-responsive/compare/v2.0.1...v2.0.2
+[2.0.3]: https://github.com/freshbooks/ember-responsive/compare/v2.0.2...v2.0.3
