@@ -1,5 +1,8 @@
 # Changelog
 
+### [2.0.4]
+- Update dependencies ([#98](https://github.com/freshbooks/ember-responsive/pull/98) @calvinlough)
+
 ### [2.0.3]
 - Update ember-cli-babel and remove some unneeded packages ([#97](https://github.com/freshbooks/ember-responsive/pull/97) @calvinlough)
 
@@ -75,3 +78,4 @@
 [2.0.1]: https://github.com/freshbooks/ember-responsive/compare/v2.0.0...v2.0.1
 [2.0.2]: https://github.com/freshbooks/ember-responsive/compare/v2.0.1...v2.0.2
 [2.0.3]: https://github.com/freshbooks/ember-responsive/compare/v2.0.2...v2.0.3
+[2.0.4]: https://github.com/freshbooks/ember-responsive/compare/v2.0.3...v2.0.4
