@@ -186,7 +186,7 @@ export default Ember.Service.extend({
     };
     this.get('listeners')[name] = listener;
 
-    if (matcher.addListener && !this.get('isTestEnv') {
+    if (matcher.addListener && !this.get('isTestEnv')) {
       matcher.addListener(function(matcher){
         Ember.run(null, listener, matcher);
       });
