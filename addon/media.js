@@ -139,6 +139,11 @@ export default Ember.Service.extend({
       return `media-${dasherize(name)}`;
     }).join(' ');
   }),
+  
+  isTestEnv: Ember.computed(function() {
+    let config = Ember.getOwner(this).resolveRegistration('config:environment');
+    return config.environment === 'test';
+  }),
 
   /**
   * Adds a new matcher to the list.
@@ -181,7 +186,7 @@ export default Ember.Service.extend({
     };
     this.get('listeners')[name] = listener;
 
-    if (matcher.addListener) {
+    if (matcher.addListener && !this.get('isTestEnv') {
       matcher.addListener(function(matcher){
         Ember.run(null, listener, matcher);
       });
