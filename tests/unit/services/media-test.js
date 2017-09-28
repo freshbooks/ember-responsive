@@ -20,7 +20,7 @@ test('it matches on init', function(assert) {
     match: sinon.stub()
   });
 
-  assert.ok(subject.match.withArgs('mobile','(max-width: 768px)').calledOnce);
+  assert.ok(subject.match.withArgs('mobile','(max-width: 767px)').calledOnce);
   assert.ok(subject.match.withArgs('jumbo','(min-width: 1201px)').calledOnce);
 });
 

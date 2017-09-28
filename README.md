@@ -25,8 +25,8 @@ After that, simply register the breakpoints that are pertinent to your applicati
 ```js
 export default {
   mobile:  '(max-width: 767px)',
-  tablet:  '(min-width: 768px) and (max-width: 992px)',
-  desktop: '(min-width: 993px) and (max-width: 1200px)',
+  tablet:  '(min-width: 768px) and (max-width: 991px)',
+  desktop: '(min-width: 992px) and (max-width: 1200px)',
   jumbo:   '(min-width: 1201px)'
 };
 ```
