@@ -15,8 +15,8 @@ const { dasherize, classify } = Ember.String;
 *
 * ```javascript
 * media = Ember.Responsive.Media.create();
-* media.match('mobile', '(max-width: 768px)');
-* media.match('desktop', '(min-width: 769px)');
+* media.match('mobile', '(max-width: 767px)');
+* media.match('desktop', '(min-width: 768px)');
 * ```
 *
 * **Testing the media query matchers**
@@ -29,7 +29,7 @@ const { dasherize, classify } = Ember.String;
 *
 * ```javascript
 * media = Ember.Responsive.Media.create();
-* media.match('mobile', '(max-width: 768px)');
+* media.match('mobile', '(max-width: 767px)');
 * media.match('desktop', '(min-width: 769px)');
 *
 * // There are convenient "isser" properties defined...
