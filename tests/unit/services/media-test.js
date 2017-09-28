@@ -4,7 +4,7 @@ import Ember from 'ember';
 import { moduleFor, test } from 'ember-qunit';
 
 const mediaRules = {
-  mobile:  '(max-width: 768px)',
+  mobile:  '(max-width: 767px)',
   jumbo:   '(min-width: 1201px)'
 };
 
@@ -20,7 +20,7 @@ test('it matches on init', function(assert) {
     match: sinon.stub()
   });
 
-  assert.ok(subject.match.withArgs('mobile','(max-width: 768px)').calledOnce);
+  assert.ok(subject.match.withArgs('mobile','(max-width: 767px)').calledOnce);
   assert.ok(subject.match.withArgs('jumbo','(min-width: 1201px)').calledOnce);
 });
 
@@ -58,7 +58,7 @@ test('classNames property returns matching matchers as classes', function(assert
 
 test('classNames is correctly bound to the matches property', function(assert) {
   var subject = this.subject({ breakpoints: mediaRules });
- 
+
   subject.match('one', 'all');
   assert.equal('media-one', subject.get('classNames'));
 
