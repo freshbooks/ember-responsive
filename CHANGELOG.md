@@ -1,5 +1,11 @@
 # Changelog
 
+### [2.0.5]
+- Fix breakpoint coherency to match breakpoint widths across the addon. Existing addons with a generated breakpoints.js
+  should not be affected, re-generating or generating for the first time will use the new breakpoints. 
+  ([#107](https://github.com/freshbooks/ember-responsive/pull/107) @telmaantunes)
+  ([#106](https://github.com/freshbooks/ember-responsive/pull/106) @AndreJoaquim)
+
 ### [2.0.4]
 - Update dependencies ([#98](https://github.com/freshbooks/ember-responsive/pull/98) @calvinlough)
 
@@ -79,3 +85,4 @@
 [2.0.2]: https://github.com/freshbooks/ember-responsive/compare/v2.0.1...v2.0.2
 [2.0.3]: https://github.com/freshbooks/ember-responsive/compare/v2.0.2...v2.0.3
 [2.0.4]: https://github.com/freshbooks/ember-responsive/compare/v2.0.3...v2.0.4
+[2.0.5]: https://github.com/freshbooks/ember-responsive/compare/v2.0.4...v2.0.5
