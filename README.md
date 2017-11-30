@@ -77,10 +77,18 @@ content specific to different breakpoints.
 
 ### Acceptance Tests
 This project provides an acceptance testing helper to assist in testing
-content specific to different breakpoints.
+content specific to different breakpoints. 
 
-To use the `setBreakpoint` helper in an acceptance test:
+The provided testing helper *has to be added to start-app.js before the following example will work*.
 
+#### Changes required to start-app
+```javascript
+// app/helpers/start-app.js
+...
+import './responsive'; // You need to import helpers to use them in your tests.
+...
+```
+#### Acceptance Helper Usage
 ```javascript
 test('example test', function(assert) {
   setBreakpoint('mobile');
