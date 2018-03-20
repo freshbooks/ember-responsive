@@ -1,10 +1,9 @@
 ---
 language: node_js
 node_js:
-  - "8"
+  - "7"
 
-sudo: false
-dist: trusty
+sudo: required # fix for chrome sandbox missing error 
 
 addons:
   chrome: stable
