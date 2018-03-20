@@ -39,7 +39,7 @@
     "ember-maybe-import-regenerator": "^0.1.6",
     "ember-resolver": "^4.0.0",
     "ember-sinon": "^1.0.0",
-    "ember-source": "https://s3.amazonaws.com/builds.emberjs.com/release/shas/95355c4c56c0d09bde61d9744e856fd9359e833f.tgz",
+    "ember-source": "~3.0.0",
     "ember-source-channel-url": "^1.0.1",
     "ember-try": "^0.2.23",
     "eslint-plugin-ember": "^5.0.0",
