@@ -1,8 +1,0 @@
-{
-  "name": "ember-responsive",
-  "dependencies": {
-    "ember-load-initializers": "1.0.0",
-    "ember-qunit": "1.0.0",
-    "sinon": "http://sinonjs.org/releases/sinon-1.12.1.js"
-  }
-}
