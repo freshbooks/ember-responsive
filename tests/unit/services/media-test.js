@@ -1,5 +1,3 @@
-/* global sinon */
-
 import Ember from 'ember';
 import { moduleFor, test } from 'ember-qunit';
 
@@ -28,14 +26,14 @@ test('matchers can be added dynamically', function(assert) {
   var subject = this.subject({ breakpoints: mediaRules });
   subject.match('all', 'not all');
 
-  assert.equal(false, subject.get('all.matches'));
+  assert.equal(subject.get('all.matches'), false);
 });
 
 test('matchers have a corresponding isser', function(assert) {
   var subject = this.subject({ breakpoints: mediaRules });
   subject.match('mobile', 'not all');
 
-  assert.equal(false, subject.get('isMobile'));
+  assert.equal(subject.get('isMobile'), false);
 });
 
 test('matches property returns matching matchers', function(assert) {
@@ -44,7 +42,7 @@ test('matches property returns matching matchers', function(assert) {
   subject.match('all', 'all');
   subject.match('none', 'not all');
 
-  assert.deepEqual(['mobile', 'all'], subject.get('matches').toArray());
+  assert.deepEqual(subject.get('matches').toArray(), ['mobile', 'all']);
 });
 
 test('classNames property returns matching matchers as classes', function(assert) {
@@ -53,20 +51,20 @@ test('classNames property returns matching matchers as classes', function(assert
   subject.match('all', 'all');
   subject.match('none', 'not all');
 
-  assert.equal('media-mobile-device media-all', subject.get('classNames'));
+  assert.equal(subject.get('classNames'), 'media-mobile-device media-all');
 });
 
 test('classNames is correctly bound to the matches property', function(assert) {
   var subject = this.subject({ breakpoints: mediaRules });
 
   subject.match('one', 'all');
-  assert.equal('media-one', subject.get('classNames'));
+  assert.equal(subject.get('classNames'), 'media-one');
 
   subject.match('two', 'all');
-  assert.equal('media-one media-two', subject.get('classNames'));
+  assert.equal(subject.get('classNames'), 'media-one media-two');
 
   subject.match('one', 'none');
-  assert.equal('media-two', subject.get('classNames'));
+  assert.equal(subject.get('classNames'), 'media-two');
 });
 
 test('matcher\'s isser property notifies upon change', function(assert) {
@@ -90,8 +88,8 @@ test('matcher\'s isser property notifies upon change', function(assert) {
   listener(matcher);
 
   assert.equal(
-    3,
     observer.callCount,
+    3,
     'Expected 3 calls to an observer, '+observer.callCount+' were called instead'
   );
 });
