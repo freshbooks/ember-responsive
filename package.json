@@ -19,8 +19,7 @@
     "test": "ember try:each"
   },
   "dependencies": {
-    "ember-cli-babel": "^6.6.0",
-    "ember-getowner-polyfill": "^2.0.0"
+    "ember-cli-babel": "^6.6.0"
   },
   "devDependencies": {
     "broccoli-asset-rev": "^2.4.5",
@@ -39,6 +38,7 @@
     "ember-load-initializers": "^1.0.0",
     "ember-maybe-import-regenerator": "^0.1.6",
     "ember-resolver": "^4.0.0",
+    "ember-sinon": "^1.0.0",
     "ember-source": "https://s3.amazonaws.com/builds.emberjs.com/release/shas/95355c4c56c0d09bde61d9744e856fd9359e833f.tgz",
     "ember-source-channel-url": "^1.0.1",
     "ember-try": "^0.2.23",
