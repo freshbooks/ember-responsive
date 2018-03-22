@@ -9,6 +9,6 @@ export function initialize(application) {
 }
 
 export default {
-  name: 'responsive',
+  name: 'ember-responsive-breakpoints',
   initialize
 };
