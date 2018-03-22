@@ -1,2 +1,2 @@
-import Media from 'ember-responsive/media';
+import Media from 'ember-responsive/services/media';
 export default Media;
