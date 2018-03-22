@@ -34,14 +34,21 @@ export default {
 This default config has already been provided for you. If you wish to change the values or add new ones,
 simply create a new `app/breakpoints.js` in your project and export your chosen config.
 
-You can then query those breakpoints in your controllers, components,
-routes, and views:
+Now you can inject the _media_ service in any object with access to the container:
 
 ```js
-this.get('media.isMobile'); // => true
+import Component from '@ember/component';
+import { inject as service } from '@ember/service';
+
+export default Controller.extend({
+  media: service(),
+  doSomething() {
+    this.get('media.isMobile'); // => true
+  }
+});
 ```
 
-Obviously, these properties also propagate to templates:
+Once you've injected the service, you can also use it in your templates:
 
 ```hbs
 {{#if media.isDesktop}}
@@ -49,7 +56,7 @@ Obviously, these properties also propagate to templates:
 {{/if}}
 ```
 
-You should also bind the list of active media queries to your app's
+You can also bind the list of active media queries to your app's
 rootElement. This means you won't have to deal with complicated media
 queries in CSS, instead simply use classes to style the different devices.
 
@@ -63,7 +70,18 @@ In your application.hbs template:
 
 ### Injection
 
-By default, this addon will generate an initializer in `app/initializers/responsive.js` that injects the media service app-wide. If the `media` property conflicts with other addons or you wish to use manual injection (`Ember.service.inject`) you can override this file.
+If you find explicitly injecting the service too repetitive, you can setup an initializer to inject it automatically in every controller and component like this:
+
+```js
+// in app/initializers/ember-responsive
+export default {
+  name: 'responsive',
+  initialize(application) {
+    application.inject('controller', 'media', 'service:media');
+    application.inject('component', 'media', 'service:media');
+  }
+};
+```
 
 ## Updating to 2.x
 
@@ -77,7 +95,7 @@ content specific to different breakpoints.
 
 ### Acceptance Tests
 This project provides an acceptance testing helper to assist in testing
-content specific to different breakpoints. 
+content specific to different breakpoints.
 
 The provided testing helper *has to be added to start-app.js before the following example will work*.
 

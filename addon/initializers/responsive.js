@@ -6,9 +6,6 @@
  */
 export function initialize(application) {
   application.registerOptionsForType('breakpoints', { instantiate: false });
-  application.inject('controller', 'media', 'service:media');
-  application.inject('component', 'media', 'service:media');
-  application.inject('route', 'media', 'service:media');
 }
 
 export default {
