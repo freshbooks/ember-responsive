@@ -24,6 +24,7 @@ module('Test Helpers | setBreakpoint', function(hooks) {
     assert.equal(subject.get('media.isDesktop'), true);
     assert.equal(subject.get('media.isMobile'), false);
     assert.equal(subject.get('media.isTablet'), false);
+    assert.equal(subject.get('media.classNames'), 'media-desktop');
   });
 
   test('if `setBreakpoint` is called with an unknown breakpoint name, it throws an error', function (assert) {
@@ -38,6 +39,7 @@ module('Test Helpers | setBreakpoint', function(hooks) {
     assert.equal(subject.get('media.isDesktop'), false);
     assert.equal(subject.get('media.isMobile'), false);
     assert.equal(subject.get('media.isTablet'), true);
+    assert.equal(subject.get('media.classNames'), 'media-tablet');
     assert.deepEqual(subject.get('media.matches'), ['tablet']);
   });
 });

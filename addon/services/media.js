@@ -116,21 +116,17 @@ export default Service.extend({
    */
   init() {
     const owner = getOwner(this);
-    const breakpoints = this.get('breakpoints');
+    const breakpoints = getOwner(this).lookup('breakpoints:main');
     if (breakpoints) {
       Object.keys(breakpoints).forEach((name) => {
-        let isser = `is${classify(name)}`;
-        defineProperty(this, isser, computed('matches.[]', function () {
+        let cpName = `is${classify(name)}`;
+        defineProperty(this, cpName, computed('matches.[]', function () {
           return this.get('matches').indexOf(name) > -1;
         }));
         this.match(name, breakpoints[name]);
       });
     }
   },
-
-  breakpoints: computed(function() {
-    return getOwner(this).lookup('breakpoints:main');
-  }),
 
   /**
   * A string composed of all the matching matchers' names, turned into
@@ -171,9 +167,9 @@ export default Service.extend({
       return;
     }
 
-    var matcher = (this.get('mql') || window.matchMedia)(query);
+    let matcher = this.get('mql')(query);
 
-    var listener = (matcher) => {
+    let listener = (matcher) => {
       if (this.get('isDestroyed')) {
         return;
       }
