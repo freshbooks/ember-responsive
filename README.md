@@ -48,10 +48,10 @@ export default Controller.extend({
 });
 ```
 
-Once you've injected the service, you can also use it in your templates:
+In your templates you have access to the `media` helper that allows you to query breakpoints easily.
 
 ```hbs
-{{#if media.isDesktop}}
+{{#if (media 'isDesktop')}}
   Desktop view!
 {{/if}}
 ```
@@ -63,7 +63,7 @@ queries in CSS, instead simply use classes to style the different devices.
 In your application.hbs template:
 
 ```hbs
-<div class="{{media.classNames}}">
+<div class="{{media 'classNames'}}">
   {{outlet}}
 </div>
 ```
