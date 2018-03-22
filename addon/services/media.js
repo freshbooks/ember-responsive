@@ -118,15 +118,13 @@ export default Service.extend({
     const owner = getOwner(this);
     const breakpoints = this.get('breakpoints');
     if (breakpoints) {
-      for (let name in breakpoints) {
-        if (breakpoints.hasOwnProperty(name)) {
-          let isser = 'is' + classify(name);
-          defineProperty(this, isser, computed('matches.[]', function() {
-            return this.get('matches').indexOf(name) > -1;
-          }));
-          this.match(name, breakpoints[name]);
-        }
-      }
+      Object.keys(breakpoints).forEach((name) => {
+        let isser = `is${classify(name)}`;
+        defineProperty(this, isser, computed('matches.[]', function () {
+          return this.get('matches').indexOf(name) > -1;
+        }));
+        this.match(name, breakpoints[name]);
+      });
     }
   },
 

@@ -11,7 +11,7 @@ module('Unit | Service | media', function(hooks) {
   setupTest(hooks);
   hooks.beforeEach(function() {
     this.owner.register('breakpoints:main', mediaRules, { instantiate: false });
-    setBreakpoint(/*intentionally empty*/);
+    setBreakpoint('auto');
   });
 
   test('matchers can be added dynamically', function(assert) {

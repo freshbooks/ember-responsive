@@ -4,7 +4,7 @@ export function setBreakpoint(breakpointName) {
   let { owner } = getContext();
   let breakpoints = owner.lookup('breakpoints:main');
   let media = owner.lookup('service:media');
-  if (!breakpointName) {
+  if (breakpointName === 'auto') {
     media.set('_mocked', false);
     return;
   }
