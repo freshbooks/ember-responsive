@@ -1,7 +1,10 @@
-import Ember from 'ember';
+import { run } from '@ember/runloop';
+import { A } from '@ember/array';
+import { computed } from '@ember/object';
+import Service from '@ember/service';
+import { classify, dasherize } from '@ember/string';
 import nullMatchMedia from './null-match-media';
-import { getOwner } from "@ember/application"
-const { dasherize, classify } = Ember.String;
+import { getOwner } from '@ember/application'
 
 /**
 * Handles detecting and responding to media queries.
@@ -72,7 +75,7 @@ const { dasherize, classify } = Ember.String;
 * @class     Media
 * @extends   Ember.Object
 */
-export default Ember.Service.extend({
+export default Service.extend({
 
   /**
   * A set of matching matchers.
@@ -81,8 +84,8 @@ export default Ember.Service.extend({
   * @type      Ember.NativeArray
   * @default   Ember.NativeArray
   */
-  matches: Ember.computed(function() {
-    return Ember.A();
+  matches: computed(function() {
+    return A();
   }),
 
   /**
@@ -122,7 +125,7 @@ export default Ember.Service.extend({
     }
   },
 
-  breakpoints: Ember.computed(function() {
+  breakpoints: computed(function() {
     return getOwner(this).lookup('breakpoints:main');
   }),
 
@@ -133,7 +136,7 @@ export default Ember.Service.extend({
   * @property  classNames
   * @type      string
   */
-  classNames: Ember.computed('matches.[]', function() {
+  classNames: computed('matches.[]', function() {
     return this.get('matches').map(function(name) {
       return `media-${dasherize(name)}`;
     }).join(' ');
@@ -182,7 +185,7 @@ export default Ember.Service.extend({
 
     if (matcher.addListener) {
       matcher.addListener(function(matcher){
-        Ember.run(null, listener, matcher);
+        run(null, listener, matcher);
       });
     }
     listener(matcher);
