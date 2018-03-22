@@ -14,6 +14,5 @@ module('ResponsiveInitializer', function(hooks) {
     assert.ok(application.inject.withArgs('controller', 'media', 'service:media').calledOnce);
     assert.ok(application.inject.withArgs('route', 'media', 'service:media').calledOnce);
     assert.ok(application.inject.withArgs('component', 'media', 'service:media').calledOnce);
-    assert.ok(application.inject.withArgs('view', 'media', 'service:media').calledOnce);
   });
 });
