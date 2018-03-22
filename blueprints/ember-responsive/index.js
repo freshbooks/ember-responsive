@@ -5,7 +5,7 @@ const EOL = require('os').EOL;
 module.exports = {
   description: 'Generates ember-responsive test helper',
 
-  afterInstall: function() {
+  afterInstall() {
 
     const TEST_HELPER_PATH = 'tests/test-helper.js';
     const IMPORT_STATEMENT = EOL + "import './helpers/responsive';";
@@ -20,5 +20,5 @@ module.exports = {
     });
   },
 
-  normalizeEntityName: function() {}
+  normalizeEntityName() {}
 };

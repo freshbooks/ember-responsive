@@ -1,9 +1,10 @@
+import Ember from 'ember';
 import { run } from '@ember/runloop';
 import { A } from '@ember/array';
-import { computed } from '@ember/object';
+import { computed, defineProperty } from '@ember/object';
 import Service from '@ember/service';
 import { classify, dasherize } from '@ember/string';
-import nullMatchMedia from './null-match-media';
+import nullMatchMedia from '../null-match-media';
 import { getOwner } from '@ember/application'
 
 /**
@@ -76,7 +77,8 @@ import { getOwner } from '@ember/application'
 * @extends   Ember.Object
 */
 export default Service.extend({
-
+  _mocked: Ember.testing,
+  _mockedBreakpoint: 'desktop',
   /**
   * A set of matching matchers.
   *
@@ -85,7 +87,7 @@ export default Service.extend({
   * @default   Ember.NativeArray
   */
   matches: computed(function() {
-    return A();
+    return A(this.get('_mocked') ? [this.get('_mockedBreakpoint')] : []);
   }),
 
   /**
@@ -114,11 +116,14 @@ export default Service.extend({
    */
   init() {
     const owner = getOwner(this);
-    owner.registerOptionsForType('breakpoints', { instantiate: false });
     const breakpoints = this.get('breakpoints');
     if (breakpoints) {
-      for (var name in breakpoints) {
+      for (let name in breakpoints) {
         if (breakpoints.hasOwnProperty(name)) {
+          let isser = 'is' + classify(name);
+          defineProperty(this, isser, computed('matches.[]', function() {
+            return this.get('matches').indexOf(name) > -1;
+          }));
           this.match(name, breakpoints[name]);
         }
       }
@@ -164,16 +169,17 @@ export default Service.extend({
   * @method  match
   */
   match(name, query) {
-    var matcher = (this.get('mql') || window.matchMedia)(query),
-        isser = 'is' + classify(name);
+    if (this.get('_mocked')) {
+      return;
+    }
+
+    var matcher = (this.get('mql') || window.matchMedia)(query);
 
     var listener = (matcher) => {
       if (this.get('isDestroyed')) {
         return;
       }
-
       this.set(name, matcher);
-      this.set(isser, matcher.matches);
 
       if (matcher.matches) {
         this.get('matches').addObject(name);
