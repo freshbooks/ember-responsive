@@ -6,6 +6,7 @@ import Service from '@ember/service';
 import { classify, dasherize } from '@ember/string';
 import nullMatchMedia from '../null-match-media';
 import { getOwner } from '@ember/application'
+import Evented from '@ember/object/evented';
 
 /**
 * Handles detecting and responding to media queries.
@@ -76,7 +77,7 @@ import { getOwner } from '@ember/application'
 * @class     Media
 * @extends   Ember.Object
 */
-export default Service.extend({
+export default Service.extend(Evented, {
   _mocked: Ember.testing,
   _mockedBreakpoint: 'desktop',
   /**
@@ -141,6 +142,14 @@ export default Service.extend({
     }).join(' ');
   }),
 
+  _triggerMediaChanged() {
+    this.trigger('mediaChanged', {});
+  },
+
+  _triggerEvent() {
+    run.once(this, this._triggerMediaChanged);
+  },
+
   /**
   * Adds a new matcher to the list.
   *
@@ -180,6 +189,7 @@ export default Service.extend({
       } else {
         this.get('matches').removeObject(name);
       }
+      this._triggerEvent();
     };
     this.get('listeners')[name] = listener;
 
