@@ -10,7 +10,7 @@ module('Integration | Helper | media', function(hooks) {
     await render(hbs`{{#if (media 'isDesktop')}}Is desktop{{/if}}`);
     assert.equal(this.element.textContent.trim(), 'Is desktop');
 
-    await render(hbs`{{#if (media 'isTabled')}}Is desktop{{/if}}`);
+    await render(hbs`{{#if (media 'isTablet')}}Is desktop{{/if}}`);
     assert.equal(this.element.textContent.trim(), '');
 
     await render(hbs`{{media 'classNames'}}`);
