@@ -1,6 +1,6 @@
 {
   "name": "ember-responsive",
-  "version": "3.0.0-beta.1",
+  "version": "3.0.0-beta.2",
   "description": "An ember-cli addon that gives you a simple, Ember-aware way of dealing with media queries.",
   "directories": {
     "doc": "doc",
