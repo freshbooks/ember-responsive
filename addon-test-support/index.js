@@ -1,4 +1,5 @@
-import { getContext } from '@ember/test-helpers';
+import { getContext, settled } from '@ember/test-helpers';
+import { run } from '@ember/runloop';
 
 export function setBreakpoint(breakpointName) {
   let { owner } = getContext();
@@ -12,6 +13,10 @@ export function setBreakpoint(breakpointName) {
     throw new Error(`Breakpoint "${breakpointName}" is not defined in your breakpoints file`);
   }
   let matches = media.get('matches');
-  matches.clear();
-  matches.addObject(breakpointName);
+  run(() => {
+    matches.clear();
+    matches.addObject(breakpointName);
+    media._triggerMediaChanged();
+  });
+  return settled();
 }
