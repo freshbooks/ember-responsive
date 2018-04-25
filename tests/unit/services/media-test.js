@@ -22,7 +22,7 @@ module('Unit | Service | media', function(hooks) {
       subject.match('all', 'not all');
     });
 
-    assert.equal(subject.get('all.matches'), false);
+    assert.equal(subject.get('matchers.all.matches'), false);
   });
 
   test('matchers have a corresponding isser', function(assert) {

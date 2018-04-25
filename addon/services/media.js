@@ -100,6 +100,11 @@ export default Service.extend(Evented, {
   listeners: {},
 
   /**
+   * A hash of matchers by breakpoint name
+   */
+  matchers: {},
+
+  /**
   * The matcher to use for testing media queries.
   *
   * @property  matcher
@@ -120,9 +125,12 @@ export default Service.extend(Evented, {
     const breakpoints = getOwner(this).lookup('breakpoints:main');
     if (breakpoints) {
       Object.keys(breakpoints).forEach((name) => {
-        let cpName = `is${classify(name)}`;
+        const cpName = `is${classify(name)}`;
         defineProperty(this, cpName, computed('matches.[]', function () {
           return this.get('matches').indexOf(name) > -1;
+        }));
+        defineProperty(this, name, computed(cpName, function () {
+          return this.get(cpName);
         }));
         this.match(name, breakpoints[name]);
       });
@@ -176,13 +184,14 @@ export default Service.extend(Evented, {
       return;
     }
 
-    let matcher = this.get('mql')(query);
+    const matcher = this.get('mql')(query);
 
-    let listener = (matcher) => {
+    const listener = (matcher) => {
       if (this.get('isDestroyed')) {
         return;
       }
-      this.set(name, matcher);
+
+      this.set(`matchers.${name}`, matcher);
 
       if (matcher.matches) {
         this.get('matches').addObject(name);
