@@ -50,6 +50,7 @@ export default Controller.extend({
 
 In your templates you have access to the `media` helper that allows you to query breakpoints easily.
 
+**Note: this syntax is for the 3.x beta of ember-responsive**
 ```hbs
 {{#if (media 'isDesktop')}}
   Desktop view!
@@ -89,25 +90,23 @@ When updating this addon, make sure to run the generate command. Choose `no` to 
 
 `ember g ember-responsive`
 
+## Updating to 3.x (Still in beta)
+
+The major breaking changes to update to 3.x are so far:
+- Test helpers are now all covered by `setBreakpoint`
+- Calling media breakpoints in templates is now done with a helper. `{{media.isDesktop}}` -> `{{media 'isDesktop'}}`
+
 ## Testing Helpers
-This project provides several testing helpers to assist in testing
+This project provides a single test helper which works in both integration and acceptance tests to assist in testing
 content specific to different breakpoints.
 
 ### Acceptance Tests
-This project provides an acceptance testing helper to assist in testing
-content specific to different breakpoints.
-
-The provided testing helper *has to be added to start-app.js before the following example will work*.
-
-#### Changes required to start-app
 ```javascript
-// app/helpers/start-app.js
 ...
-import './responsive'; // You need to import helpers to use them in your tests.
+import { setBreakpoint } from 'ember-responsive/test-support';
+
 ...
-```
-#### Acceptance Helper Usage
-```javascript
+
 test('example test', function(assert) {
   setBreakpoint('mobile');
   visit('/');
@@ -118,28 +117,17 @@ test('example test', function(assert) {
 });
 ```
 
-The default breakpoint for testing defaults to `desktop`. You can modify this
-by changing `_defaultBreakpoint` in `tests/helpers/responsive.js`.
-
 ### Integration Tests
-Since the entire application isn't spun up for an integration tests, the `setBreakpoint`
-acceptance test helper won't work. In this case, you'll need to use the
-`setBreakpointForIntegrationTest` helper.
-
-To use the `setBreakpointForIntegrationTest` helper in an integration test:
-
 ```javascript
-import { moduleForComponent, test } from 'ember-qunit';
-import hbs from 'htmlbars-inline-precompile';
-import { setBreakpointForIntegrationTest } from 'your-app-name/tests/helpers/responsive';
+...
+import { setBreakpoint } from 'ember-responsive/test-support';
 
-moduleForComponent('foo-bar', 'Integration | Component | foo bar', {
-  integration: true
-});
+...
 
 test('it renders', function(assert) {
-  setBreakpointForIntegrationTest(this, 'mobile');
-  this.render(hbs`{{foo-bar media=media}}`); // IMPORTANT: you must pass the media service
+  setBreakpoint('mobile');
+
+  this.render(hbs`{{your-component}}`);
 
   // assert something specific to mobile
 });
