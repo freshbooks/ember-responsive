@@ -100,20 +100,6 @@ The major breaking changes to update to 3.x are so far:
 
 If you are using engines and you want to share responsive behaviour between the main application and engine, you must pass the 'media' service to the engine app.
 
-```js
-const Eng = Engine.extend({
-  modulePrefix,
-  podModulePrefix,
-  Resolver,
-  dependencies: {
-    services: [
-      'media',
-      ...
-    ],
-  },
-});
-```
-
 ## Testing Helpers
 This project provides a single test helper which works in both integration and acceptance tests to assist in testing
 content specific to different breakpoints.
