@@ -95,6 +95,7 @@ When updating this addon, make sure to run the generate command. Choose `no` to 
 The major breaking changes to update to 3.x are so far:
 - Test helpers are now all covered by `setBreakpoint`
 - Calling media breakpoints in templates is now done with a helper. `{{media.isDesktop}}` -> `{{media 'isDesktop'}}`
+- Tests run into issues if you have not ported to the new style tests (https://github.com/emberjs/rfcs/blob/master/text/0232-simplify-qunit-testing-api.md)
 
 ## Usage in engines
 
