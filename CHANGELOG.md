@@ -1,5 +1,20 @@
 # Changelog
 
+### [3.0.0]
+- Breaking Change: All test helpers now use the same import: `import { setBreakpoint } from 'ember-responsive/test-support';`. See README for examples. (#124)
+- Breaking Change: The media helper now needs to be passed a breakpoint as a string. `{{media.isDesktop}} -> {{media
+  'isDesktop'}}`. (#126, #128)
+- Breaking Change: You have to update to using the new testing api for tests to work properly. https://github.com/emberjs/rfcs/blob/master/text/0232-simplify-qunit-testing-api.md
+
+### [2.0.8]
+- Use new testing api (#122 @cibernox)
+
+### [2.0.7]
+- Added safeguard to fail on jQuery usage (#120 @cibernox)
+
+### [2.0.6]
+- Update ember-cli (#119 @k-fish)
+
 ### [2.0.5]
 - Fix breakpoint coherency to match breakpoint widths across the addon. Existing addons with a generated breakpoints.js
   should not be affected, re-generating or generating for the first time will use the new breakpoints. 
