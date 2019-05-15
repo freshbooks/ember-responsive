@@ -1,5 +1,8 @@
 # Changelog
 
+### [3.0.1]
+- Fixed init not calling super, which breaks for Ember 3.11 ([#145](https://github.com/freshbooks/ember-responsive/pull/145) @ryanto)
+
 ### [3.0.0]
 - Breaking Change: All test helpers now use the same import: `import { setBreakpoint } from 'ember-responsive/test-support';`. See README for examples. (#124)
 - Breaking Change: The media helper now needs to be passed a breakpoint as a string. `{{media.isDesktop}} -> {{media
