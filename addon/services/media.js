@@ -121,6 +121,7 @@ export default Service.extend(Evented, {
    *
    */
   init() {
+    this._super(...arguments);
     const owner = getOwner(this);
     const breakpoints = getOwner(this).lookup('breakpoints:main');
     if (breakpoints) {
