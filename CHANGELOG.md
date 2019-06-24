@@ -1,5 +1,8 @@
 # Changelog
 
+### [3.0.2]
+- Update the package dependencies to address security vulnerabilities. ([#changes](https://github.com/freshbooks/ember-responsive/commit/d8ec195e453051d2d5910d8e0fe29fc949fc692a) @danielchanja)
+
 ### [3.0.1]
 - Fixed init not calling super, which breaks for Ember 3.11 ([#145](https://github.com/freshbooks/ember-responsive/pull/145) @ryanto)
 
