@@ -1,5 +1,8 @@
 # Changelog
 
+### [3.0.3]
+- Move ember-cli-babel back to 6.6 ([#148](https://github.com/freshbooks/ember-responsive/pull/148) @calvin-fb)
+
 ### [3.0.2]
 - Update the package dependencies to address security vulnerabilities. ([#changes](https://github.com/freshbooks/ember-responsive/commit/d8ec195e453051d2d5910d8e0fe29fc949fc692a) @danielchanja)
 
