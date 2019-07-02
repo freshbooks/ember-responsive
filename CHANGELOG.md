@@ -11,6 +11,7 @@
 
 ### [3.0.0]
 - Breaking Change: All test helpers now use the same import: `import { setBreakpoint } from 'ember-responsive/test-support';`. See README for examples. (#124)
+- Breaking Change: Make auto-injection an opt-in (#124)
 - Breaking Change: The media helper now needs to be passed a breakpoint as a string. `{{media.isDesktop}} -> {{media
   'isDesktop'}}`. (#126, #128)
 - Breaking Change: You have to update to using the new testing api for tests to work properly. https://github.com/emberjs/rfcs/blob/master/text/0232-simplify-qunit-testing-api.md
