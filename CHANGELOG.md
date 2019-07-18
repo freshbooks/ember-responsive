@@ -1,5 +1,12 @@
 # Changelog
 
+### [3.0.5]
+- Update dependencies ([#153](https://github.com/freshbooks/ember-responsive/pull/153) @k-fish)
+
+### [3.0.4]
+- Update dependencies ([#151](https://github.com/freshbooks/ember-responsive/pull/151) @danielchanja)
+- Update dependencies ([#150](https://github.com/freshbooks/ember-responsive/pull/150) @danielchanja)
+
 ### [3.0.3]
 - Move ember-cli-babel back to 6.6 ([#148](https://github.com/freshbooks/ember-responsive/pull/148) @calvin-fb)
 
