@@ -64,4 +64,13 @@ module('Test Helpers | setBreakpoint', function(hooks) {
     await setBreakpoint('desktop');
     assert.dom('#dom-target').hasText('Desktop');
   });
+
+  test('`setBreakpoint` can accept an array of breakpoints', async function(assert) {
+    setBreakpoint(['mobile', 'tablet']);
+    let subject = this.owner.factoryFor('component:dummy-component').create();
+
+    assert.equal(subject.get('media.isDesktop'), false);
+    assert.equal(subject.get('media.isTablet'), true);
+    assert.equal(subject.get('media.isMobile'), true);
+  });
 });

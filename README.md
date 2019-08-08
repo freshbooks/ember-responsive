@@ -137,6 +137,35 @@ test('it renders', function(assert) {
 });
 ```
 
+### Multiple Breakpoints in Tests
+
+You can set multiple breakpoints to the helper.  This is useful if your `breakpoints.js` file defines breakpoints
+that overlap.
+
+```javascript
+// in app/breakpoints.js
+export default {
+  tablet:  '(min-width: 768px)',
+  desktop: '(min-width: 992px)',
+  jumbo:   '(min-width: 1201px)'
+};
+
+// in test file
+...
+import { setBreakpoint } from 'ember-responsive/test-support';
+
+...
+
+test('it renders', function(assert) {
+  setBreakpoint(['tablet', 'desktop']);
+
+  this.render(hbs`{{your-component}}`);
+
+  // assert something specific to desktop, i.e. sizes 992px - 1201px
+  // `isTablet` and `isDesktop` will both return true
+});
+```
+
 ## Tests
 
 To run the tests, after cloning do:
