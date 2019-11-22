@@ -83,6 +83,17 @@ export default {
 };
 ```
 
+### Additional Media Queries
+
+Media queries beyond those based on size will also work in your `breakpoints.js` file, including:
+
+```
+  portrait: '(orientation: portrait)',
+  landscape: '(orientation: landscape)',
+  dark: '(prefers-color-scheme: dark)',
+  light: '(prefers-color-scheme: light)'
+```
+
 ## Updating to 2.x
 
 When updating this addon, make sure to run the generate command. Choose `no` to overriding existing files, unless you want the defaults. This command has to be run when updating to 2.x if your application relies on automatic injection. Because as of version 1.2.9, the addon will generate an initializer to allow users to customize injection.
