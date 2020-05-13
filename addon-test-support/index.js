@@ -7,7 +7,9 @@ export function setBreakpoint(breakpoint) {
   let breakpoints = owner.lookup('breakpoints:main');
   let media = owner.lookup('service:media');
 
-  for (let breakpointName of breakpointArray) {
+  for (let i = 0; i < breakpointArray.length; i++) {
+    let breakpointName = breakpointArray[i];
+
     if (breakpointName === 'auto') {
       media.set('_mocked', false);
       return;
@@ -17,6 +19,16 @@ export function setBreakpoint(breakpoint) {
       throw new Error(`Breakpoint "${breakpointName}" is not defined in your breakpoints file`);
     }
   }
+  breakpointArray.forEach((breakpointName) => {
+    if (breakpointName === 'auto') {
+      media.set('_mocked', false);
+      return;
+    }
+
+    if (Object.keys(breakpoints).indexOf(breakpointName) === -1) {
+      throw new Error(`Breakpoint "${breakpointName}" is not defined in your breakpoints file`);
+    }
+  });
 
   let matches = media.get('matches');
   run(() => {
