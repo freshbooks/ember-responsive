@@ -34,7 +34,6 @@ jobs:
     - stage: "Tests"
       name: "Tests"
       script:
-        - yarn lint:hbs
         - yarn lint:js
         - yarn test
 
