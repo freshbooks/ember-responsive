@@ -1,4 +1,3 @@
-import { classify } from '@ember/string';
 import { module, test } from 'qunit';
 import { setupTest } from 'ember-qunit';
 import { setBreakpoint } from 'ember-responsive/test-support';

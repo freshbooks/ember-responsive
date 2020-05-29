@@ -78,6 +78,7 @@ import Evented from '@ember/object/evented';
 * @extends   Ember.Object
 */
 export default Service.extend(Evented, {
+  // eslint-disable-next-line ember/no-ember-testing-in-module-scope
   _mocked: Ember.testing,
   _mockedBreakpoint: 'desktop',
   /**
@@ -87,7 +88,7 @@ export default Service.extend(Evented, {
   * @type      Ember.NativeArray
   * @default   Ember.NativeArray
   */
-  matches: computed(function() {
+  matches: computed('_mocked', '_mockedBreakpoint', function() {
     return A(this.get('_mocked') ? [this.get('_mockedBreakpoint')] : []);
   }),
 
@@ -97,11 +98,13 @@ export default Service.extend(Evented, {
     * @property
     * @type Object
     */
+  // eslint-disable-next-line ember/avoid-leaking-state-in-ember-objects
   listeners: {},
 
   /**
    * A hash of matchers by breakpoint name
    */
+  // eslint-disable-next-line ember/avoid-leaking-state-in-ember-objects
   matchers: {},
 
   /**
@@ -122,7 +125,6 @@ export default Service.extend(Evented, {
    */
   init() {
     this._super(...arguments);
-    const owner = getOwner(this);
     const breakpoints = getOwner(this).lookup('breakpoints:main');
     if (breakpoints) {
       Object.keys(breakpoints).forEach((name) => {

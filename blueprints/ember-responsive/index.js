@@ -1,5 +1,3 @@
-/* jshint node: true */
-
 const EOL = require('os').EOL;
 
 module.exports = {
