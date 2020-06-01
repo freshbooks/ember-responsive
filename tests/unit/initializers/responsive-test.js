@@ -4,7 +4,7 @@ import { module, test } from 'qunit';
 
 var application = [];
 
-module('ResponsiveInitializer', function(hooks) {
+module('ResponsiveInitializer', function() {
   test('it works', function(assert) {
     application.registerOptionsForType = sinon.stub();
     initializer.initialize(application);
