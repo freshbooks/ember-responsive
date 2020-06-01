@@ -18,10 +18,9 @@ export function setBreakpoint(breakpoint) {
     }
   }
 
-  let matches = media.get('matches');
   run(() => {
-    matches.clear();
-    matches.addObjects(breakpointArray);
+    media.matches = [];
+    media.matches = breakpointArray;
     media._triggerMediaChanged();
   });
   return settled();

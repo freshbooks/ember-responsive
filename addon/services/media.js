@@ -1,5 +1,6 @@
 import Ember from 'ember';
 import { run } from '@ember/runloop';
+import { tracked } from '@glimmer/tracking'
 import { computed, defineProperty, set } from '@ember/object';
 import Service from '@ember/service';
 import { classify, dasherize } from '@ember/string';
@@ -56,7 +57,7 @@ import Evented from '@ember/object/evented';
 * media.match('desktop', 'all');
 * media.match('mobile', 'all');
 *
-* console.log(media.get('matches'));
+* console.log(media.matches);
 * // => Ember.Set(['desktop', 'mobile']);
 * ```
 *
@@ -88,8 +89,10 @@ export default class MediaService extends Service.extend(Evented) {
   * @type      Ember.NativeArray
   * @default   Ember.NativeArray
   */
+  @tracked matches;
+
   get matches() {
-    return this._mocked ? [this._mockedBreakpoint] : [];
+    return this._mocked ? [this._mockedBreakpoint] : this._matches;
   }
 
   /**
@@ -113,7 +116,7 @@ export default class MediaService extends Service.extend(Evented) {
   * @default   window.matchMedia
   * @private
   */
-  mql = detectMatchMedia()
+  mql = detectMatchMedia();
 
   /**
    * Initialize the service based on the breakpoints config
@@ -124,10 +127,13 @@ export default class MediaService extends Service.extend(Evented) {
   init() {
     super.init(...arguments);
 
+    this.matches = this._mocked ? [this._mockedBreakpoint] : [];
+
     const breakpoints = getOwner(this).lookup('breakpoints:main');
     if (breakpoints) {
       Object.keys(breakpoints).forEach((name) => {
         const cpName = `is${classify(name)}`;
+        // @TODO replace computed
         defineProperty(this, cpName, computed('matches.[]', function () {
           return this.matches.indexOf(name) > -1;
         }));
@@ -186,7 +192,8 @@ export default class MediaService extends Service.extend(Evented) {
       return;
     }
 
-    const matcher = this.mql(query);
+    const mql = this.mql;
+    const matcher = mql(query);
 
     const listener = (matcher) => {
       if (this.isDestroyed) {
@@ -196,6 +203,7 @@ export default class MediaService extends Service.extend(Evented) {
       set(this, `matchers.${name}`, matcher);
 
       if (matcher.matches) {
+        // @TODO Set like behaviour or just use Set
         this.matches = [...this.matches, name];
       } else {
         this.matches = this.matches.filter(key => key !== name);

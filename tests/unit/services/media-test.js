@@ -42,7 +42,7 @@ module('Unit | Service | media', function(hooks) {
       subject.match('none', 'not all');
     });
 
-    assert.deepEqual(subject.get('matches').toArray(), ['mobile', 'all']);
+    assert.deepEqual(subject.get('matches'), ['mobile', 'all']);
   });
 
   test('classNames property returns matching matchers as classes', function(assert) {
