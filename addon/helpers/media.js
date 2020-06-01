@@ -5,7 +5,7 @@ import { get } from '@ember/object';
 export default Helper.extend({
   init() {
     this._super(...arguments);
-    this.get('media').on('mediaChanged', () => {
+    this.media.on('mediaChanged', () => {
       this.recompute();
     });
   },

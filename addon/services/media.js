@@ -1,7 +1,6 @@
 import Ember from 'ember';
 import { run } from '@ember/runloop';
-import { A } from '@ember/array';
-import { computed, defineProperty } from '@ember/object';
+import { computed, defineProperty, set } from '@ember/object';
 import Service from '@ember/service';
 import { classify, dasherize } from '@ember/string';
 import nullMatchMedia from '../null-match-media';
@@ -77,10 +76,11 @@ import Evented from '@ember/object/evented';
 * @class     Media
 * @extends   Ember.Object
 */
-export default Service.extend(Evented, {
+export default class MediaService extends Service.extend(Evented) {
   // eslint-disable-next-line ember/no-ember-testing-in-module-scope
-  _mocked: Ember.testing,
-  _mockedBreakpoint: 'desktop',
+  _mocked = Ember.testing;
+  _mockedBreakpoint = 'desktop';
+
   /**
   * A set of matching matchers.
   *
@@ -88,9 +88,9 @@ export default Service.extend(Evented, {
   * @type      Ember.NativeArray
   * @default   Ember.NativeArray
   */
-  matches: computed('_mocked', '_mockedBreakpoint', function() {
-    return A(this.get('_mocked') ? [this.get('_mockedBreakpoint')] : []);
-  }),
+  get matches() {
+    return this._mocked ? [this._mockedBreakpoint] : [];
+  }
 
   /**
     * A hash of listeners indexed by their matcher's names
@@ -98,14 +98,12 @@ export default Service.extend(Evented, {
     * @property
     * @type Object
     */
-  // eslint-disable-next-line ember/avoid-leaking-state-in-ember-objects
-  listeners: {},
+  listeners = {};
 
   /**
    * A hash of matchers by breakpoint name
    */
-  // eslint-disable-next-line ember/avoid-leaking-state-in-ember-objects
-  matchers: {},
+  matchers = {};
 
   /**
   * The matcher to use for testing media queries.
@@ -115,7 +113,7 @@ export default Service.extend(Evented, {
   * @default   window.matchMedia
   * @private
   */
-  mql: detectMatchMedia(),
+  mql = detectMatchMedia()
 
   /**
    * Initialize the service based on the breakpoints config
@@ -124,21 +122,22 @@ export default Service.extend(Evented, {
    *
    */
   init() {
-    this._super(...arguments);
+    super.init(...arguments);
+
     const breakpoints = getOwner(this).lookup('breakpoints:main');
     if (breakpoints) {
       Object.keys(breakpoints).forEach((name) => {
         const cpName = `is${classify(name)}`;
         defineProperty(this, cpName, computed('matches.[]', function () {
-          return this.get('matches').indexOf(name) > -1;
+          return this.matches.indexOf(name) > -1;
         }));
         defineProperty(this, name, computed(cpName, function () {
-          return this.get(cpName);
+          return this[cpName];
         }));
         this.match(name, breakpoints[name]);
       });
     }
-  },
+  }
 
   /**
   * A string composed of all the matching matchers' names, turned into
@@ -147,19 +146,19 @@ export default Service.extend(Evented, {
   * @property  classNames
   * @type      string
   */
-  classNames: computed('matches.[]', function() {
-    return this.get('matches').map(function(name) {
+  get classNames() {
+    return this.matches.map(function(name) {
       return `media-${dasherize(name)}`;
     }).join(' ');
-  }),
+  }
 
   _triggerMediaChanged() {
     this.trigger('mediaChanged', {});
-  },
+  }
 
   _triggerEvent() {
     run.once(this, this._triggerMediaChanged);
-  },
+  }
 
   /**
   * Adds a new matcher to the list.
@@ -183,27 +182,28 @@ export default Service.extend(Evented, {
   * @method  match
   */
   match(name, query) {
-    if (this.get('_mocked')) {
+    if (this._mocked) {
       return;
     }
 
-    const matcher = this.get('mql')(query);
+    const matcher = this.mql(query);
 
     const listener = (matcher) => {
-      if (this.get('isDestroyed')) {
+      if (this.isDestroyed) {
         return;
       }
 
-      this.set(`matchers.${name}`, matcher);
+      set(this, `matchers.${name}`, matcher);
 
       if (matcher.matches) {
-        this.get('matches').addObject(name);
+        this.matches = [...this.matches, name];
       } else {
-        this.get('matches').removeObject(name);
+        this.matches = this.matches.filter(key => key !== name);
       }
+
       this._triggerEvent();
     };
-    this.get('listeners')[name] = listener;
+    this.listeners[name] = listener;
 
     if (matcher.addListener) {
       matcher.addListener(function(matcher){
@@ -212,7 +212,7 @@ export default Service.extend(Evented, {
     }
     listener(matcher);
   }
-});
+}
 
 function detectMatchMedia() {
   if (typeof window === 'object' && window.matchMedia) {
