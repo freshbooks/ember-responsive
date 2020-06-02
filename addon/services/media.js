@@ -78,10 +78,6 @@ import Evented from '@ember/object/evented';
 * @extends   Ember.Object
 */
 export default class MediaService extends Service.extend(Evented) {
-  // eslint-disable-next-line ember/no-ember-testing-in-module-scope
-  _mocked = Ember.testing;
-  _mockedBreakpoint = 'desktop';
-
   /**
   * A set of matching matchers.
   *
@@ -122,7 +118,7 @@ export default class MediaService extends Service.extend(Evented) {
   init() {
     super.init(...arguments);
 
-    this.matches = this._mocked ? [this._mockedBreakpoint] : [];
+    this.matches = Ember.testing ? ['desktop'] : [];
 
     const breakpoints = getOwner(this).lookup('breakpoints:main');
     if (breakpoints) {
@@ -188,7 +184,7 @@ export default class MediaService extends Service.extend(Evented) {
   * @method  match
   */
   match(name, query) {
-    if (this._mocked) {
+    if (Ember.testing) {
       return;
     }
 
