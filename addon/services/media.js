@@ -1,7 +1,7 @@
 import Ember from 'ember';
 import { run } from '@ember/runloop';
 import { tracked } from '@glimmer/tracking'
-import { defineProperty, set } from '@ember/object';
+import { set } from '@ember/object';
 import Service from '@ember/service';
 import { classify, dasherize } from '@ember/string';
 import nullMatchMedia from '../null-match-media';
@@ -143,13 +143,13 @@ export default class MediaService extends Service.extend(Evented) {
     if (breakpoints) {
       Object.keys(breakpoints).forEach((name) => {
         const cpName = `is${classify(name)}`;
-        defineProperty(this, cpName, {
+        Object.defineProperty(this, cpName, {
           get() {
             return this.matches.indexOf(name) > -1;
           }
         });
 
-        defineProperty(this, name, {
+        Object.defineProperty(this, name, {
           get() {
             return this[cpName];
           }
