@@ -19,7 +19,6 @@ export function setBreakpoint(breakpoint) {
   }
 
   run(() => {
-    media.matches = [];
     media.matches = breakpointArray;
     media._triggerMediaChanged();
   });
