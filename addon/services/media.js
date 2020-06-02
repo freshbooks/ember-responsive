@@ -81,6 +81,7 @@ export default class MediaService extends Service.extend(Evented) {
   // Ember only sets Ember.testing when tests are starting
   // eslint-disable-next-line ember/no-ember-testing-in-module-scope
   _mocked = Ember.testing;
+  _mockedBreakpoint = 'desktop';
 
   /**
   * A set of matching matchers.
@@ -122,7 +123,7 @@ export default class MediaService extends Service.extend(Evented) {
   init() {
     super.init(...arguments);
 
-    this.matches = (Ember.testing && this._mocked) ? ['desktop'] : [];
+    this.matches = (Ember.testing && this._mocked) ? [this._mockedBreakpoint] : [];
 
     const breakpoints = getOwner(this).lookup('breakpoints:main');
     if (breakpoints) {
