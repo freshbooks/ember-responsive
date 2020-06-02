@@ -5,7 +5,7 @@ import { run } from '@ember/runloop';
 
 const mediaRules = {
   mobile:  '(max-width: 767px)',
-  jumbo: '(min-width: 2301px)'
+  jumbo:   '(min-width: 1201px)'
 };
 
 module('Unit | Service | media', function(hooks) {
@@ -74,6 +74,18 @@ module('Unit | Service | media', function(hooks) {
       subject.match('one', 'none');
     });
     assert.equal(subject.get('classNames'), 'media-desktop media-two');
+  });
+
+  test('matches removes duplicates', function(assert) {
+    let subject = this.owner.lookup('service:media');
+
+    run(() => {
+      subject.match('mobile', 'all');
+      subject.match('mobile', 'all');
+      subject.match('none', 'not all');
+    });
+
+    assert.deepEqual(subject.get('matches'), ['desktop', 'mobile']);
   });
 });
 
