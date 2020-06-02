@@ -18,7 +18,7 @@ module('Unit | Service | media', function(hooks) {
     let subject = this.owner.lookup('service:media');
     subject.match('all', 'not all');
 
-    assert.equal(subject.get('matchers.all.matches'), false);
+    assert.equal(subject.matchers.all.matches, false);
   });
 
   test('matchers have a corresponding isser', function(assert) {
@@ -26,7 +26,7 @@ module('Unit | Service | media', function(hooks) {
 
     subject.match('mobile', 'not all');
 
-    assert.equal(subject.get('isMobile'), false);
+    assert.equal(subject.isMobile, false);
   });
 
   test('matches property returns matching matchers', function(assert) {
@@ -36,7 +36,7 @@ module('Unit | Service | media', function(hooks) {
     subject.match('all', 'all');
     subject.match('none', 'not all');
 
-    assert.deepEqual(subject.get('matches'), ['mobile', 'all']);
+    assert.deepEqual(subject.matches, ['mobile', 'all']);
   });
 
   test('classNames property returns matching matchers as classes', function(assert) {
@@ -46,7 +46,7 @@ module('Unit | Service | media', function(hooks) {
     subject.match('all', 'all');
     subject.match('none', 'not all');
 
-    assert.equal(subject.get('classNames'), 'media-mobile-device media-all');
+    assert.equal(subject.classNames, 'media-mobile-device media-all');
   });
 
   test('classNames is correctly bound to the matches property', function(assert) {
@@ -54,15 +54,15 @@ module('Unit | Service | media', function(hooks) {
 
     subject.match('one', 'all');
 
-    assert.equal(subject.get('classNames'), 'media-one');
+    assert.equal(subject.classNames, 'media-one');
 
     subject.match('two', 'all');
 
-    assert.equal(subject.get('classNames'), 'media-one media-two');
+    assert.equal(subject.classNames, 'media-one media-two');
 
     subject.match('one', 'none');
 
-    assert.equal(subject.get('classNames'), 'media-two');
+    assert.equal(subject.classNames, 'media-two');
   });
 
   test('matches removes duplicates', function(assert) {
@@ -72,7 +72,7 @@ module('Unit | Service | media', function(hooks) {
     subject.match('mobile', 'all');
     subject.match('none', 'not all');
 
-    assert.deepEqual(subject.get('matches'), ['mobile']);
+    assert.deepEqual(subject.matches, ['mobile']);
   });
 });
 
