@@ -15,37 +15,32 @@ module('Unit | Service | media', function(hooks) {
     setBreakpoint('auto');
   });
 
-  test('matchers can be added dynamically', function(assert) {
+  test('matchers can be added dynamically', async function(assert) {
     let subject = this.owner.lookup('service:media');
-    run(() => {
-      subject.match('all', 'not all');
-    });
+    subject.match('all', 'not all');
 
     assert.equal(subject.get('matchers.all.matches'), false);
   });
 
-  test('matchers have a corresponding isser', function(assert) {
+  test('matchers have a corresponding isser', async function(assert) {
     let subject = this.owner.lookup('service:media');
-    run(() => {
-      subject.match('mobile', 'not all');
-    });
+
+    subject.match('mobile', 'not all');
 
     assert.equal(subject.get('isMobile'), false);
   });
 
-  test('matches property returns matching matchers', function(assert) {
+  test('matches property returns matching matchers', async function(assert) {
     let subject = this.owner.lookup('service:media');
 
-    run(() => {
-      subject.match('mobile', 'all');
-      subject.match('all', 'all');
-      subject.match('none', 'not all');
-    });
+    subject.match('mobile', 'all');
+    subject.match('all', 'all');
+    subject.match('none', 'not all');
 
     assert.deepEqual(subject.get('matches'), ['desktop', 'mobile', 'all']);
   });
 
-  test('classNames property returns matching matchers as classes', function(assert) {
+  test('classNames property returns matching matchers as classes', async function(assert) {
     let subject = this.owner.lookup('service:media');
     run(() => {
       subject.match('mobileDevice', 'all');
@@ -56,34 +51,28 @@ module('Unit | Service | media', function(hooks) {
     assert.equal(subject.get('classNames'), 'media-desktop media-mobile-device media-all');
   });
 
-  test('classNames is correctly bound to the matches property', function(assert) {
+  test('classNames is correctly bound to the matches property', async function(assert) {
     let subject = this.owner.lookup('service:media');
 
-    run(() => {
-      subject.match('one', 'all');
-    });
+    subject.match('one', 'all');
+
     assert.equal(subject.get('classNames'), 'media-desktop media-one');
 
-    run(() => {
-      subject.match('two', 'all');
-    });
+    subject.match('two', 'all');
+
     assert.equal(subject.get('classNames'), 'media-desktop media-one media-two');
 
+    subject.match('one', 'none');
 
-    run(() => {
-      subject.match('one', 'none');
-    });
     assert.equal(subject.get('classNames'), 'media-desktop media-two');
   });
 
-  test('matches removes duplicates', function(assert) {
+  test('matches removes duplicates', async function(assert) {
     let subject = this.owner.lookup('service:media');
 
-    run(() => {
-      subject.match('mobile', 'all');
-      subject.match('mobile', 'all');
-      subject.match('none', 'not all');
-    });
+    subject.match('mobile', 'all');
+    subject.match('mobile', 'all');
+    subject.match('none', 'not all');
 
     assert.deepEqual(subject.get('matches'), ['desktop', 'mobile']);
   });
