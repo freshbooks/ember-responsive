@@ -86,14 +86,9 @@ export default class MediaService extends Service.extend(Evented) {
   * A set of matching matchers.
   *
   * @property  matches
-  * @type      Ember.NativeArray
-  * @default   Ember.NativeArray
+  * @type      Array
   */
   @tracked matches;
-
-  get matches() {
-    return this._mocked ? [this._mockedBreakpoint] : this._matches;
-  }
 
   /**
     * A hash of listeners indexed by their matcher's names
@@ -202,13 +197,14 @@ export default class MediaService extends Service.extend(Evented) {
 
       set(this, `matchers.${name}`, matcher);
 
+      let matches = [];
       if (matcher.matches) {
-        // @TODO Set like behaviour or just use Set
-        this.matches = [...this.matches, name];
+        matches = [...this.matches, name];
       } else {
-        this.matches = this.matches.filter(key => key !== name);
+        matches = this.matches.filter(key => key !== name);
       }
 
+      this.matches = matches.filter((item, index) => matches.indexOf(item) === index);
       this._triggerEvent();
     };
     this.listeners[name] = listener;

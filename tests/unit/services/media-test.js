@@ -5,7 +5,7 @@ import { run } from '@ember/runloop';
 
 const mediaRules = {
   mobile:  '(max-width: 767px)',
-  jumbo:   '(min-width: 1201px)'
+  jumbo: '(min-width: 2301px)'
 };
 
 module('Unit | Service | media', function(hooks) {
@@ -16,7 +16,7 @@ module('Unit | Service | media', function(hooks) {
   });
 
   test('matchers can be added dynamically', function(assert) {
-    var subject = this.owner.lookup('service:media');
+    let subject = this.owner.lookup('service:media');
     run(() => {
       subject.match('all', 'not all');
     });
@@ -25,7 +25,7 @@ module('Unit | Service | media', function(hooks) {
   });
 
   test('matchers have a corresponding isser', function(assert) {
-    var subject = this.owner.lookup('service:media');
+    let subject = this.owner.lookup('service:media');
     run(() => {
       subject.match('mobile', 'not all');
     });
@@ -34,7 +34,7 @@ module('Unit | Service | media', function(hooks) {
   });
 
   test('matches property returns matching matchers', function(assert) {
-    var subject = this.owner.lookup('service:media');
+    let subject = this.owner.lookup('service:media');
 
     run(() => {
       subject.match('mobile', 'all');
@@ -42,38 +42,38 @@ module('Unit | Service | media', function(hooks) {
       subject.match('none', 'not all');
     });
 
-    assert.deepEqual(subject.get('matches'), ['mobile', 'all']);
+    assert.deepEqual(subject.get('matches'), ['desktop', 'mobile', 'all']);
   });
 
   test('classNames property returns matching matchers as classes', function(assert) {
-    var subject = this.owner.lookup('service:media');
+    let subject = this.owner.lookup('service:media');
     run(() => {
       subject.match('mobileDevice', 'all');
       subject.match('all', 'all');
       subject.match('none', 'not all');
     });
 
-    assert.equal(subject.get('classNames'), 'media-mobile-device media-all');
+    assert.equal(subject.get('classNames'), 'media-desktop media-mobile-device media-all');
   });
 
   test('classNames is correctly bound to the matches property', function(assert) {
-    var subject = this.owner.lookup('service:media');
+    let subject = this.owner.lookup('service:media');
 
     run(() => {
       subject.match('one', 'all');
     });
-    assert.equal(subject.get('classNames'), 'media-one');
+    assert.equal(subject.get('classNames'), 'media-desktop media-one');
 
     run(() => {
       subject.match('two', 'all');
     });
-    assert.equal(subject.get('classNames'), 'media-one media-two');
+    assert.equal(subject.get('classNames'), 'media-desktop media-one media-two');
 
 
     run(() => {
       subject.match('one', 'none');
     });
-    assert.equal(subject.get('classNames'), 'media-two');
+    assert.equal(subject.get('classNames'), 'media-desktop media-two');
   });
 });
 
