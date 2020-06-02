@@ -2,17 +2,18 @@ import Helper from '@ember/component/helper';
 import { inject as service } from '@ember/service';
 import { get } from '@ember/object';
 
-export default Helper.extend({
+export default class MediaHelper extends Helper {
+  @service() media;
+
   init() {
-    this._super(...arguments);
+    super.init(...arguments);
+
     this.media.on('mediaChanged', () => {
       this.recompute();
     });
-  },
-
-  media: service(),
+  }
 
   compute([prop]) {
     return get(this, `media.${prop}`);
   }
-});
+}
