@@ -84,12 +84,28 @@ export default class MediaService extends Service.extend(Evented) {
   _mockedBreakpoint = 'desktop';
 
   /**
+  * @property  _matches
+  * @type      Array
+  */
+  @tracked _matches;
+
+  /**
   * A set of matching matchers.
   *
   * @property  matches
   * @type      Array
   */
-  @tracked matches;
+  get matches() {
+    if (this._matches) {
+      return this._matches
+    }
+
+    return (Ember.testing && this._mocked) ? [this._mockedBreakpoint] : [];
+  }
+
+  set matches(value) {
+    this._matches = value;
+  }
 
   /**
   * A hash of listeners indexed by their matcher's names
@@ -122,8 +138,6 @@ export default class MediaService extends Service.extend(Evented) {
    */
   init() {
     super.init(...arguments);
-
-    this.matches = (Ember.testing && this._mocked) ? [this._mockedBreakpoint] : [];
 
     const breakpoints = getOwner(this).lookup('breakpoints:main');
     if (breakpoints) {

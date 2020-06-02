@@ -36,7 +36,7 @@ module('Unit | Service | media', function(hooks) {
     subject.match('all', 'all');
     subject.match('none', 'not all');
 
-    assert.deepEqual(subject.get('matches'), ['desktop', 'mobile', 'all']);
+    assert.deepEqual(subject.get('matches'), ['mobile', 'all']);
   });
 
   test('classNames property returns matching matchers as classes', function(assert) {
@@ -46,7 +46,7 @@ module('Unit | Service | media', function(hooks) {
     subject.match('all', 'all');
     subject.match('none', 'not all');
 
-    assert.equal(subject.get('classNames'), 'media-desktop media-mobile-device media-all');
+    assert.equal(subject.get('classNames'), 'media-mobile-device media-all');
   });
 
   test('classNames is correctly bound to the matches property', function(assert) {
@@ -54,15 +54,15 @@ module('Unit | Service | media', function(hooks) {
 
     subject.match('one', 'all');
 
-    assert.equal(subject.get('classNames'), 'media-desktop media-one');
+    assert.equal(subject.get('classNames'), 'media-one');
 
     subject.match('two', 'all');
 
-    assert.equal(subject.get('classNames'), 'media-desktop media-one media-two');
+    assert.equal(subject.get('classNames'), 'media-one media-two');
 
     subject.match('one', 'none');
 
-    assert.equal(subject.get('classNames'), 'media-desktop media-two');
+    assert.equal(subject.get('classNames'), 'media-two');
   });
 
   test('matches removes duplicates', function(assert) {
@@ -72,7 +72,7 @@ module('Unit | Service | media', function(hooks) {
     subject.match('mobile', 'all');
     subject.match('none', 'not all');
 
-    assert.deepEqual(subject.get('matches'), ['desktop', 'mobile']);
+    assert.deepEqual(subject.get('matches'), ['mobile']);
   });
 });
 
