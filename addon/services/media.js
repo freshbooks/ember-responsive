@@ -197,14 +197,12 @@ export default class MediaService extends Service.extend(Evented) {
 
       set(this, `matchers.${name}`, matcher);
 
-      let matches = [];
       if (matcher.matches) {
-        matches = [...this.matches, name];
+        this.matches = Array.from(new Set([...this.matches, name]));
       } else {
-        matches = this.matches.filter(key => key !== name);
+        this.matches = Array.from(new Set(this.matches.filter(key => key !== name)));
       }
 
-      this.matches = matches.filter((item, index) => matches.indexOf(item) === index);
       this._triggerEvent();
     };
     this.listeners[name] = listener;
