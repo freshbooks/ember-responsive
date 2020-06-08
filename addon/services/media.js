@@ -1,7 +1,7 @@
 import Ember from 'ember';
 import { run } from '@ember/runloop';
-import { A } from '@ember/array';
-import { computed, defineProperty } from '@ember/object';
+import { tracked } from '@glimmer/tracking'
+import { set } from '@ember/object';
 import Service from '@ember/service';
 import { classify, dasherize } from '@ember/string';
 import nullMatchMedia from '../null-match-media';
@@ -57,7 +57,7 @@ import Evented from '@ember/object/evented';
 * media.match('desktop', 'all');
 * media.match('mobile', 'all');
 *
-* console.log(media.get('matches'));
+* console.log(media.matches);
 * // => Ember.Set(['desktop', 'mobile']);
 * ```
 *
@@ -77,35 +77,48 @@ import Evented from '@ember/object/evented';
 * @class     Media
 * @extends   Ember.Object
 */
-export default Service.extend(Evented, {
+export default class MediaService extends Service.extend(Evented) {
+  // Ember only sets Ember.testing when tests are starting
   // eslint-disable-next-line ember/no-ember-testing-in-module-scope
-  _mocked: Ember.testing,
-  _mockedBreakpoint: 'desktop',
+  _mocked = Ember.testing;
+  _mockedBreakpoint = 'desktop';
+
+  /**
+  * @property  _matches
+  * @type      Array
+  */
+  @tracked _matches;
+
   /**
   * A set of matching matchers.
   *
   * @property  matches
-  * @type      Ember.NativeArray
-  * @default   Ember.NativeArray
+  * @type      Array
   */
-  matches: computed('_mocked', '_mockedBreakpoint', function() {
-    return A(this.get('_mocked') ? [this.get('_mockedBreakpoint')] : []);
-  }),
+  get matches() {
+    if (this._matches) {
+      return this._matches
+    }
+
+    return (Ember.testing && this._mocked) ? [this._mockedBreakpoint] : [];
+  }
+
+  set matches(value) {
+    this._matches = value;
+  }
 
   /**
-    * A hash of listeners indexed by their matcher's names
-    *
-    * @property
-    * @type Object
-    */
-  // eslint-disable-next-line ember/avoid-leaking-state-in-ember-objects
-  listeners: {},
+  * A hash of listeners indexed by their matcher's names
+  *
+  * @property
+  * @type Object
+  */
+  listeners = {};
 
   /**
    * A hash of matchers by breakpoint name
    */
-  // eslint-disable-next-line ember/avoid-leaking-state-in-ember-objects
-  matchers: {},
+  matchers = {};
 
   /**
   * The matcher to use for testing media queries.
@@ -115,7 +128,7 @@ export default Service.extend(Evented, {
   * @default   window.matchMedia
   * @private
   */
-  mql: detectMatchMedia(),
+  mql = detectMatchMedia();
 
   /**
    * Initialize the service based on the breakpoints config
@@ -124,21 +137,28 @@ export default Service.extend(Evented, {
    *
    */
   init() {
-    this._super(...arguments);
+    super.init(...arguments);
+
     const breakpoints = getOwner(this).lookup('breakpoints:main');
     if (breakpoints) {
       Object.keys(breakpoints).forEach((name) => {
         const cpName = `is${classify(name)}`;
-        defineProperty(this, cpName, computed('matches.[]', function () {
-          return this.get('matches').indexOf(name) > -1;
-        }));
-        defineProperty(this, name, computed(cpName, function () {
-          return this.get(cpName);
-        }));
+        Object.defineProperty(this, cpName, {
+          get() {
+            return this.matches.indexOf(name) > -1;
+          }
+        });
+
+        Object.defineProperty(this, name, {
+          get() {
+            return this[cpName];
+          }
+        });
+
         this.match(name, breakpoints[name]);
       });
     }
-  },
+  }
 
   /**
   * A string composed of all the matching matchers' names, turned into
@@ -147,19 +167,19 @@ export default Service.extend(Evented, {
   * @property  classNames
   * @type      string
   */
-  classNames: computed('matches.[]', function() {
-    return this.get('matches').map(function(name) {
+  get classNames() {
+    return this.matches.map(function(name) {
       return `media-${dasherize(name)}`;
     }).join(' ');
-  }),
+  }
 
   _triggerMediaChanged() {
     this.trigger('mediaChanged', {});
-  },
+  }
 
   _triggerEvent() {
     run.once(this, this._triggerMediaChanged);
-  },
+  }
 
   /**
   * Adds a new matcher to the list.
@@ -183,27 +203,30 @@ export default Service.extend(Evented, {
   * @method  match
   */
   match(name, query) {
-    if (this.get('_mocked')) {
+    // see https://github.com/ember-cli/eslint-plugin-ember/pull/272
+    if (Ember.testing && this._mocked) {
       return;
     }
 
-    const matcher = this.get('mql')(query);
+    const mql = this.mql;
+    const matcher = mql(query);
 
     const listener = (matcher) => {
-      if (this.get('isDestroyed')) {
+      if (this.isDestroyed) {
         return;
       }
 
-      this.set(`matchers.${name}`, matcher);
+      set(this, `matchers.${name}`, matcher);
 
       if (matcher.matches) {
-        this.get('matches').addObject(name);
+        this.matches = Array.from(new Set([...this.matches, name]));
       } else {
-        this.get('matches').removeObject(name);
+        this.matches = Array.from(new Set(this.matches.filter(key => key !== name)));
       }
+
       this._triggerEvent();
     };
-    this.get('listeners')[name] = listener;
+    this.listeners[name] = listener;
 
     if (matcher.addListener) {
       matcher.addListener(function(matcher){
@@ -212,7 +235,7 @@ export default Service.extend(Evented, {
     }
     listener(matcher);
   }
-});
+}
 
 function detectMatchMedia() {
   if (typeof window === 'object' && window.matchMedia) {
