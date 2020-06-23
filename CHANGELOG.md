@@ -1,5 +1,10 @@
 # Changelog
 
+### [4.0.0]
+
+- Use Tracked based services on Match ([#286](https://github.com/freshbooks/ember-responsive/pull/286) @snewcomer) 
+- Breaking Change:  Bump Node 10
+
 ### [3.0.5]
 - Update dependencies ([#153](https://github.com/freshbooks/ember-responsive/pull/153) @k-fish)
 
