@@ -7,7 +7,8 @@ export function setBreakpoint(breakpoint) {
   let breakpoints = owner.lookup('breakpoints:main');
   let media = owner.lookup('service:media');
 
-  for (let breakpointName of breakpointArray) {
+  for (let i = 0; i < breakpointArray.length; i++) {
+    let breakpointName = breakpointArray[i];
     if (breakpointName === 'auto') {
       media.set('_mocked', false);
       return;
