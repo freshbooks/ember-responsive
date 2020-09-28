@@ -228,7 +228,11 @@ export default class MediaService extends Service.extend(Evented) {
     };
     this.listeners[name] = listener;
 
-    if (matcher.addListener) {
+    if (typeof matcher.addEventListener === "function") {
+      matcher.addEventListener("change", function(matcher){
+        run(null, listener, matcher);
+      });
+    } else if (matcher.addListener) {
       matcher.addListener(function(matcher){
         run(null, listener, matcher);
       });
