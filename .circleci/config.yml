@@ -18,7 +18,6 @@ jobs:
       - run: JOBS=1 ./node_modules/.bin/ember try:one ember-lts-3.16
       - run: JOBS=1 ./node_modules/.bin/ember try:one ember-release
       - run: JOBS=1 ./node_modules/.bin/ember try:one ember-beta
-      - run: JOBS=1 ./node_modules/.bin/ember try:one ember-canary
       - run: JOBS=1 ./node_modules/.bin/ember try:one ember-classic
 workflows:
   tests:
