@@ -1,12 +1,13 @@
 import Ember from 'ember';
 import { run } from '@ember/runloop';
 import { tracked } from '@glimmer/tracking'
-import { set } from '@ember/object';
+import { set, defineProperty } from '@ember/object';
 import Service from '@ember/service';
 import { classify, dasherize } from '@ember/string';
 import nullMatchMedia from '../null-match-media';
 import { getOwner } from '@ember/application'
 import Evented from '@ember/object/evented';
+import { dependentKeyCompat } from '@ember/object/compat';
 
 /**
 * Handles detecting and responding to media queries.
@@ -143,17 +144,25 @@ export default class MediaService extends Service.extend(Evented) {
     if (breakpoints) {
       Object.keys(breakpoints).forEach((name) => {
         const cpName = `is${classify(name)}`;
-        Object.defineProperty(this, cpName, {
-          get() {
-            return this.matches.indexOf(name) > -1;
-          }
-        });
+        defineProperty(
+          this,
+          cpName,
+          dependentKeyCompat({
+            get() {
+              return this.matches.indexOf(name) > -1;
+            },
+          })
+        );
 
-        Object.defineProperty(this, name, {
-          get() {
-            return this[cpName];
-          }
-        });
+        defineProperty(
+          this,
+          name,
+          dependentKeyCompat({
+            get() {
+              return this[cpName];
+            },
+          })
+        );
 
         this.match(name, breakpoints[name]);
       });

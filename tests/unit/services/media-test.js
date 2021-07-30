@@ -1,6 +1,9 @@
 import { module, test } from 'qunit';
 import { setupTest } from 'ember-qunit';
 import { setBreakpoint } from 'ember-responsive/test-support';
+import Service from '@ember/service';
+import { inject as service } from '@ember/service';
+import { computed } from '@ember/object';
 
 const mediaRules = {
   mobile:  '(max-width: 767px)',
@@ -74,5 +77,31 @@ module('Unit | Service | media', function(hooks) {
 
     assert.deepEqual(subject.matches, ['mobile']);
   });
+
+  test('computed properties recompute according to the media', async function(assert) {
+    class TestComputedPropertiesService extends Service {
+      @service
+      media;
+
+      @computed('media.isMobile')
+      get isMobile() {
+        return this.media.isMobile
+      }
+    }
+    this.owner.register('service:test-cp', TestComputedPropertiesService);
+    
+    let subject = this.owner.lookup('service:media');
+    let serviceWithCps = this.owner.lookup('service:test-cp');
+
+    subject.match('mobile', 'all');
+    
+    assert.equal(serviceWithCps.isMobile, true);
+    assert.equal(subject.isMobile, true);
+    
+    subject.match('mobile', 'not all');
+
+    assert.equal(serviceWithCps.isMobile, false);
+    assert.equal(subject.isMobile, false);
+  })
 });
 
