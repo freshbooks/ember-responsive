@@ -1,6 +1,6 @@
 import Ember from 'ember';
-import { run } from '@ember/runloop';
 import { tracked } from '@glimmer/tracking'
+import { run, once } from '@ember/runloop';
 import { set, defineProperty } from '@ember/object';
 import Service from '@ember/service';
 import { classify, dasherize } from '@ember/string';
@@ -187,7 +187,7 @@ export default class MediaService extends Service.extend(Evented) {
   }
 
   _triggerEvent() {
-    run.once(this, this._triggerMediaChanged);
+    once(this, this._triggerMediaChanged);
   }
 
   /**
