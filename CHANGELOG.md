@@ -1,8 +1,13 @@
 # Changelog
 
-### [4.0.0]
+### [4.0.2]
+- BUGFIX: CP's are not firing on tracked media props ([#350](https://github.com/freshbooks/ember-responsive/pull/350) @rreckonerr)
 
-- Use Tracked based services on Match ([#286](https://github.com/freshbooks/ember-responsive/pull/286) @snewcomer) 
+### [4.0.1]
+- Make test support setBreakpoint IE11 compatible ([#303](https://github.com/freshbooks/ember-responsive/pull/303) @raido)
+
+### [4.0.0]
+- Use Tracked based services on Match ([#286](https://github.com/freshbooks/ember-responsive/pull/286) @snewcomer)
 - Breaking Change:  Bump Node 10
 
 ### [3.0.5]
@@ -39,7 +44,7 @@
 
 ### [2.0.5]
 - Fix breakpoint coherency to match breakpoint widths across the addon. Existing addons with a generated breakpoints.js
-  should not be affected, re-generating or generating for the first time will use the new breakpoints. 
+  should not be affected, re-generating or generating for the first time will use the new breakpoints.
   ([#107](https://github.com/freshbooks/ember-responsive/pull/107) @telmaantunes)
   ([#106](https://github.com/freshbooks/ember-responsive/pull/106) @AndreJoaquim)
 
