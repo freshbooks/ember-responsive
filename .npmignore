@@ -25,6 +25,8 @@
 /tests/
 /yarn.lock
 .gitkeep
+/.circleci
+/.github
 
 # ember-try
 /.node_modules.ember-try/
