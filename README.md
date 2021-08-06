@@ -1,4 +1,4 @@
-# ember-responsive [![Build Status](https://travis-ci.org/freshbooks/ember-responsive.svg?branch=master)](https://travis-ci.org/freshbooks/ember-responsive) [![Ember Observer Score](http://emberobserver.com/badges/ember-responsive.svg)](http://emberobserver.com/addons/ember-responsive)
+# ember-responsive [![Ember Observer Score](http://emberobserver.com/badges/ember-responsive.svg)](http://emberobserver.com/addons/ember-responsive)
 
 ember-responsive is an ember-cli addon that give you a simple, Ember-aware way
 of dealing with media queries.
