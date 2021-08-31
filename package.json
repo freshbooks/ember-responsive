@@ -45,7 +45,7 @@
     "eslint-plugin-ember": "^8.5.2",
     "eslint-plugin-node": "^11.1.0",
     "loader.js": "^4.7.0",
-    "qunit-dom": "^1.0.0"
+    "qunit-dom": "^2.0.0"
   },
   "keywords": [
     "ember-addon",
