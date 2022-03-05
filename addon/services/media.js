@@ -137,8 +137,8 @@ export default class MediaService extends Service.extend(Evented) {
    * @method init
    *
    */
-  init() {
-    super.init(...arguments);
+  constructor() {
+    super(...arguments);
 
     const breakpoints = getOwner(this).lookup('breakpoints:main');
     if (breakpoints) {
