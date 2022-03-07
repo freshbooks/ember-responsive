@@ -1,1 +1,1 @@
-export { default, media } from 'ember-responsive/helpers/media';
+export { default } from 'ember-responsive/helpers/media';
