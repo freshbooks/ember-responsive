@@ -5,8 +5,8 @@ import { get } from '@ember/object';
 export default class MediaHelper extends Helper {
   @service() media;
 
-  init() {
-    super.init(...arguments);
+  constructor() {
+    super(...arguments);
 
     this.media.on('mediaChanged', () => {
       this.recompute();
