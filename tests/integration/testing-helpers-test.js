@@ -4,6 +4,7 @@ import hbs from "htmlbars-inline-precompile";
 import Component from '@ember/component';
 import { inject as service } from '@ember/service';
 import { setBreakpoint } from 'ember-responsive/test-support';
+import { render } from '@ember/test-helpers';
 
 module('Test Helpers | setBreakpoint', function(hooks) {
   setupRenderingTest(hooks);
@@ -46,7 +47,7 @@ module('Test Helpers | setBreakpoint', function(hooks) {
 
   test('`setBreakpoint` can be "awaited" to ensure the template has updated', async function(assert) {
     setBreakpoint("tablet");
-    await this.render(hbs`
+    await render(hbs`
       <div id="dom-target">
         {{#if (media "isMobile")}}
           Mobile
