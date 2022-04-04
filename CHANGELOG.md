@@ -1,5 +1,11 @@
 # Changelog
 
+### [5.0.0]
+- Fix export of media helper ([#468](https://github.com/freshbooks/ember-responsive/pull/468) @jrjohnson)
+- Update components to modern ember syntax ([#472](https://github.com/freshbooks/ember-responsive/pull/472) @weekaah)
+- Update dependencies
+- Fix tests to make them run with the new ember version
+- Fix lint issues 
 ### [4.0.2]
 - BUGFIX: CP's are not firing on tracked media props ([#350](https://github.com/freshbooks/ember-responsive/pull/350) @rreckonerr)
 
