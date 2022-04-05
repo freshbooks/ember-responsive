@@ -5056,9 +5056,9 @@ ember-source@~4.3.0:
     silent-error "^1.1.1"
 
 ember-template-lint@^4.2.0:
-  version "4.2.0"
-  resolved "https://registry.yarnpkg.com/ember-template-lint/-/ember-template-lint-4.2.0.tgz#13ce814c414a07c2dfe8185067261ab3b1317317"
-  integrity sha512-zuTo280sMarKwL92748fjMfBYogdN8AikbLPD+/csFbYA99HreG3DzgYj61uEjYaymA7nbyDmVYxfDTH9bHZAg==
+  version "4.3.0"
+  resolved "https://registry.yarnpkg.com/ember-template-lint/-/ember-template-lint-4.3.0.tgz#4bb6050db57eeeaa8f944151c9fef9cf582e7217"
+  integrity sha512-a+UFZDTGMUStY8wnzFQyD3BmA/UKdegQ4WDikS0TbhVTx9tK6aOnVh5lV33Xr4Fbf3Pee1N1//XdCulWpUajMg==
   dependencies:
     "@lint-todo/utils" "^12.0.1"
     aria-query "^5.0.0"
@@ -7201,14 +7201,7 @@ is-glob@^3.1.0:
   dependencies:
     is-extglob "^2.1.0"
 
-is-glob@^4.0.0, is-glob@^4.0.1:
-  version "4.0.1"
-  resolved "https://registry.yarnpkg.com/is-glob/-/is-glob-4.0.1.tgz#7567dbe9f2f5e2467bc77ab83c4a29482407a5dc"
-  integrity sha512-5G0tKtBTFImOqDnLB2hG6Bp2qcKEFduo4tZu9MT/H6NQv/ghhy30o55ufafxJ/LdH79LLs2Kfrn85TLKyA7BUg==
-  dependencies:
-    is-extglob "^2.1.1"
-
-is-glob@^4.0.3, is-glob@~4.0.1:
+is-glob@^4.0.0, is-glob@^4.0.1, is-glob@^4.0.3, is-glob@~4.0.1:
   version "4.0.3"
   resolved "https://registry.yarnpkg.com/is-glob/-/is-glob-4.0.3.tgz#64f61e42cbbb2eec2071a9dac0b28ba1e65d5084"
   integrity sha512-xelSayHH36ZgE7ZWhli7pW34hNbNl8Ojv5KVmkJD4hBdD3th8Tfk9vYasLM+mXWOZhFkgZfxhLSnrwRr4elSSg==
