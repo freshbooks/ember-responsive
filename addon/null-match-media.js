@@ -3,7 +3,7 @@
  * `false`. Useful for server-side environments like FastBoot where there
  * is no viewport.
  */
-export default function() {
+export default function () {
   return {
     matches: false
   };

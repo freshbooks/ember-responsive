@@ -1,24 +1,25 @@
 'use strict';
 
 const getChannelURL = require('ember-source-channel-url');
+const { embroiderSafe, embroiderOptimized } = require('@embroider/test-setup');
 
-module.exports = async function() {
+module.exports = async function () {
   return {
     useYarn: true,
     scenarios: [
       {
-        name: 'ember-lts-3.13',
+        name: 'ember-lts-3.24',
         npm: {
           devDependencies: {
-            'ember-source': '~3.13.0'
+            'ember-source': '~3.24.3'
           }
         }
       },
       {
-        name: 'ember-lts-3.16',
+        name: 'ember-lts-3.28',
         npm: {
           devDependencies: {
-            'ember-source': '~3.16.0'
+            'ember-source': '~3.28.0'
           }
         }
       },
@@ -46,16 +47,26 @@ module.exports = async function() {
           }
         }
       },
-      // The default `.travis.yml` runs this scenario via `yarn test`,
-      // not via `ember try`. It's still included here so that running
-      // `ember try:each` manually or from a customized CI config will run it
-      // along with all the other scenarios.
       {
-        name: 'ember-default',
+        name: 'ember-classic',
+        env: {
+          EMBER_OPTIONAL_FEATURES: JSON.stringify({
+            'application-template-wrapper': true,
+            'default-async-observers': false,
+            'template-only-glimmer-components': false
+          })
+        },
         npm: {
-          devDependencies: {}
+          devDependencies: {
+            'ember-source': '~3.28.0'
+          },
+          ember: {
+            edition: 'classic'
+          }
         }
-      }
+      },
+      embroiderSafe(),
+      embroiderOptimized()
     ]
   };
 };

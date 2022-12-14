@@ -1,9 +1,8 @@
 import Helper from '@ember/component/helper';
 import { inject as service } from '@ember/service';
-import { get } from '@ember/object';
 
-export default class MediaHelper extends Helper {
-  @service() media;
+export default class Media extends Helper {
+  @service media;
 
   constructor() {
     super(...arguments);
@@ -14,6 +13,6 @@ export default class MediaHelper extends Helper {
   }
 
   compute([prop]) {
-    return get(this, `media.${prop}`);
+    return this.media[prop];
   }
 }

@@ -4,11 +4,15 @@ import { module, test } from 'qunit';
 
 var application = [];
 
-module('ResponsiveInitializer', function() {
-  test('it works', function(assert) {
+module('ResponsiveInitializer', function () {
+  test('it works', function (assert) {
     application.registerOptionsForType = sinon.stub();
     initializer.initialize(application);
 
-    assert.ok(application.registerOptionsForType.withArgs('breakpoints', { instantiate: false }).calledOnce);
+    assert.ok(
+      application.registerOptionsForType.withArgs('breakpoints', {
+        instantiate: false
+      }).calledOnce
+    );
   });
 });

@@ -14,10 +14,13 @@ jobs:
       - node/install-packages:
           pkg-manager: yarn
       - run: JOBS=1 ./node_modules/.bin/ember test
-      - run: JOBS=1 ./node_modules/.bin/ember try:one ember-lts-3.13
-      - run: JOBS=1 ./node_modules/.bin/ember try:one ember-lts-3.16
+      - run: JOBS=1 ./node_modules/.bin/ember try:one ember-lts-3.24
+      - run: JOBS=1 ./node_modules/.bin/ember try:one ember-lts-3.28
       - run: JOBS=1 ./node_modules/.bin/ember try:one ember-release
       - run: JOBS=1 ./node_modules/.bin/ember try:one ember-beta
+      - run: JOBS=1 ./node_modules/.bin/ember try:one ember-canary
+      - run: JOBS=1 ./node_modules/.bin/ember try:one ember-classic
+      - run: JOBS=1 ./node_modules/.bin/ember try:one embroider-safe
 workflows:
   tests:
     jobs:
