@@ -2,10 +2,9 @@ import Ember from 'ember';
 import { run } from '@ember/runloop';
 import Service from '@ember/service';
 import { classify, dasherize } from '@ember/string';
-// import nullMatchMedia from '../null-match-media';
 import { getOwner } from '@ember/application';
 import Evented from '@ember/object/evented';
-import { TrackedArray, TrackedObject } from 'tracked-built-ins';
+import { tracked, TrackedObject } from 'tracked-built-ins';
 
 /**
  * Handles detecting and responding to media queries.
@@ -96,7 +95,7 @@ export default class MediaService extends Service.extend(Evented) {
    * @type TrackedArray<string>
    * @private
    */
-  _matches = new TrackedArray([]);
+  @tracked _matches = [];
 
   /**
    * A TrackedArray of matching matchers.
@@ -228,9 +227,9 @@ export default class MediaService extends Service.extend(Evented) {
       this.matchers[name] = matcher;
 
       if (matcher.matches) {
-        this.matches = TrackedArray.from(new Set([...this.matches, name]));
+        this.matches = Array.from(new Set([...this.matches, name]));
       } else {
-        this.matches = TrackedArray.from(
+        this.matches = Array.from(
           new Set(this.matches.filter((key) => key !== name))
         );
       }

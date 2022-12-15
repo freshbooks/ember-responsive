@@ -6,13 +6,8 @@ export default class Media extends Helper {
 
   constructor() {
     super(...arguments);
-
-    this.media.on('mediaChanged', () => {
-      this.recompute();
-    });
+    this.media.on('mediaChanged', () => this.recompute());
   }
 
-  compute([prop]) {
-    return this.media[prop];
-  }
+  compute = ([prop]) => this.media[prop];
 }
