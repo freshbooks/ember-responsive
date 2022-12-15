@@ -235,8 +235,6 @@ export default class MediaService extends Service.extend(Evented) {
         );
       }
 
-      // Only fire event if this listener is the one that changed
-      // to avoid unnecessary recomputations
       if (this.listeners[name] !== matcher) {
         this._triggerEvent();
       }
@@ -257,7 +255,3 @@ export default class MediaService extends Service.extend(Evented) {
     listener(matcher);
   }
 }
-
-// const detectMatchMedia = () => {
-//   return window?.matchMedia || nullMatchMedia;
-// };
