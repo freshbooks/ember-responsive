@@ -1,13 +1,11 @@
 import Ember from 'ember';
 import { run } from '@ember/runloop';
-import { tracked } from '@glimmer/tracking';
 import Service from '@ember/service';
 import { classify, dasherize } from '@ember/string';
-import nullMatchMedia from '../null-match-media';
+// import nullMatchMedia from '../null-match-media';
 import { getOwner } from '@ember/application';
 import Evented from '@ember/object/evented';
-import { defineProperty } from '@ember/object';
-import { dependentKeyCompat } from '@ember/object/compat';
+import { TrackedArray, TrackedObject } from 'tracked-built-ins';
 
 /**
  * Handles detecting and responding to media queries.
@@ -71,10 +69,10 @@ import { dependentKeyCompat } from '@ember/object/compat';
  * // => 'media-desktop media-mobile'
  * ```
  *
- * @module    ember-responsive
+ * @module ember-responsive
  * @namespace Ember.Responsive
- * @class     Media
- * @extends   Ember.Service
+ * @class Media
+ * @extends Ember.Service
  */
 export default class MediaService extends Service.extend(Evented) {
   // Ember only sets Ember.testing when tests are starting
@@ -83,19 +81,31 @@ export default class MediaService extends Service.extend(Evented) {
   _mockedBreakpoint = 'desktop';
 
   /**
-   * @property _matches
-   * @type Array<string>
+   * If the matchMedia API is not available, this will be `false`, and
+   * the service will not respond to calls.
+   *
+   * @property enabled
+   * @type boolean
    */
-  @tracked _matches;
+  get enabled() {
+    return !!window?.matchMedia;
+  }
 
   /**
-   * A set of matching matchers.
+   * @property _matches
+   * @type TrackedArray<string>
+   * @private
+   */
+  _matches = new TrackedArray([]);
+
+  /**
+   * A TrackedArray of matching matchers.
    *
    * @property matches
-   * @type Array<string>
+   * @type TrackedArray<string>
    */
   get matches() {
-    if (this._matches) {
+    if (this._matches.length) {
       return this._matches;
     }
     return Ember.testing && this._mocked ? [this._mockedBreakpoint] : [];
@@ -114,6 +124,7 @@ export default class MediaService extends Service.extend(Evented) {
 
   /**
    * A hash of matchers by breakpoint name
+   *
    * @property
    * @type Record<string, MediaQueryList>
    */
@@ -122,53 +133,51 @@ export default class MediaService extends Service.extend(Evented) {
   /**
    * The matcher to use for testing media queries.
    *
-   * @property  matcher
-   * @type      matchMedia
-   * @default   window.matchMedia
+   * @property matcher
+   * @type Window['matchMedia'] | undefined
+   * @default Window['matchMedia']
    * @private
    */
-  mql = detectMatchMedia();
+  mql = window?.matchMedia;
 
   /**
-   * Initialize the service based on the breakpoints config
+   * Initialize service based on the breakpoints config
    */
   constructor() {
     super(...arguments);
 
     const breakpoints = getOwner(this).lookup('breakpoints:main');
 
-    if (breakpoints) {
-      Object.keys(breakpoints).forEach((name) => {
-        const cpName = `is${classify(name)}`;
-        defineProperty(
-          this,
-          cpName,
-          dependentKeyCompat({
-            get() {
-              return this.matches.indexOf(name) > -1;
-            }
-          })
-        );
-        defineProperty(
-          this,
-          name,
-          dependentKeyCompat({
-            get() {
-              return this[cpName];
-            }
-          })
-        );
-        this.match(name, breakpoints[name]);
-      });
+    if (!breakpoints || !this.enabled) {
+      return;
     }
+
+    Object.keys(breakpoints).forEach((name) => {
+      const getterName = `is${classify(name)}`;
+
+      Object.defineProperties(this, {
+        [getterName]: new TrackedObject({
+          get() {
+            return this.matches.indexOf(name) > -1;
+          }
+        }),
+        [name]: new TrackedObject({
+          get() {
+            return this[getterName];
+          }
+        })
+      });
+
+      this.match(name, breakpoints[name]);
+    });
   }
 
   /**
    * A string composed of all the matching matchers' names, turned into
    * friendly, dasherized class-names that are prefixed with `media-`.
    *
-   * @property  classNames
-   * @type      string
+   * @property classNames
+   * @type string
    */
   get classNames() {
     return this.matches.map((match) => `media-${dasherize(match)}`).join(' ');
@@ -191,7 +200,6 @@ export default class MediaService extends Service.extend(Evented) {
    * **Adding a new matcher**
    *
    * ```javascript
-   * media = this.owner.lookup('service:media');
    * media.match('all', 'all');
    * media.all;
    *   // => instanceof window.matchMedia
@@ -199,13 +207,13 @@ export default class MediaService extends Service.extend(Evented) {
    *   // => true
    * ```
    *
-   * @param   string  name   The name of the matcher
-   * @param   string  query  The media query to match against
-   * @method  match
+   * @param string name The name of the matcher
+   * @param string query The media query to match against
+   * @method match
    */
   match(name, query) {
     // see https://github.com/ember-cli/eslint-plugin-ember/pull/272
-    if (Ember.testing && this._mocked) {
+    if ((Ember.testing && this._mocked) || !this.enabled) {
       return;
     }
 
@@ -220,14 +228,18 @@ export default class MediaService extends Service.extend(Evented) {
       this.matchers[name] = matcher;
 
       if (matcher.matches) {
-        this.matches = Array.from(new Set([...this.matches, name]));
+        this.matches = TrackedArray.from(new Set([...this.matches, name]));
       } else {
-        this.matches = Array.from(
+        this.matches = TrackedArray.from(
           new Set(this.matches.filter((key) => key !== name))
         );
       }
 
-      this._triggerEvent();
+      // Only fire event if this listener is the one that changed
+      // to avoid unnecessary recomputations
+      if (this.listeners[name] !== matcher) {
+        this._triggerEvent();
+      }
     };
 
     this.listeners[name] = listener;
@@ -246,6 +258,6 @@ export default class MediaService extends Service.extend(Evented) {
   }
 }
 
-const detectMatchMedia = () => {
-  return window?.matchMedia || nullMatchMedia;
-};
+// const detectMatchMedia = () => {
+//   return window?.matchMedia || nullMatchMedia;
+// };
