@@ -110,7 +110,6 @@ The major breaking changes to update to 3.x are so far:
 ## Updating to 5.x
 
 Updating to 5.x should be seamless for modern (post-Octane) Ember apps.
-  - TODO: add more here
 
 ## Usage in engines
 
