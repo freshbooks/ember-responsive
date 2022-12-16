@@ -1,88 +1,106 @@
 import { module, test } from 'qunit';
 import { setupTest } from 'ember-qunit';
 import { setBreakpoint } from 'ember-responsive/test-support';
-import Service from '@ember/service';
-import { inject as service } from '@ember/service';
+import Service, { inject as service } from '@ember/service';
+import sinon from 'sinon';
 
 const mediaRules = {
-  mobile:  '(max-width: 767px)',
-  jumbo:   '(min-width: 1201px)'
+  mobile: '(max-width: 767px)',
+  jumbo: '(min-width: 1201px)'
 };
 
-module('Unit | Service | media', function(hooks) {
+module('Unit | Service | media', function (hooks) {
   setupTest(hooks);
-  hooks.beforeEach(function() {
+
+  hooks.beforeEach(function () {
     this.owner.register('breakpoints:main', mediaRules, { instantiate: false });
     setBreakpoint('auto');
+    this.subject = this.owner.lookup('service:media');
   });
 
-  test('matchers can be added dynamically', function(assert) {
-    let subject = this.owner.lookup('service:media');
-    subject.match('all', 'not all');
+  test('matchers can be added dynamically', function (assert) {
+    this.subject.match('all', 'not all');
 
-    assert.equal(subject.matchers.all.matches, false);
+    assert.false(this.subject.matchers.all.matches);
   });
 
-  test('matchers have a corresponding isser', function(assert) {
-    let subject = this.owner.lookup('service:media');
+  test('matchers have a corresponding isser', function (assert) {
+    this.subject.match('mobile', 'not all');
 
-    subject.match('mobile', 'not all');
-
-    assert.equal(subject.isMobile, false);
+    assert.false(this.subject.isMobile);
   });
 
-  test('matches property returns matching matchers', function(assert) {
-    let subject = this.owner.lookup('service:media');
+  test('matches property returns matching matchers', function (assert) {
+    this.subject.match('mobile', 'all');
+    this.subject.match('all', 'all');
+    this.subject.match('none', 'not all');
 
-    subject.match('mobile', 'all');
-    subject.match('all', 'all');
-    subject.match('none', 'not all');
-
-    assert.deepEqual(subject.matches, ['mobile', 'all']);
+    assert.deepEqual(this.subject.matches, ['mobile', 'all']);
   });
 
-  test('classNames property returns matching matchers as classes', function(assert) {
-    let subject = this.owner.lookup('service:media');
+  test('classNames property returns matching matchers as classes', function (assert) {
+    this.subject.match('mobileDevice', 'all');
+    this.subject.match('all', 'all');
+    this.subject.match('none', 'not all');
 
-    subject.match('mobileDevice', 'all');
-    subject.match('all', 'all');
-    subject.match('none', 'not all');
-
-    assert.equal(subject.classNames, 'media-mobile-device media-all');
+    assert.strictEqual(
+      this.subject.classNames,
+      'media-mobile-device media-all'
+    );
   });
 
-  test('classNames is correctly bound to the matches property', function(assert) {
-    let subject = this.owner.lookup('service:media');
+  test('classNames is correctly bound to the matches property', function (assert) {
+    this.subject.match('one', 'all');
 
-    subject.match('one', 'all');
+    assert.strictEqual(this.subject.classNames, 'media-one');
 
-    assert.equal(subject.classNames, 'media-one');
+    this.subject.match('two', 'all');
 
-    subject.match('two', 'all');
+    assert.strictEqual(this.subject.classNames, 'media-one media-two');
 
-    assert.equal(subject.classNames, 'media-one media-two');
+    this.subject.match('one', 'none');
 
-    subject.match('one', 'none');
-
-    assert.equal(subject.classNames, 'media-two');
+    assert.strictEqual(this.subject.classNames, 'media-two');
   });
 
-  test('matches removes duplicates', function(assert) {
-    let subject = this.owner.lookup('service:media');
+  test('matches removes duplicates', function (assert) {
+    this.subject.match('mobile', 'all');
+    this.subject.match('mobile', 'all');
+    this.subject.match('none', 'not all');
 
-    subject.match('mobile', 'all');
-    subject.match('mobile', 'all');
-    subject.match('none', 'not all');
-
-    assert.deepEqual(subject.matches, ['mobile']);
+    assert.deepEqual(this.subject.matches, ['mobile']);
   });
 
-  test('computed properties recompute according to the media', async function(assert) {
+  test('addEventListener is preferred if available', function (assert) {
+    assert.expect(3);
+
+    const addEventListener = sinon.stub().returns(),
+      addListener = sinon.stub().returns();
+
+    this.subject._mocked = false;
+    this.subject.mql = () => ({
+      addEventListener,
+      addListener
+    });
+    this.subject.match('mobile', 'all');
+
+    assert.true(addEventListener.calledOnce);
+    assert.true(addListener.notCalled);
+
+    this.subject.mql = () => ({
+      addListener
+    });
+    this.subject.match('mobile', 'all');
+
+    assert.true(addListener.calledOnce);
+  });
+
+  test('computed properties recompute according to the media', async function (assert) {
     class TestComputedPropertiesService extends Service {
       @service media;
 
       get isMobile() {
-        return this.media.isMobile
+        return this.media.isMobile;
       }
     }
     this.owner.register('service:test-cp', TestComputedPropertiesService);
@@ -92,13 +110,24 @@ module('Unit | Service | media', function(hooks) {
 
     subject.match('mobile', 'all');
 
-    assert.equal(serviceWithCps.isMobile, true);
-    assert.equal(subject.isMobile, true);
+    assert.true(serviceWithCps.isMobile);
+    assert.true(subject.isMobile);
 
     subject.match('mobile', 'not all');
 
-    assert.equal(serviceWithCps.isMobile, false);
-    assert.equal(subject.isMobile, false);
-  })
-});
+    assert.false(serviceWithCps.isMobile);
+    assert.false(subject.isMobile);
+  });
 
+  test('can use either classic get() syntax or standard prop access', function (assert) {
+    this.subject.match('mobile', 'all');
+
+    assert.true(this.subject.get('isMobile'));
+    assert.true(this.subject.isMobile);
+
+    this.subject.match('mobile', 'not all');
+
+    assert.false(this.subject.get('isMobile'));
+    assert.false(this.subject.isMobile);
+  });
+});

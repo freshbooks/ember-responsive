@@ -14,10 +14,7 @@ jobs:
       - node/install-packages:
           pkg-manager: yarn
       - run: JOBS=1 ./node_modules/.bin/ember test
-      - run: JOBS=1 ./node_modules/.bin/ember try:one ember-lts-3.13
-      - run: JOBS=1 ./node_modules/.bin/ember try:one ember-lts-3.16
-      - run: JOBS=1 ./node_modules/.bin/ember try:one ember-release
-      - run: JOBS=1 ./node_modules/.bin/ember try:one ember-beta
+      - run: JOBS=1 ./node_modules/.bin/ember try:each
 workflows:
   tests:
     jobs:

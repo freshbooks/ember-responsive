@@ -2,10 +2,10 @@ import { getContext, settled } from '@ember/test-helpers';
 import { run } from '@ember/runloop';
 
 export function setBreakpoint(breakpoint) {
-  let breakpointArray = Array.isArray(breakpoint) ? breakpoint : [breakpoint];
-  let { owner } = getContext();
-  let breakpoints = owner.lookup('breakpoints:main');
-  let media = owner.lookup('service:media');
+  const breakpointArray = Array.isArray(breakpoint) ? breakpoint : [breakpoint],
+    { owner } = getContext(),
+    breakpoints = owner.lookup('breakpoints:main'),
+    media = owner.lookup('service:media');
 
   for (let i = 0; i < breakpointArray.length; i++) {
     let breakpointName = breakpointArray[i];
@@ -15,7 +15,9 @@ export function setBreakpoint(breakpoint) {
     }
 
     if (Object.keys(breakpoints).indexOf(breakpointName) === -1) {
-      throw new Error(`Breakpoint "${breakpointName}" is not defined in your breakpoints file`);
+      throw new Error(
+        `Breakpoint "${breakpointName}" not defined in breakpoints.js`
+      );
     }
   }
 
@@ -23,5 +25,6 @@ export function setBreakpoint(breakpoint) {
     media.matches = breakpointArray;
     media._triggerMediaChanged();
   });
+
   return settled();
 }

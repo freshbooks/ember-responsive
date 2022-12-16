@@ -8,3 +8,4 @@ updates:
   open-pull-requests-limit: 99
   ignore:
   - dependency-name: ember-cli-babel
+
