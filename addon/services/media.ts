@@ -4,7 +4,7 @@ import Service from '@ember/service';
 import { classify, dasherize } from '@ember/string';
 import { getOwner } from '@ember/application';
 import Evented from '@ember/object/evented';
-import { tracked, TrackedObject } from 'tracked-built-ins';
+import { tracked, TrackedObject, type TrackedArray } from 'tracked-built-ins';
 
 /**
  * Handles detecting and responding to media queries.
@@ -82,7 +82,7 @@ export default class MediaService extends Service.extend(Evented) {
   /**
    * If the matchMedia API is not available, this will be `false`, and
    * the service will not respond to calls.
-   *
+   * 
    * @property enabled
    * @type boolean
    */
@@ -91,11 +91,13 @@ export default class MediaService extends Service.extend(Evented) {
   }
 
   /**
+   * A TrackedArray of matching matchers.
+   * 
    * @property _matches
    * @type TrackedArray<string>
    * @private
    */
-  @tracked _matches = [];
+  @tracked _matches: TrackedArray<string> = [] as unknown as TrackedArray<string>;
 
   /**
    * A TrackedArray of matching matchers.
@@ -110,7 +112,7 @@ export default class MediaService extends Service.extend(Evented) {
     return Ember.testing && this._mocked ? [this._mockedBreakpoint] : [];
   }
   set matches(value) {
-    this._matches = value;
+    this._matches = tracked(value);
   }
 
   /**
@@ -119,7 +121,7 @@ export default class MediaService extends Service.extend(Evented) {
    * @property
    * @type Record<string, MediaQueryListEvent>
    */
-  listeners = {};
+  listeners: Record<string, (matcher: MediaQueryList | MediaQueryListEvent) => void> = {};
 
   /**
    * A hash of matchers by breakpoint name
@@ -127,7 +129,7 @@ export default class MediaService extends Service.extend(Evented) {
    * @property
    * @type Record<string, MediaQueryList>
    */
-  matchers = {};
+  matchers: Record<string, MediaQueryListEvent> = {};
 
   /**
    * The matcher to use for testing media queries.
@@ -137,7 +139,7 @@ export default class MediaService extends Service.extend(Evented) {
    * @default Window['matchMedia']
    * @private
    */
-  mql = window?.matchMedia;
+  mql: Window['matchMedia'] | undefined = window?.matchMedia;
 
   /**
    * Initialize service based on the breakpoints config
@@ -145,7 +147,7 @@ export default class MediaService extends Service.extend(Evented) {
   constructor() {
     super(...arguments);
 
-    const breakpoints = getOwner(this).lookup('breakpoints:main');
+    const breakpoints = getOwner(this).lookup('breakpoints:main') as Record<string, string>;
 
     if (!breakpoints || !this.enabled) {
       return;
@@ -154,20 +156,23 @@ export default class MediaService extends Service.extend(Evented) {
     Object.keys(breakpoints).forEach((name) => {
       const getterName = `is${classify(name)}`;
 
-      Object.defineProperties(this, {
-        [getterName]: new TrackedObject({
-          get() {
-            return this.matches.indexOf(name) > -1;
-          }
-        }),
-        [name]: new TrackedObject({
-          get() {
-            return this[getterName];
-          }
-        })
-      });
+        Object.defineProperties(this, {
+          [getterName]: new TrackedObject({
+            get(): boolean {
+              // @ts-expect-error asdf
+              return this.matches.indexOf(name) > -1;
+            }
+          }),
+          [name]: new TrackedObject({
+            get(): boolean {
+              // @ts-expect-error asdf
+              return this[getterName];
+            }
+          })
+        });
 
-      this.match(name, breakpoints[name]);
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      this.match(name, breakpoints[name]!);
     });
   }
 
@@ -210,21 +215,21 @@ export default class MediaService extends Service.extend(Evented) {
    * @param string query The media query to match against
    * @method match
    */
-  match(name, query) {
+  match(name: string, query: string) {
     // see https://github.com/ember-cli/eslint-plugin-ember/pull/272
-    if ((Ember.testing && this._mocked) || !this.enabled) {
+    if ((Ember.testing && this._mocked) || !this.enabled || !this.mql) {
       return;
     }
 
     const mql = this.mql,
       matcher = mql(query);
 
-    const listener = (matcher) => {
+    const listener = (matcher: MediaQueryList | MediaQueryListEvent) => {
       if (this.isDestroyed || this.isDestroying) {
         return;
       }
 
-      this.matchers[name] = matcher;
+      this.matchers[name] = matcher as MediaQueryListEvent;
 
       if (matcher.matches) {
         this.matches = Array.from(new Set([...this.matches, name]));
@@ -234,18 +239,16 @@ export default class MediaService extends Service.extend(Evented) {
         );
       }
 
-      if (this.listeners[name] !== matcher) {
-        this._triggerEvent();
-      }
+      this._triggerEvent();
     };
 
     this.listeners[name] = listener;
 
-    if (typeof matcher.addEventListener === 'function') {
+    if (typeof matcher?.addEventListener === 'function') {
       matcher.addEventListener('change', (matcher) => {
         run(null, listener, matcher);
       });
-    } else if (typeof matcher.addListener === 'function') {
+    } else if (typeof matcher?.addListener === 'function') {
       matcher.addListener((matcher) => {
         run(null, listener, matcher);
       });
