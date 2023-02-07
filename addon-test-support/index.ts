@@ -1,8 +1,9 @@
 import { getContext, settled } from '@ember/test-helpers';
 import { run } from '@ember/runloop';
 
-export function setBreakpoint(breakpoint) {
+export function setBreakpoint(breakpoint: string) {
   const breakpointArray = Array.isArray(breakpoint) ? breakpoint : [breakpoint],
+    // @ts-expect-error TODO: Fix type of owner here
     { owner } = getContext(),
     breakpoints = owner.lookup('breakpoints:main'),
     media = owner.lookup('service:media');

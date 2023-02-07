@@ -1,24 +1,16 @@
-'use strict';
-
 module.exports = {
   root: true,
-  parser: '@babel/eslint-parser',
+  parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaVersion: 2018,
-    sourceType: 'module',
-    ecmaFeatures: {
-      legacyDecorators: true
-    },
-    babelOptions: {
-      plugins: [['@babel/plugin-proposal-decorators', { legacy: true }]]
-    },
-    requireConfigFile: false
+    sourceType: 'module'
   },
-  plugins: ['ember', 'prettier'],
+  plugins: ['ember', '@typescript-eslint', 'prettier'],
   extends: [
     'eslint:recommended',
     'plugin:ember/recommended',
-    'plugin:prettier/recommended'
+    'plugin:prettier/recommended',
+    '@typescript-eslint/eslint-recommended'
   ],
   env: {
     browser: true
