@@ -5313,9 +5313,9 @@ eslint-config-prettier@^8.5.0:
   integrity sha512-wLbQiFre3tdGgpDv67NQKnJuTlcUVYHas3k+DZCc2U2BadthoEY4B7hLPvAxaqdyOGCzuLfii2fqGph10va7oA==
 
 eslint-plugin-ember@^11.0.2:
-  version "11.7.1"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-ember/-/eslint-plugin-ember-11.7.1.tgz#fc1a999021f9e591eb4b1d8c0cdf0dba1aa1c928"
-  integrity sha512-+IxjcPMFbXF+q8xrlXIgsFxDR9hggNPCOT6QDGmjaKhRgyJ4uQCqVAU0/XVmV7dKVcnFWH9ImZ9eroH3oHwRKg==
+  version "11.8.0"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-ember/-/eslint-plugin-ember-11.8.0.tgz#3c984500513a01d930c13dcac0b4661a64ea457b"
+  integrity sha512-oZ6My7LlbyhNCguHuyBnajGbpU5+raQ5zkaF9Vqe8EkWf3Ji2uJZH7BxzMMcR4gAuyx5qTUZRXVs42km1nTzVg==
   dependencies:
     "@ember-data/rfc395-data" "^0.0.4"
     "@glimmer/syntax" "^0.84.2"
