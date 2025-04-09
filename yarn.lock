@@ -4967,10 +4967,10 @@ ember-qunit@^5.1.5:
     silent-error "^1.1.1"
     validate-peer-dependencies "^1.2.0"
 
-ember-resolver@^10.1.0:
-  version "10.1.1"
-  resolved "https://registry.yarnpkg.com/ember-resolver/-/ember-resolver-10.1.1.tgz#1106a2386337b13a9ee509a9ad2a18b53a728ab3"
-  integrity sha512-y1zzn6C4YGJui+tJzcCKlsf1oSOSVAkRrvmg8OwqVIKnALKKb9ihx2qLCslHg8x0wJvJgMtDMXgrczvQrZW0Lw==
+ember-resolver@^13.1.0:
+  version "13.1.0"
+  resolved "https://registry.yarnpkg.com/ember-resolver/-/ember-resolver-13.1.0.tgz#8e04034c43fb20b7b92b76f7492f984dd635542e"
+  integrity sha512-t/PjXLCl5tM9EQXGIFoBgHiA41HkLJpfo17Nud5Cy9eyUPGcnsMjWJqQ+O5QHA0E63Sp+zTn4y/RS5Tu2v2ydg==
   dependencies:
     ember-cli-babel "^7.26.11"
 
