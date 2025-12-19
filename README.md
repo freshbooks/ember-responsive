@@ -23,10 +23,10 @@ After that, simply register the breakpoints that are pertinent to your applicati
 
 ```js
 export default {
-  mobile:  '(max-width: 767px)',
-  tablet:  '(min-width: 768px) and (max-width: 991px)',
+  mobile: '(max-width: 767px)',
+  tablet: '(min-width: 768px) and (max-width: 991px)',
   desktop: '(min-width: 992px) and (max-width: 1200px)',
-  jumbo:   '(min-width: 1201px)'
+  jumbo: '(min-width: 1201px)'
 };
 ```
 
@@ -37,7 +37,7 @@ Now you can inject the _media_ service in any object with access to the containe
 
 ```js
 import Controller from '@ember/controller';
-import { inject as service } from '@ember/service';
+import { service } from '@ember/service';
 
 export default class SomeController extends Controller {
   @service media;
@@ -63,7 +63,7 @@ queries in CSS, instead simply use classes to style the different devices.
 In your application.hbs template:
 
 ```hbs
-<div class="{{media 'classNames'}}">
+<div class='{{media "classNames"}}'>
   {{outlet}}
 </div>
 ```
@@ -103,6 +103,7 @@ When updating this addon, make sure to run the generate command. Choose `no` to 
 ## Updating to 3.x
 
 The major breaking changes to update to 3.x are so far:
+
 - Test helpers are now all covered by `setBreakpoint`
 - Calling media breakpoints in templates is now done with a helper. `{{media.isDesktop}}` -> `{{media 'isDesktop'}}`
 - Tests run into issues if you have not ported to the new style tests (https://github.com/emberjs/rfcs/blob/master/text/0232-simplify-qunit-testing-api.md)
@@ -116,10 +117,12 @@ Updating to 5.x should be seamless for modern (post-Octane) Ember apps.
 If you are using engines and you want to share responsive behaviour between the main application and engine, you must pass the 'media' service to the engine app.
 
 ## Testing Helpers
+
 This project provides a single test helper which works in both integration and acceptance tests to assist in testing
 content specific to different breakpoints.
 
 ### Acceptance Tests
+
 ```javascript
 ...
 import { setBreakpoint } from 'ember-responsive/test-support';
@@ -135,6 +138,7 @@ test('example test', async function (assert) {
 ```
 
 ### Integration Tests
+
 ```javascript
 ...
 import { setBreakpoint } from 'ember-responsive/test-support';
@@ -152,7 +156,7 @@ test('it renders', function (assert) {
 
 ### Multiple Breakpoints in Tests
 
-You can set multiple breakpoints to the helper.  This is useful if your `breakpoints.js` file defines breakpoints
+You can set multiple breakpoints to the helper. This is useful if your `breakpoints.js` file defines breakpoints
 that overlap.
 
 ```javascript
