@@ -1,0 +1,14 @@
+name: FreshBooks Global CI
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  global-ci:
+    uses: freshbooks/fresh-cli/.github/workflows/reusable_global_ci.yaml@v1
