@@ -4,7 +4,7 @@ import { setupRenderingTest } from 'ember-qunit';
 import { render } from '@ember/test-helpers';
 import Component from '@ember/component';
 import hbs from 'htmlbars-inline-precompile';
-import { inject as service } from '@ember/service';
+import { service } from '@ember/service';
 import { setBreakpoint } from 'ember-responsive/test-support';
 
 module('Test Helpers | setBreakpoint', function (hooks) {
