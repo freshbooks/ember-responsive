@@ -1,4 +1,4 @@
-import Ember from 'ember';
+import { isTesting } from '@ember/debug';
 import { run } from '@ember/runloop';
 import Service from '@ember/service';
 import { classify, dasherize } from '@ember/string';
@@ -74,9 +74,7 @@ import { tracked, TrackedObject } from 'tracked-built-ins';
  * @extends Ember.Service
  */
 export default class MediaService extends Service.extend(Evented) {
-  // Ember only sets Ember.testing when tests are starting
-  // eslint-disable-next-line ember/no-ember-testing-in-module-scope
-  _mocked = Ember.testing;
+  _mocked = isTesting();
   _mockedBreakpoint = 'desktop';
 
   /**
@@ -107,7 +105,7 @@ export default class MediaService extends Service.extend(Evented) {
     if (this._matches.length) {
       return this._matches;
     }
-    return Ember.testing && this._mocked ? [this._mockedBreakpoint] : [];
+    return isTesting() && this._mocked ? [this._mockedBreakpoint] : [];
   }
   set matches(value) {
     this._matches = value;
@@ -212,7 +210,7 @@ export default class MediaService extends Service.extend(Evented) {
    */
   match(name, query) {
     // see https://github.com/ember-cli/eslint-plugin-ember/pull/272
-    if ((Ember.testing && this._mocked) || !this.enabled) {
+    if ((isTesting() && this._mocked) || !this.enabled) {
       return;
     }
 
