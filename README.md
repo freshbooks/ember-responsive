@@ -15,11 +15,27 @@ that will add support to older browsers
 
 ## Getting Started
 
-This is an ember-cli addon so, so all you need to do is
+ember-responsive is a v2 addon for Embroider/Vite apps. It no longer ships a v1 shim, so it
+does not register anything in your app automatically.
 
-`ember install ember-responsive`
+```bash
+pnpm add ember-responsive
+```
 
-After that, simply register the breakpoints that are pertinent to your application in `app/breakpoints.js`:
+Register the service, helper, initializer and breakpoints by re-exporting them from your app:
+
+```js
+// app/services/media.js
+export { default } from 'ember-responsive/services/media';
+
+// app/helpers/media.js
+export { default } from 'ember-responsive/helpers/media';
+
+// app/initializers/ember-responsive-breakpoints.js
+export { default } from 'ember-responsive/initializers/responsive';
+```
+
+Then define the breakpoints that are pertinent to your application in `app/breakpoints.js`:
 
 ```js
 export default {
@@ -30,8 +46,12 @@ export default {
 };
 ```
 
-This default config has already been provided for you. If you wish to change the values or add new ones,
-simply create a new `app/breakpoints.js` in your project and export your chosen config.
+To use these defaults as-is, re-export them instead:
+
+```js
+// app/breakpoints.js
+export { default } from 'ember-responsive/breakpoints';
+```
 
 Now you can inject the _media_ service in any object with access to the container:
 
@@ -111,6 +131,16 @@ The major breaking changes to update to 3.x are so far:
 
 Updating to 5.x should be seamless for modern (post-Octane) Ember apps.
 
+## Updating to 6.x
+
+6.x is a v2-only addon and requires an Embroider/Vite app.
+
+- Add the `app/services/media.js`, `app/helpers/media.js` and
+  `app/initializers/ember-responsive-breakpoints.js` re-exports shown in Getting Started.
+- If you relied on the default breakpoints, add `app/breakpoints.js` re-exporting
+  `ember-responsive/breakpoints`.
+- The `ember g ember-responsive` blueprint has been removed.
+
 ## Usage in engines
 
 If you are using engines and you want to share responsive behaviour between the main application and engine, you must pass the 'media' service to the engine app.
@@ -184,10 +214,9 @@ test('it renders', function (assert) {
 To run the tests, after cloning do:
 
 ```bash
-yarn install
-yarn test # Run all tests
-yarn test:ember # Run using current ember version
-yarn test:ember-compatibility # Run using ember-try versions
+pnpm install
+pnpm build # Build the addon
+pnpm test # Run the test-app tests
 ```
 
 ## License

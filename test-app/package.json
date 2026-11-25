@@ -10,7 +10,7 @@
   "author": "FreshBooks",
   "license": "MIT",
   "scripts": {
-    "build": "ember build --environment=production",
+    "build": "vite build",
     "format": "prettier . --cache --write",
     "lint": "concurrently \"pnpm:lint:*(!fix)\" --names \"lint:\"",
     "lint:css": "stylelint \"**/*.css\" --allow-empty-input --cache",
@@ -21,8 +21,8 @@
     "lint:hbs:fix": "ember-template-lint . --fix",
     "lint:js": "eslint . --cache",
     "lint:js:fix": "eslint . --fix",
-    "start": "ember serve",
-    "test": "ember test",
+    "start": "vite",
+    "test": "vite build --mode development && ember test --path dist",
     "test:ember-compatibility": "ember try:one"
   },
   "dependencies": {},
@@ -31,28 +31,28 @@
     "@babel/eslint-parser": "^7.28.6",
     "@babel/eslint-plugin": "^7.27.1",
     "@babel/plugin-proposal-decorators": "^7.29.0",
+    "@babel/plugin-transform-runtime": "^7.29.0",
+    "@babel/runtime": "^7.29.0",
     "@ember/optional-features": "^2.0.0",
     "@ember/string": "^4.0.1",
     "@ember/test-helpers": "^5.2.2",
-    "@embroider/broccoli-side-watch": "^1.1.0",
-    "@embroider/test-setup": "^3.0.1",
+    "@embroider/compat": "^4.1.17",
+    "@embroider/config-meta-loader": "^1.0.0",
+    "@embroider/core": "^4.4.7",
+    "@embroider/vite": "^1.8.1",
     "@glimmer/component": "^2.0.0",
     "@glimmer/tracking": "^1.1.2",
     "@ijlee2-frontend-configs/ember-template-lint": "^3.0.0",
     "@ijlee2-frontend-configs/eslint-config-ember": "^3.4.0",
     "@ijlee2-frontend-configs/prettier": "^3.1.1",
     "@ijlee2-frontend-configs/stylelint": "^3.1.3",
-    "broccoli-asset-rev": "^3.0.0",
+    "@rollup/plugin-babel": "^7.0.0",
+    "babel-plugin-ember-template-compilation": "^3.1.0",
     "concurrently": "^9.2.1",
-    "ember-auto-import": "^2.4.2",
+    "decorator-transforms": "^2.3.1",
     "ember-cli": "^6.12.0",
     "ember-cli-babel": "^8.2.0",
-    "ember-cli-dependency-checker": "^3.3.1",
     "ember-cli-htmlbars": "^6.1.0",
-    "ember-cli-inject-live-reload": "^2.1.0",
-    "ember-cli-sri": "^2.1.1",
-    "ember-cli-terser": "^4.0.2",
-    "ember-disable-prototype-extensions": "^1.1.3",
     "ember-load-initializers": "^3.0.1",
     "ember-page-title": "^7.0.0",
     "ember-qunit": "^9.0.3",
@@ -68,7 +68,6 @@
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-qunit": "^7.3.1",
-    "loader.js": "^4.7.0",
     "npm-run-all": "^4.1.5",
     "prettier": "^3.8.3",
     "prettier-plugin-ember-hbs-tag": "^2.0.5",
@@ -80,7 +79,7 @@
     "stylelint-config-standard": "^40.0.0",
     "stylelint-order": "^8.1.3",
     "typescript": "^5.9.3",
-    "webpack": "^5.74.0"
+    "vite": "^8.3.8"
   },
   "engines": {
     "node": "14.* || >= 16"
@@ -91,5 +90,9 @@
   "keywords": [
     "media query"
   ],
-  "private": true
+  "private": true,
+  "exports": {
+    "./tests/*": "./tests/*",
+    "./*": "./app/*"
+  }
 }

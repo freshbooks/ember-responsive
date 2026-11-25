@@ -21,25 +21,6 @@ export default {
     // See https://github.com/embroider-build/embroider/blob/main/docs/v2-faq.md#how-can-i-define-the-public-exports-of-my-addon
     addon.publicEntrypoints(['**/*.js', 'index.js']),
 
-    // These are the modules that should get reexported into the traditional
-    // "app" tree. Things in here should also be in publicEntrypoints above, but
-    // not everything in publicEntrypoints necessarily needs to go here.
-    addon.appReexports(
-      [
-        'breakpoints.js',
-        'helpers/**/*.js',
-        'initializers/**/*.js',
-        'services/**/*.js',
-      ],
-      {
-        // Keep the v1 module name so apps that reference it keep working.
-        mapFilename: (name) =>
-          name === 'initializers/responsive.js'
-            ? 'initializers/ember-responsive-breakpoints.js'
-            : name,
-      },
-    ),
-
     // Follow the V2 Addon rules about dependencies. Your code can import from
     // `dependencies` and `peerDependencies` as well as standard Ember-provided
     // package names.
